@@ -367,19 +367,21 @@ export default function Customers() {
     {
       field: "fullName",
       headerName: "Name",
-      flex: 1.5,
-      minWidth: 180,
+      flex: 1.2,
+      minWidth: 150,
       valueGetter: (value, row: User) =>
         `${row.name.title} ${row.name.first} ${row.name.last}`,
+    },
+    {
+      field: "username",
+      headerName: "Username",
+      flex: 1,
+      minWidth: 120,
+      valueGetter: (value, row: User) => row.login.username,
       renderCell: (params) => (
-        <Box>
-          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-            {params.value}
-          </Typography>
-          <Typography variant="caption" color="text.secondary">
-            @{params.row.login.username}
-          </Typography>
-        </Box>
+        <Typography variant="body2" color="text.secondary">
+          @{params.value}
+        </Typography>
       ),
     },
     {
