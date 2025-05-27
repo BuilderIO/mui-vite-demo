@@ -162,7 +162,7 @@ export default function UserForm({
   }, [user]);
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }} id="user-form">
       <Grid container spacing={2}>
         {/* Personal Information */}
         <Grid item xs={12} sm={6}>

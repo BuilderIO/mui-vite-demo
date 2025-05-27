@@ -29,7 +29,6 @@ export default function UserDialog({
 }: UserDialogProps) {
   const [formError, setFormError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const formRef = React.useRef<HTMLFormElement>(null);
 
   const isEditMode = !!user;
 
@@ -57,13 +56,14 @@ export default function UserDialog({
   };
 
   const handleFormSubmit = () => {
-    // Trigger form submission by dispatching a submit event
-    if (formRef.current) {
+    // Trigger form submission by finding the form element and dispatching submit event
+    const form = document.getElementById("user-form") as HTMLFormElement;
+    if (form) {
       const submitEvent = new Event("submit", {
         bubbles: true,
         cancelable: true,
       });
-      formRef.current.dispatchEvent(submitEvent);
+      form.dispatchEvent(submitEvent);
     }
   };
 
@@ -93,13 +93,11 @@ export default function UserDialog({
           </Alert>
         )}
 
-        <Box ref={formRef} component="div">
-          <UserForm
-            user={user}
-            onSubmit={handleSubmit}
-            loading={isSubmitting || loading}
-          />
-        </Box>
+        <UserForm
+          user={user}
+          onSubmit={handleSubmit}
+          loading={isSubmitting || loading}
+        />
       </DialogContent>
 
       <DialogActions sx={{ px: 3, pb: 2 }}>
