@@ -153,16 +153,11 @@ export default function CustomerDataGrid({
   const renderFullName = (params: any) => {
     const user = params.row as User;
     return (
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
         {renderAvatar(params)}
-        <Box>
-          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-            {user.name.title} {user.name.first} {user.name.last}
-          </Typography>
-          <Typography variant="caption" color="text.secondary">
-            {user.login.username}
-          </Typography>
-        </Box>
+        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+          {user.name.title} {user.name.first} {user.name.last}
+        </Typography>
       </Box>
     );
   };
@@ -188,12 +183,9 @@ export default function CustomerDataGrid({
   const renderLocation = (params: any) => {
     const user = params.row as User;
     return (
-      <Box>
-        <Typography variant="body2">{user.location.city}</Typography>
-        <Typography variant="caption" color="text.secondary">
-          {user.location.state}, {user.location.country}
-        </Typography>
-      </Box>
+      <Typography variant="body2">
+        {user.location.city}, {user.location.country}
+      </Typography>
     );
   };
 
@@ -215,8 +207,8 @@ export default function CustomerDataGrid({
       {
         field: "fullName",
         headerName: "Customer",
-        flex: 1.5,
-        minWidth: 200,
+        flex: 1.3,
+        minWidth: 180,
         renderCell: renderFullName,
         sortable: true,
       },
@@ -224,20 +216,20 @@ export default function CustomerDataGrid({
         field: "email",
         headerName: "Email",
         flex: 1.2,
-        minWidth: 200,
+        minWidth: 180,
         sortable: true,
       },
       {
         field: "gender",
         headerName: "Gender",
-        width: 100,
+        width: 90,
         renderCell: renderGender,
         sortable: false,
       },
       {
         field: "age",
         headerName: "Age",
-        width: 80,
+        width: 70,
         align: "center",
         headerAlign: "center",
         valueGetter: (value, row) => row.dob.age,
@@ -247,7 +239,7 @@ export default function CustomerDataGrid({
         field: "location",
         headerName: "Location",
         flex: 1,
-        minWidth: 150,
+        minWidth: 140,
         renderCell: renderLocation,
         sortable: false,
       },
@@ -260,7 +252,7 @@ export default function CustomerDataGrid({
       {
         field: "registered",
         headerName: "Member Since",
-        width: 120,
+        width: 110,
         valueGetter: (value, row) => {
           const date = new Date(row.registered.date);
           return date.toLocaleDateString("en-US", {
@@ -274,7 +266,7 @@ export default function CustomerDataGrid({
         field: "actions",
         type: "actions",
         headerName: "Actions",
-        width: 80,
+        width: 70,
         renderCell: renderActions,
       },
     ],
@@ -301,7 +293,7 @@ export default function CustomerDataGrid({
   return (
     <Card
       variant="outlined"
-      sx={{ height: 600, display: "flex", flexDirection: "column" }}
+      sx={{ height: 550, display: "flex", flexDirection: "column" }}
     >
       {/* Search Header */}
       <Box sx={{ p: 2, borderBottom: 1, borderColor: "divider" }}>
@@ -368,7 +360,7 @@ export default function CustomerDataGrid({
           onPaginationModelChange={handlePaginationModelChange}
           rowCount={pagination.total}
           pageSizeOptions={[10, 20, 50, 100]}
-          density="comfortable"
+          density="compact"
           disableColumnResize
           disableRowSelectionOnClick
           getRowClassName={(params) =>
