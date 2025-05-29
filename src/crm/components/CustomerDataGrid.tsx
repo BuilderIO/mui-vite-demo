@@ -3,7 +3,6 @@ import { useState, useCallback, useMemo } from "react";
 import {
   DataGrid,
   GridColDef,
-  GridActionsCellItem,
   GridRowParams,
   GridPaginationModel,
   GridSortModel,
@@ -135,73 +134,6 @@ export default function CustomerDataGrid({
     handleMenuClose();
   };
 
-  const renderAvatar = (params: any) => {
-    const user = params.row as User;
-    const initials = `${user.name.first[0]}${user.name.last[0]}`.toUpperCase();
-
-    return (
-      <Avatar
-        src={user.picture.thumbnail}
-        alt={`${user.name.first} ${user.name.last}`}
-        sx={{ width: 32, height: 32 }}
-      >
-        {initials}
-      </Avatar>
-    );
-  };
-
-  const renderFullName = (params: any) => {
-    const user = params.row as User;
-    return (
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-        {renderAvatar(params)}
-        <Typography variant="body2" sx={{ fontWeight: 500 }}>
-          {user.name.title} {user.name.first} {user.name.last}
-        </Typography>
-      </Box>
-    );
-  };
-
-  const renderGender = (params: any) => {
-    const gender = params.value as string;
-    const color =
-      gender === "male"
-        ? "primary"
-        : gender === "female"
-          ? "secondary"
-          : "default";
-    return (
-      <Chip
-        label={gender.charAt(0).toUpperCase() + gender.slice(1)}
-        size="small"
-        variant="outlined"
-        color={color as any}
-      />
-    );
-  };
-
-  const renderLocation = (params: any) => {
-    const user = params.row as User;
-    return (
-      <Typography variant="body2">
-        {user.location.city}, {user.location.country}
-      </Typography>
-    );
-  };
-
-  const renderActions = (params: any) => {
-    const user = params.row as User;
-    return (
-      <IconButton
-        size="small"
-        onClick={(event) => handleMenuClick(event, user)}
-        aria-label="user actions"
-      >
-        <MoreVertIcon fontSize="small" />
-      </IconButton>
-    );
-  };
-
   const columns: GridColDef[] = useMemo(
     () => [
       {
@@ -209,7 +141,26 @@ export default function CustomerDataGrid({
         headerName: "Customer",
         flex: 1.3,
         minWidth: 180,
-        renderCell: renderFullName,
+        renderCell: (params) => {
+          const user = params.row as User;
+          const initials =
+            `${user.name.first[0]}${user.name.last[0]}`.toUpperCase();
+
+          return (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+              <Avatar
+                src={user.picture.thumbnail}
+                alt={`${user.name.first} ${user.name.last}`}
+                sx={{ width: 32, height: 32 }}
+              >
+                {initials}
+              </Avatar>
+              <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                {user.name.title} {user.name.first} {user.name.last}
+              </Typography>
+            </Box>
+          );
+        },
         sortable: true,
       },
       {
@@ -223,7 +174,23 @@ export default function CustomerDataGrid({
         field: "gender",
         headerName: "Gender",
         width: 90,
-        renderCell: renderGender,
+        renderCell: (params) => {
+          const gender = params.value as string;
+          const color =
+            gender === "male"
+              ? "primary"
+              : gender === "female"
+                ? "secondary"
+                : "default";
+          return (
+            <Chip
+              label={gender.charAt(0).toUpperCase() + gender.slice(1)}
+              size="small"
+              variant="outlined"
+              color={color as any}
+            />
+          );
+        },
         sortable: false,
       },
       {
@@ -240,7 +207,14 @@ export default function CustomerDataGrid({
         headerName: "Location",
         flex: 1,
         minWidth: 140,
-        renderCell: renderLocation,
+        renderCell: (params) => {
+          const user = params.row as User;
+          return (
+            <Typography variant="body2">
+              {user.location.city}, {user.location.country}
+            </Typography>
+          );
+        },
         sortable: false,
       },
       {
@@ -267,7 +241,18 @@ export default function CustomerDataGrid({
         type: "actions",
         headerName: "Actions",
         width: 70,
-        renderCell: renderActions,
+        renderCell: (params) => {
+          const user = params.row as User;
+          return (
+            <IconButton
+              size="small"
+              onClick={(event) => handleMenuClick(event, user)}
+              aria-label="user actions"
+            >
+              <MoreVertIcon fontSize="small" />
+            </IconButton>
+          );
+        },
       },
     ],
     [],
