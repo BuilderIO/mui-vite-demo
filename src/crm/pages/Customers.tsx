@@ -11,6 +11,7 @@ import Copyright from "../../dashboard/internals/components/Copyright";
 import CustomerStatsCards from "../components/CustomerStatsCards";
 import CustomersDataGrid from "../components/CustomersDataGrid";
 import CustomerDemographicsChart from "../components/CustomerDemographicsChart";
+import ApiTest from "../components/ApiTest";
 import { User } from "../types/User";
 
 export default function Customers() {
@@ -85,6 +86,11 @@ export default function Customers() {
             Add Customer
           </Button>
         </Stack>
+      </Box>
+
+      {/* API Test - Temporary for debugging */}
+      <Box sx={{ mb: 3 }}>
+        <ApiTest />
       </Box>
 
       {/* Customer Statistics Cards */}
