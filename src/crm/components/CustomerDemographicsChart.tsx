@@ -6,9 +6,9 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import Skeleton from "@mui/material/Skeleton";
-import { PieChart } from "@mui/x-charts/PieChart";
 import { UsersApiService } from "../services/usersApi";
 import { User } from "../types/User";
+import DemographicsPieChart from "./DemographicsPieChart";
 
 interface DemographicsData {
   genderDistribution: { label: string; value: number; color: string }[];
@@ -165,74 +165,15 @@ export default function CustomerDemographicsChart() {
 
   return (
     <Stack spacing={2}>
-      {/* Gender Distribution */}
-      <Card variant="outlined">
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Gender Distribution
-          </Typography>
-          <PieChart
-            series={[
-              {
-                data: demographics.genderDistribution.map((item, index) => ({
-                  id: index,
-                  value: item.value,
-                  label: `${item.label} (${item.value})`,
-                  color: item.color,
-                })),
-              },
-            ]}
-            width={400}
-            height={200}
-          />
-        </CardContent>
-      </Card>
-
-      {/* Age Groups */}
-      <Card variant="outlined">
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Age Groups
-          </Typography>
-          <PieChart
-            series={[
-              {
-                data: demographics.ageGroups.map((item, index) => ({
-                  id: index,
-                  value: item.value,
-                  label: `${item.label} (${item.value})`,
-                  color: item.color,
-                })),
-              },
-            ]}
-            width={400}
-            height={200}
-          />
-        </CardContent>
-      </Card>
-
-      {/* Top Countries */}
-      <Card variant="outlined">
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Top Countries
-          </Typography>
-          <PieChart
-            series={[
-              {
-                data: demographics.topCountries.map((item, index) => ({
-                  id: index,
-                  value: item.value,
-                  label: `${item.label} (${item.value})`,
-                  color: item.color,
-                })),
-              },
-            ]}
-            width={400}
-            height={200}
-          />
-        </CardContent>
-      </Card>
+      <DemographicsPieChart
+        title="Gender Distribution"
+        data={demographics.genderDistribution}
+      />
+      <DemographicsPieChart title="Age Groups" data={demographics.ageGroups} />
+      <DemographicsPieChart
+        title="Top Countries"
+        data={demographics.topCountries}
+      />
     </Stack>
   );
 }
