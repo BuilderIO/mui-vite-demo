@@ -10,72 +10,104 @@ export class UsersApiService {
     sortBy?: string;
     span?: string;
   }): Promise<UsersApiResponse> {
-    const searchParams = new URLSearchParams();
-
-    // Set default values and validate parameters
-    if (params?.page)
-      searchParams.set("page", Math.max(1, params.page).toString());
-    if (params?.perPage)
-      searchParams.set(
-        "perPage",
-        Math.min(100, Math.max(1, params.perPage)).toString(),
-      );
-    if (params?.search && params.search.trim())
-      searchParams.set("search", params.search.trim());
-
-    // Map frontend sort fields to API fields
-    if (params?.sortBy) {
-      const sortMapping: Record<string, string> = {
-        fullName: "name.first",
-        name: "name.first",
-        email: "email",
-        location: "location.city",
-        age: "dob.age",
-        gender: "gender",
-        phone: "phone",
-        registered: "registered.date",
-      };
-
-      const mappedSort = sortMapping[params.sortBy] || "name.first";
-      searchParams.set("sortBy", mappedSort);
-    }
-
-    if (params?.span) searchParams.set("span", params.span);
-
-    const url = `${BASE_URL}/users${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+    // Start with a simple request without parameters to test basic connectivity
+    let url = `${BASE_URL}/users`;
 
     try {
-      console.log("Fetching users from:", url);
+      // If no parameters, make simple call
+      if (!params) {
+        console.log("Making simple API call to:", url);
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Simple API call failed:", response.status, errorText);
+          throw new Error(
+            `API Error: ${response.status} ${response.statusText}`,
+          );
+        }
+
+        const data = await response.json();
+        console.log("Simple API call successful:", data);
+        return data;
+      }
+
+      // Build parameters only if they exist
+      const searchParams = new URLSearchParams();
+
+      if (params.page && params.page > 0) {
+        searchParams.set("page", params.page.toString());
+      }
+
+      if (params.perPage && params.perPage > 0) {
+        searchParams.set("perPage", Math.min(100, params.perPage).toString());
+      }
+
+      if (params.search && params.search.trim()) {
+        searchParams.set("search", params.search.trim());
+      }
+
+      if (params.sortBy) {
+        // Use simple field names that match the API documentation
+        const validSortFields = [
+          "name.first",
+          "name.last",
+          "location.city",
+          "location.country",
+          "dob.age",
+          "registered.date",
+        ];
+        const sortField = validSortFields.includes(params.sortBy)
+          ? params.sortBy
+          : "name.first";
+        searchParams.set("sortBy", sortField);
+      }
+
+      if (searchParams.toString()) {
+        url += `?${searchParams.toString()}`;
+      }
+
+      console.log("Making parameterized API call to:", url);
+
       const response = await fetch(url, {
         method: "GET",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
         },
       });
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("API Error Response:", errorText);
-        throw new Error(
-          `HTTP error! status: ${response.status} - ${errorText}`,
+        console.error(
+          "Parameterized API call failed:",
+          response.status,
+          errorText,
         );
+
+        // Try falling back to simple call
+        console.log("Falling back to simple API call...");
+        return await this.getUsers();
       }
 
       const data = await response.json();
-      console.log("Successfully fetched users:", data);
+      console.log("Parameterized API call successful:", data);
       return data;
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("API call error:", error);
 
-      // Return fallback data if API fails
-      if (error instanceof Error && error.message.includes("fetch")) {
+      // If there's a network error, throw a user-friendly message
+      if (error instanceof TypeError && error.message.includes("fetch")) {
         throw new Error(
-          "Unable to connect to the users API. Please check your internet connection.",
+          "Unable to connect to the API. Please check your internet connection.",
         );
       }
 
-      throw error;
+      // If there's an HTTP error, provide details
+      if (error instanceof Error) {
+        throw new Error(`API Error: ${error.message}`);
+      }
+
+      throw new Error("Unknown error occurred while fetching users");
     }
   }
 

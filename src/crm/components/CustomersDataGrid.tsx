@@ -174,23 +174,61 @@ export default function CustomersDataGrid({
       setLoading(true);
       setError(null);
 
-      const params = {
-        page: paginationModel.page + 1, // API uses 1-based pagination
-        perPage: paginationModel.pageSize,
-        search: searchQuery || undefined,
-        sortBy: sortModel.length > 0 ? sortModel[0].field : "fullName",
-      };
+      console.log("Starting user fetch...");
 
-      console.log("Fetching users with params:", params);
-      const response = await UsersApiService.getUsers(params);
+      // Start with basic call, then add parameters
+      let response;
 
-      if (response && response.data) {
+      // If it's the first load or no special parameters, try simple call first
+      if (
+        paginationModel.page === 0 &&
+        !searchQuery &&
+        sortModel.length === 0
+      ) {
+        console.log("Making simple API call...");
+        response = await UsersApiService.getUsers();
+      } else {
+        // Build parameters carefully
+        const params: any = {};
+
+        if (paginationModel.page > 0 || paginationModel.pageSize !== 25) {
+          params.page = paginationModel.page + 1;
+          params.perPage = paginationModel.pageSize;
+        }
+
+        if (searchQuery && searchQuery.trim()) {
+          params.search = searchQuery.trim();
+        }
+
+        if (sortModel.length > 0) {
+          // Map the sort field to API expected format
+          const sortFieldMapping: Record<string, string> = {
+            fullName: "name.first",
+            email: "email",
+            location: "location.city",
+            age: "dob.age",
+            gender: "gender",
+            phone: "phone",
+            registered: "registered.date",
+          };
+
+          params.sortBy = sortFieldMapping[sortModel[0].field] || "name.first";
+        }
+
+        console.log("Making API call with params:", params);
+        response = await UsersApiService.getUsers(params);
+      }
+
+      console.log("API response received:", response);
+
+      if (response && response.data && Array.isArray(response.data)) {
         setUsers(response.data);
         setTotalUsers(response.total || response.data.length);
+        console.log(`Successfully loaded ${response.data.length} users`);
       } else {
         setUsers([]);
         setTotalUsers(0);
-        setError("No data received from API");
+        setError("Invalid response format from API");
       }
     } catch (err) {
       console.error("Error in fetchUsers:", err);
