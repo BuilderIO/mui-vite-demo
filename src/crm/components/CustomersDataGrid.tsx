@@ -16,12 +16,15 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import Alert from "@mui/material/Alert";
 import { UsersApiService } from "../services/usersApi";
 import { User } from "../types/User";
+import EditUserModal from "./EditUserModal";
 
 const getGenderColor = (
   gender: string,
@@ -45,6 +48,37 @@ const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString("en-US", options);
 };
 
+const [users, setUsers] = useState<User[]>([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState<string | null>(null);
+const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+  page: 0,
+  pageSize: 25,
+});
+const [sortModel, setSortModel] = useState<GridSortModel>([
+  { field: "firstName", sort: "asc" },
+]);
+const [searchQuery, setSearchQuery] = useState("");
+const [totalUsers, setTotalUsers] = useState(0);
+const [editModalOpen, setEditModalOpen] = useState(false);
+const [selectedUserForEdit, setSelectedUserForEdit] = useState<User | null>(
+  null,
+);
+
+const handleEditUser = (user: User) => {
+  setSelectedUserForEdit(user);
+  setEditModalOpen(true);
+};
+
+const handleCloseEditModal = () => {
+  setEditModalOpen(false);
+  setSelectedUserForEdit(null);
+};
+
+const handleUserUpdated = () => {
+  fetchUsers(); // Refresh the data grid
+};
+
 const columns: GridColDef[] = [
   {
     field: "picture",
@@ -63,46 +97,33 @@ const columns: GridColDef[] = [
     ),
   },
   {
-    field: "fullName",
-    headerName: "Name",
-    width: 200,
-    valueGetter: (value, row) =>
-      `${row.name?.first || ""} ${row.name?.last || ""}`,
-    renderCell: (params) => (
-      <Box>
-        <Typography variant="body2" fontWeight="500">
-          {params.row.name?.first} {params.row.name?.last}
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
-          @{params.row.login?.username}
-        </Typography>
-      </Box>
-    ),
+    field: "firstName",
+    headerName: "First Name",
+    width: 140,
+    valueGetter: (value, row) => row.name?.first || "",
+  },
+  {
+    field: "lastName",
+    headerName: "Last Name",
+    width: 140,
+    valueGetter: (value, row) => row.name?.last || "",
   },
   {
     field: "email",
     headerName: "Email",
-    width: 250,
-    renderCell: (params) => (
-      <Typography variant="body2" color="primary">
-        {params.value}
-      </Typography>
-    ),
+    width: 220,
   },
   {
-    field: "location",
-    headerName: "Location",
-    width: 200,
-    valueGetter: (value, row) =>
-      `${row.location?.city || ""}, ${row.location?.country || ""}`,
-    renderCell: (params) => (
-      <Box>
-        <Typography variant="body2">{params.row.location?.city}</Typography>
-        <Typography variant="caption" color="text.secondary">
-          {params.row.location?.country}
-        </Typography>
-      </Box>
-    ),
+    field: "city",
+    headerName: "City",
+    width: 140,
+    valueGetter: (value, row) => row.location?.city || "",
+  },
+  {
+    field: "country",
+    headerName: "Country",
+    width: 120,
+    valueGetter: (value, row) => row.location?.country || "",
   },
   {
     field: "age",
@@ -110,9 +131,6 @@ const columns: GridColDef[] = [
     width: 80,
     type: "number",
     valueGetter: (value, row) => row.dob?.age || 0,
-    renderCell: (params) => (
-      <Typography variant="body2">{params.value} years</Typography>
-    ),
   },
   {
     field: "gender",
@@ -131,20 +149,22 @@ const columns: GridColDef[] = [
   {
     field: "phone",
     headerName: "Phone",
-    width: 150,
-    renderCell: (params) => (
-      <Typography variant="body2" fontFamily="monospace">
-        {params.value}
-      </Typography>
-    ),
+    width: 140,
   },
   {
-    field: "registered",
-    headerName: "Registered",
-    width: 120,
-    valueGetter: (value, row) => row.registered?.date || "",
+    field: "actions",
+    headerName: "Actions",
+    width: 100,
+    sortable: false,
+    filterable: false,
     renderCell: (params) => (
-      <Typography variant="body2">{formatDate(params.value)}</Typography>
+      <IconButton
+        size="small"
+        onClick={() => handleEditUser(params.row)}
+        sx={{ color: "primary.main" }}
+      >
+        <EditRoundedIcon fontSize="small" />
+      </IconButton>
     ),
   },
 ];
@@ -203,13 +223,14 @@ export default function CustomersDataGrid({
         if (sortModel.length > 0) {
           // Map the sort field to API expected format
           const sortFieldMapping: Record<string, string> = {
-            fullName: "name.first",
+            firstName: "name.first",
+            lastName: "name.last",
             email: "email",
-            location: "location.city",
+            city: "location.city",
+            country: "location.country",
             age: "dob.age",
             gender: "gender",
             phone: "phone",
-            registered: "registered.date",
           };
 
           params.sortBy = sortFieldMapping[sortModel[0].field] || "name.first";
@@ -276,115 +297,124 @@ export default function CustomersDataGrid({
   }));
 
   return (
-    <Card variant="outlined" sx={{ height: "100%" }}>
-      <CardContent sx={{ pb: 0 }}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={2}
-          sx={{ mb: 2 }}
-        >
-          <Typography variant="h6" component="h3">
-            Customer Directory
-          </Typography>
-          <Stack direction="row" spacing={1}>
-            <Button
-              variant="outlined"
-              size="small"
-              startIcon={<RefreshRoundedIcon />}
-              onClick={handleRefresh}
-              disabled={loading}
-            >
-              Refresh
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-              startIcon={<AddRoundedIcon />}
-            >
-              Add Customer
-            </Button>
+    <>
+      <Card variant="outlined" sx={{ height: "100%" }}>
+        <CardContent sx={{ pb: 0 }}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={2}
+            sx={{ mb: 2 }}
+          >
+            <Typography variant="h6" component="h3">
+              Customer Directory
+            </Typography>
+            <Stack direction="row" spacing={1}>
+              <Button
+                variant="outlined"
+                size="small"
+                startIcon={<RefreshRoundedIcon />}
+                onClick={handleRefresh}
+                disabled={loading}
+              >
+                Refresh
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<AddRoundedIcon />}
+              >
+                Add Customer
+              </Button>
+            </Stack>
           </Stack>
-        </Stack>
 
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Search customers by name, email, or city..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchRoundedIcon />
-                </InputAdornment>
-              ),
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              fullWidth
+              size="small"
+              placeholder="Search customers by name, email, or city..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchRoundedIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Box>
+
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
+        </CardContent>
+
+        <Box sx={{ height: 600 }}>
+          <DataGrid
+            rows={rowsWithId}
+            columns={columns}
+            loading={loading}
+            paginationModel={paginationModel}
+            onPaginationModelChange={handlePaginationModelChange}
+            paginationMode="server"
+            sortingMode="server"
+            sortModel={sortModel}
+            onSortModelChange={handleSortModelChange}
+            rowCount={totalUsers}
+            pageSizeOptions={[10, 25, 50, 100]}
+            checkboxSelection
+            disableRowSelectionOnClick
+            onRowClick={handleRowClick}
+            density="compact"
+            getRowClassName={(params) =>
+              params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
+            }
+            sx={{
+              "& .MuiDataGrid-row:hover": {
+                cursor: "pointer",
+              },
             }}
-          />
-        </Box>
-
-        {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            {error}
-          </Alert>
-        )}
-      </CardContent>
-
-      <Box sx={{ height: 600 }}>
-        <DataGrid
-          rows={rowsWithId}
-          columns={columns}
-          loading={loading}
-          paginationModel={paginationModel}
-          onPaginationModelChange={handlePaginationModelChange}
-          paginationMode="server"
-          sortingMode="server"
-          sortModel={sortModel}
-          onSortModelChange={handleSortModelChange}
-          rowCount={totalUsers}
-          pageSizeOptions={[10, 25, 50, 100]}
-          checkboxSelection
-          disableRowSelectionOnClick
-          onRowClick={handleRowClick}
-          density="compact"
-          getRowClassName={(params) =>
-            params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
-          }
-          sx={{
-            "& .MuiDataGrid-row:hover": {
-              cursor: "pointer",
-            },
-          }}
-          slotProps={{
-            filterPanel: {
-              filterFormProps: {
-                logicOperatorInputProps: {
-                  variant: "outlined",
-                  size: "small",
-                },
-                columnInputProps: {
-                  variant: "outlined",
-                  size: "small",
-                  sx: { mt: "auto" },
-                },
-                operatorInputProps: {
-                  variant: "outlined",
-                  size: "small",
-                  sx: { mt: "auto" },
-                },
-                valueInputProps: {
-                  InputComponentProps: {
+            slotProps={{
+              filterPanel: {
+                filterFormProps: {
+                  logicOperatorInputProps: {
                     variant: "outlined",
                     size: "small",
                   },
+                  columnInputProps: {
+                    variant: "outlined",
+                    size: "small",
+                    sx: { mt: "auto" },
+                  },
+                  operatorInputProps: {
+                    variant: "outlined",
+                    size: "small",
+                    sx: { mt: "auto" },
+                  },
+                  valueInputProps: {
+                    InputComponentProps: {
+                      variant: "outlined",
+                      size: "small",
+                    },
+                  },
                 },
               },
-            },
-          }}
-        />
-      </Box>
-    </Card>
+            }}
+          />
+        </Box>
+      </Card>
+
+      <EditUserModal
+        open={editModalOpen}
+        user={selectedUserForEdit}
+        onClose={handleCloseEditModal}
+        onUserUpdated={handleUserUpdated}
+      />
+    </>
   );
 }
