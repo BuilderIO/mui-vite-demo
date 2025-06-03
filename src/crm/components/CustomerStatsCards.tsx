@@ -35,11 +35,20 @@ export default function CustomerStatsCards() {
         const userStats = await UsersApiService.getUserStats();
         setStats(userStats);
       } catch (err) {
+        console.error("Error in CustomerStatsCards:", err);
         setError(
           err instanceof Error
             ? err.message
             : "Failed to fetch user statistics",
         );
+
+        // Set fallback stats to show something rather than empty state
+        setStats({
+          totalUsers: 0,
+          newUsersThisMonth: 0,
+          averageAge: 0,
+          topCountries: [],
+        });
       } finally {
         setLoading(false);
       }

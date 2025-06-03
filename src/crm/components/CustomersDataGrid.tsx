@@ -178,14 +178,25 @@ export default function CustomersDataGrid({
         page: paginationModel.page + 1, // API uses 1-based pagination
         perPage: paginationModel.pageSize,
         search: searchQuery || undefined,
-        sortBy: sortModel.length > 0 ? sortModel[0].field : "name.first",
+        sortBy: sortModel.length > 0 ? sortModel[0].field : "fullName",
       };
 
+      console.log("Fetching users with params:", params);
       const response = await UsersApiService.getUsers(params);
-      setUsers(response.data);
-      setTotalUsers(response.total);
+
+      if (response && response.data) {
+        setUsers(response.data);
+        setTotalUsers(response.total || response.data.length);
+      } else {
+        setUsers([]);
+        setTotalUsers(0);
+        setError("No data received from API");
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to fetch users");
+      console.error("Error in fetchUsers:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch users";
+      setError(errorMessage);
       setUsers([]);
       setTotalUsers(0);
     } finally {
