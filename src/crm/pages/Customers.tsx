@@ -387,23 +387,28 @@ export default function Customers() {
       width: 60,
       sortable: false,
       filterable: false,
-      renderCell: (params) => (
-        <Avatar
-          src={params.row.picture?.thumbnail}
-          alt={`${params.row.name.first} ${params.row.name.last}`}
-          sx={{ width: 32, height: 32 }}
-        >
-          {params.row.name.first?.[0]}
-          {params.row.name.last?.[0]}
-        </Avatar>
-      ),
+      renderCell: (params) => {
+        if (!params.row) return null;
+        return (
+          <Avatar
+            src={params.row.picture?.thumbnail}
+            alt={`${params.row.name?.first || ""} ${params.row.name?.last || ""}`}
+            sx={{ width: 32, height: 32 }}
+          >
+            {params.row.name?.first?.[0] || ""}
+            {params.row.name?.last?.[0] || ""}
+          </Avatar>
+        );
+      },
     },
     {
       field: "fullName",
       headerName: "Name",
       width: 200,
-      valueGetter: (params) =>
-        `${params.row.name.first} ${params.row.name.last}`,
+      valueGetter: (params) => {
+        if (!params.row?.name) return "";
+        return `${params.row.name.first || ""} ${params.row.name.last || ""}`;
+      },
     },
     {
       field: "email",
@@ -414,33 +419,38 @@ export default function Customers() {
       field: "username",
       headerName: "Username",
       width: 150,
-      valueGetter: (params) => params.row.login.username,
+      valueGetter: (params) => params.row?.login?.username || "",
     },
     {
       field: "location",
       headerName: "Location",
       width: 200,
-      valueGetter: (params) =>
-        `${params.row.location.city}, ${params.row.location.country}`,
+      valueGetter: (params) => {
+        if (!params.row?.location) return "";
+        return `${params.row.location.city || ""}, ${params.row.location.country || ""}`;
+      },
     },
     {
       field: "age",
       headerName: "Age",
       width: 80,
-      valueGetter: (params) => params.row.dob.age,
+      valueGetter: (params) => params.row?.dob?.age || 0,
     },
     {
       field: "gender",
       headerName: "Gender",
       width: 100,
-      renderCell: (params) => (
-        <Chip
-          label={params.value}
-          size="small"
-          color={params.value === "male" ? "primary" : "secondary"}
-          variant="outlined"
-        />
-      ),
+      renderCell: (params) => {
+        if (!params.value) return null;
+        return (
+          <Chip
+            label={params.value}
+            size="small"
+            color={params.value === "male" ? "primary" : "secondary"}
+            variant="outlined"
+          />
+        );
+      },
     },
     {
       field: "phone",
@@ -452,20 +462,23 @@ export default function Customers() {
       type: "actions",
       headerName: "Actions",
       width: 120,
-      getActions: (params) => [
-        <GridActionsCellItem
-          icon={<EditIcon />}
-          label="Edit"
-          onClick={() => handleEditUser(params.row)}
-          color="primary"
-        />,
-        <GridActionsCellItem
-          icon={<DeleteIcon />}
-          label="Delete"
-          onClick={() => handleDeleteUser(params.row)}
-          color="error"
-        />,
-      ],
+      getActions: (params) => {
+        if (!params.row) return [];
+        return [
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            onClick={() => handleEditUser(params.row)}
+            color="primary"
+          />,
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={() => handleDeleteUser(params.row)}
+            color="error"
+          />,
+        ];
+      },
     },
   ];
 
