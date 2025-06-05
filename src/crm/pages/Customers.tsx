@@ -379,6 +379,19 @@ export default function Customers() {
     }
   };
 
+  // Transform users data to include computed fields for DataGrid
+  const transformedUsers = users.map((user) => ({
+    ...user,
+    fullName: user.name
+      ? `${user.name.first || ""} ${user.name.last || ""}`
+      : "",
+    username: user.login?.username || "",
+    locationDisplay: user.location
+      ? `${user.location.city || ""}, ${user.location.country || ""}`
+      : "",
+    age: user.dob?.age || 0,
+  }));
+
   // Data Grid columns configuration
   const columns: GridColDef[] = [
     {
@@ -388,15 +401,16 @@ export default function Customers() {
       sortable: false,
       filterable: false,
       renderCell: (params) => {
-        if (!params.row) return null;
+        const user = params.row;
+        if (!user) return null;
         return (
           <Avatar
-            src={params.row.picture?.thumbnail}
-            alt={`${params.row.name?.first || ""} ${params.row.name?.last || ""}`}
+            src={user.picture?.thumbnail}
+            alt={`${user.name?.first || ""} ${user.name?.last || ""}`}
             sx={{ width: 32, height: 32 }}
           >
-            {params.row.name?.first?.[0] || ""}
-            {params.row.name?.last?.[0] || ""}
+            {user.name?.first?.[0] || ""}
+            {user.name?.last?.[0] || ""}
           </Avatar>
         );
       },
@@ -405,10 +419,6 @@ export default function Customers() {
       field: "fullName",
       headerName: "Name",
       width: 200,
-      valueGetter: (params) => {
-        if (!params.row?.name) return "";
-        return `${params.row.name.first || ""} ${params.row.name.last || ""}`;
-      },
     },
     {
       field: "email",
@@ -419,22 +429,16 @@ export default function Customers() {
       field: "username",
       headerName: "Username",
       width: 150,
-      valueGetter: (params) => params.row?.login?.username || "",
     },
     {
-      field: "location",
+      field: "locationDisplay",
       headerName: "Location",
       width: 200,
-      valueGetter: (params) => {
-        if (!params.row?.location) return "";
-        return `${params.row.location.city || ""}, ${params.row.location.country || ""}`;
-      },
     },
     {
       field: "age",
       headerName: "Age",
       width: 80,
-      valueGetter: (params) => params.row?.dob?.age || 0,
     },
     {
       field: "gender",
@@ -463,19 +467,22 @@ export default function Customers() {
       headerName: "Actions",
       width: 120,
       getActions: (params) => {
-        if (!params.row) return [];
+        const user = params.row;
+        if (!user) return [];
         return [
           <GridActionsCellItem
             icon={<EditIcon />}
             label="Edit"
-            onClick={() => handleEditUser(params.row)}
+            onClick={() => handleEditUser(user)}
             color="primary"
+            key="edit"
           />,
           <GridActionsCellItem
             icon={<DeleteIcon />}
             label="Delete"
-            onClick={() => handleDeleteUser(params.row)}
+            onClick={() => handleDeleteUser(user)}
             color="error"
+            key="delete"
           />,
         ];
       },
