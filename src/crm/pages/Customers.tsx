@@ -265,17 +265,19 @@ export default function Customers() {
       renderCell: (params) => {
         const user = params.row as User;
         return (
-          <Avatar sx={{ width: 32, height: 32, fontSize: "0.875rem" }}>
-            {user.picture?.thumbnail ? (
-              <img
-                src={user.picture.thumbnail}
-                alt={`${user.name.first} ${user.name.last}`}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            ) : (
-              getInitials(user.name.first, user.name.last)
-            )}
-          </Avatar>
+          <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
+            <Avatar sx={{ width: 32, height: 32, fontSize: "0.875rem" }}>
+              {user.picture?.thumbnail ? (
+                <img
+                  src={user.picture.thumbnail}
+                  alt={`${user.name.first} ${user.name.last}`}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              ) : (
+                getInitials(user.name.first, user.name.last)
+              )}
+            </Avatar>
+          </Box>
         );
       },
     },
