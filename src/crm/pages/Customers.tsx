@@ -575,9 +575,9 @@ export default function Customers() {
 
             <Box sx={{ height: 600, width: "100%" }}>
               <DataGrid
-                rows={users}
+                rows={transformedUsers}
                 columns={columns}
-                getRowId={(row) => row.login.uuid}
+                getRowId={(row) => row?.login?.uuid || Math.random().toString()}
                 loading={loading}
                 checkboxSelection
                 disableRowSelectionOnClick
