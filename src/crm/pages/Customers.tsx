@@ -432,6 +432,16 @@ export default function Customers() {
                   showQuickFilter: false,
                 },
               }}
+              sx={{
+                "& .MuiDataGrid-cell": {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                },
+                '& .MuiDataGrid-cell[data-field="avatar"]': {
+                  justifyContent: "center",
+                },
+              }}
             />
           </Box>
         </CardContent>
