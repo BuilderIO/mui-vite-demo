@@ -458,35 +458,13 @@ export default function Customers() {
       />
 
       {/* Delete Confirmation Dialog */}
-      <Dialog
+      <DeleteCustomerDialog
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
-      >
-        <DialogTitle>Confirm Delete</DialogTitle>
-        <DialogContent>
-          Are you sure you want to delete {userToDelete?.name.first}{" "}
-          {userToDelete?.name.last}? This action cannot be undone.
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => setDeleteDialogOpen(false)}
-            disabled={deleting}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={confirmDelete}
-            color="error"
-            variant="contained"
-            disabled={deleting}
-            startIcon={
-              deleting ? <CircularProgress size={20} /> : <DeleteIcon />
-            }
-          >
-            {deleting ? "Deleting..." : "Delete"}
-          </Button>
-        </DialogActions>
-      </Dialog>
+        onConfirm={confirmDelete}
+        user={userToDelete}
+        loading={deleting}
+      />
 
       {/* Success/Error Snackbar */}
       <Snackbar
