@@ -263,10 +263,13 @@ export default function Customers() {
       sortable: false,
       filterable: false,
       align: "center",
+      headerAlign: "center",
       renderCell: (params) => {
         const user = params.row as User;
         return (
-          <Avatar sx={{ width: 32, height: 32, fontSize: "0.875rem" }}>
+          <Avatar
+            sx={{ width: 32, height: 32, fontSize: "0.875rem", my: "auto" }}
+          >
             {user.picture?.thumbnail ? (
               <img
                 src={user.picture.thumbnail}
@@ -284,14 +287,8 @@ export default function Customers() {
       field: "name",
       headerName: "Name",
       width: 200,
-      renderCell: (params) => {
-        const user = params.row as User;
-        return (
-          <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
-            {`${user.name.title} ${user.name.first} ${user.name.last}`}
-          </Box>
-        );
-      },
+      valueGetter: (value, row: User) =>
+        `${row.name.title} ${row.name.first} ${row.name.last}`,
     },
     {
       field: "email",
