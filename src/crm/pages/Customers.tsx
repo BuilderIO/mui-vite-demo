@@ -426,12 +426,19 @@ export default function Customers() {
               getRowId={(row) => row.login.uuid}
               density="comfortable"
               disableRowSelectionOnClick
+              rowHeight={56}
               slots={{
                 toolbar: GridToolbar,
               }}
               slotProps={{
                 toolbar: {
                   showQuickFilter: false,
+                },
+              }}
+              sx={{
+                "& .MuiDataGrid-cell": {
+                  display: "flex",
+                  alignItems: "center",
                 },
               }}
             />
