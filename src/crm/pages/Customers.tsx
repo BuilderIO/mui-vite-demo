@@ -41,6 +41,7 @@ import {
   UpdateUserRequest,
 } from "../services/usersApi";
 import CustomerModal from "../components/CustomerModal";
+import DeleteCustomerDialog from "../components/DeleteCustomerDialog";
 
 interface ActionMenuProps {
   user: User;
