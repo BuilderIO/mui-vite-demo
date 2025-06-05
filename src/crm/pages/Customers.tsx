@@ -262,22 +262,21 @@ export default function Customers() {
       width: 60,
       sortable: false,
       filterable: false,
+      align: "center",
       renderCell: (params) => {
         const user = params.row as User;
         return (
-          <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
-            <Avatar sx={{ width: 32, height: 32, fontSize: "0.875rem" }}>
-              {user.picture?.thumbnail ? (
-                <img
-                  src={user.picture.thumbnail}
-                  alt={`${user.name.first} ${user.name.last}`}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              ) : (
-                getInitials(user.name.first, user.name.last)
-              )}
-            </Avatar>
-          </Box>
+          <Avatar sx={{ width: 32, height: 32, fontSize: "0.875rem" }}>
+            {user.picture?.thumbnail ? (
+              <img
+                src={user.picture.thumbnail}
+                alt={`${user.name.first} ${user.name.last}`}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            ) : (
+              getInitials(user.name.first, user.name.last)
+            )}
+          </Avatar>
         );
       },
     },
@@ -285,8 +284,14 @@ export default function Customers() {
       field: "name",
       headerName: "Name",
       width: 200,
-      valueGetter: (value, row: User) =>
-        `${row.name.title} ${row.name.first} ${row.name.last}`,
+      renderCell: (params) => {
+        const user = params.row as User;
+        return (
+          <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
+            {`${user.name.title} ${user.name.first} ${user.name.last}`}
+          </Box>
+        );
+      },
     },
     {
       field: "email",
