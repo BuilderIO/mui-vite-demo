@@ -16,7 +16,6 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
-  CircularProgress,
 } from "@mui/material";
 import {
   DataGrid,
