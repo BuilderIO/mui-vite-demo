@@ -39,6 +39,9 @@ export default function Customers() {
     severity: "success" | "error";
   }>({ open: false, message: "", severity: "success" });
 
+  // Search debounce timeout ref - must be at top level
+  const searchTimeoutRef = React.useRef<NodeJS.Timeout>();
+
   const fetchUsers = React.useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -70,19 +73,15 @@ export default function Customers() {
     fetchUsers();
   }, [fetchUsers]);
 
-  const handleSearch = React.useMemo(() => {
-    const timeoutId = React.useRef<NodeJS.Timeout>();
+  const handleSearch = React.useCallback((value: string) => {
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
 
-    return (value: string) => {
-      if (timeoutId.current) {
-        clearTimeout(timeoutId.current);
-      }
-
-      timeoutId.current = setTimeout(() => {
-        setSearchQuery(value);
-        setPage(0); // Reset to first page when searching
-      }, 500);
-    };
+    searchTimeoutRef.current = setTimeout(() => {
+      setSearchQuery(value);
+      setPage(0); // Reset to first page when searching
+    }, 500);
   }, []);
 
   const handleEditUser = (user: User) => {
