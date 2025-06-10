@@ -159,15 +159,26 @@ export default function Customers() {
       width: 60,
       sortable: false,
       filterable: false,
+      headerAlign: "center",
+      align: "center",
       renderCell: (params) => (
-        <Avatar
-          src={params.row.picture.thumbnail}
-          alt={formatFullName(params.row)}
-          sx={{ width: 32, height: 32 }}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+          }}
         >
-          {params.row.name.first[0]}
-          {params.row.name.last[0]}
-        </Avatar>
+          <Avatar
+            src={params.row.picture.thumbnail}
+            alt={formatFullName(params.row)}
+            sx={{ width: 32, height: 32 }}
+          >
+            {params.row.name.first[0]}
+            {params.row.name.last[0]}
+          </Avatar>
+        </Box>
       ),
     },
     {
@@ -222,8 +233,18 @@ export default function Customers() {
       width: 120,
       sortable: false,
       filterable: false,
+      headerAlign: "center",
+      align: "center",
       renderCell: (params) => (
-        <Box sx={{ display: "flex", gap: 0.5 }}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 0.5,
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
           <IconButton
             size="small"
             onClick={() => handleEditUser(params.row)}
