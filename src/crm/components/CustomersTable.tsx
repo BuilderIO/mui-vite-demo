@@ -150,15 +150,9 @@ export default function CustomersTable({
       minWidth: 150,
       valueGetter: (value, row) => `${row.name.first} ${row.name.last}`,
       renderCell: (params) => (
-        <Box>
-          <Typography variant="body2" fontWeight={500}>
-            {params.row.name.title} {params.row.name.first}{" "}
-            {params.row.name.last}
-          </Typography>
-          <Typography variant="caption" color="text.secondary">
-            @{params.row.login.username}
-          </Typography>
-        </Box>
+        <Typography variant="body2" fontWeight={500}>
+          {params.row.name.title} {params.row.name.first} {params.row.name.last}
+        </Typography>
       ),
     },
     {
@@ -178,12 +172,9 @@ export default function CustomersTable({
       valueGetter: (value, row) =>
         `${row.location.city}, ${row.location.country}`,
       renderCell: (params) => (
-        <Box>
-          <Typography variant="body2">{params.row.location.city}</Typography>
-          <Typography variant="caption" color="text.secondary">
-            {params.row.location.country}
-          </Typography>
-        </Box>
+        <Typography variant="body2">
+          {params.row.location.city}, {params.row.location.country}
+        </Typography>
       ),
     },
     {
@@ -322,7 +313,7 @@ export default function CustomersTable({
           onSortModelChange={handleSortChange}
           getRowId={(row) => row.login.uuid}
           disableRowSelectionOnClick
-          density="comfortable"
+          density="standard"
           sx={{
             border: "none",
             "& .MuiDataGrid-cell": {
