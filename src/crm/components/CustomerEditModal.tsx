@@ -172,30 +172,7 @@ export default function CustomerEditModal({
       }}
     >
       <DialogTitle sx={{ m: 0, p: 2, pb: 1 }}>
-        <Box display="flex" alignItems="center" justifyContent="space-between">
-          <Box display="flex" alignItems="center" gap={2}>
-            <Avatar
-              src={user.picture?.large}
-              alt={`${user.name.first} ${user.name.last}`}
-              sx={{ width: 48, height: 48 }}
-            >
-              {user.name.first.charAt(0).toUpperCase()}
-            </Avatar>
-            <Box>
-              <Typography variant="h6">Edit Customer</Typography>
-              <Typography variant="body2" color="text.secondary">
-                {user.name.first} {user.name.last} (@{user.login.username})
-              </Typography>
-            </Box>
-          </Box>
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            sx={{ color: "grey.500" }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </Box>
+        <CustomerEditModalHeader user={user} onClose={handleClose} />
       </DialogTitle>
 
       <DialogContent sx={{ pt: 2 }}>
