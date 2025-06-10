@@ -313,7 +313,7 @@ export default function CustomersTable({
           onSortModelChange={handleSortChange}
           getRowId={(row) => row.login.uuid}
           disableRowSelectionOnClick
-          density="standard"
+          density="comfortable"
           sx={{
             border: "none",
             "& .MuiDataGrid-cell": {
