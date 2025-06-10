@@ -73,6 +73,15 @@ export default function Customers() {
     fetchUsers();
   }, [fetchUsers]);
 
+  // Cleanup search timeout on unmount
+  React.useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleSearch = React.useCallback((value: string) => {
     if (searchTimeoutRef.current) {
       clearTimeout(searchTimeoutRef.current);
