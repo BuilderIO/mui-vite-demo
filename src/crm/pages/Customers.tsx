@@ -345,7 +345,8 @@ export default function Customers() {
       minWidth: 180,
       valueGetter: (params) => {
         const user = params.row as User;
-        return `${user.name.title} ${user.name.first} ${user.name.last}`;
+        if (!user || !user.name) return "";
+        return `${user.name.title || ""} ${user.name.first || ""} ${user.name.last || ""}`.trim();
       },
     },
     {
@@ -354,7 +355,8 @@ export default function Customers() {
       width: 140,
       valueGetter: (params) => {
         const user = params.row as User;
-        return `@${user.login.username}`;
+        if (!user || !user.login) return "";
+        return `@${user.login.username || ""}`;
       },
     },
     {
