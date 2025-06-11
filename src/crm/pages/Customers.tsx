@@ -469,6 +469,7 @@ export default function Customers() {
       headerName: "City",
       width: 130,
       valueGetter: (params) => {
+        if (!params || !params.row) return "";
         const user = params.row as User;
         if (!user || !user.location) return "";
         return user.location.city || "";
@@ -479,6 +480,7 @@ export default function Customers() {
       headerName: "Country",
       width: 120,
       valueGetter: (params) => {
+        if (!params || !params.row) return "";
         const user = params.row as User;
         if (!user || !user.location) return "";
         return user.location.country || "";
@@ -489,6 +491,7 @@ export default function Customers() {
       headerName: "Age",
       width: 80,
       valueGetter: (params) => {
+        if (!params || !params.row) return "";
         const user = params.row as User;
         if (!user || !user.dob) return "";
         return user.dob.age || "";
