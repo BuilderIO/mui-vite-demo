@@ -612,7 +612,11 @@ export default function Customers() {
 
       {/* Error Alert */}
       {error && (
-        <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError(null)}>
+        <Alert
+          severity={error.includes("demo data") ? "warning" : "error"}
+          sx={{ mb: 3 }}
+          onClose={() => setError(null)}
+        >
           {error}
         </Alert>
       )}
