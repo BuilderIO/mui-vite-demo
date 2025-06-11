@@ -111,6 +111,88 @@ interface EditUserData {
 
 const API_BASE_URL = "https://user-api.builder-io.workers.dev/api";
 
+// Fallback data for when API is not available
+const FALLBACK_USERS: User[] = [
+  {
+    login: {
+      uuid: "fallback-1",
+      username: "johndoe",
+    },
+    name: {
+      title: "Mr",
+      first: "John",
+      last: "Doe",
+    },
+    gender: "male",
+    location: {
+      street: {
+        number: 123,
+        name: "Main St",
+      },
+      city: "New York",
+      state: "NY",
+      country: "USA",
+      postcode: "10001",
+    },
+    email: "john.doe@example.com",
+    dob: {
+      date: "1990-01-01",
+      age: 34,
+    },
+    registered: {
+      date: "2020-01-01",
+      age: 4,
+    },
+    phone: "555-0123",
+    cell: "555-0124",
+    picture: {
+      large: "",
+      medium: "",
+      thumbnail: "",
+    },
+    nat: "US",
+  },
+  {
+    login: {
+      uuid: "fallback-2",
+      username: "janesmith",
+    },
+    name: {
+      title: "Ms",
+      first: "Jane",
+      last: "Smith",
+    },
+    gender: "female",
+    location: {
+      street: {
+        number: 456,
+        name: "Oak Ave",
+      },
+      city: "Los Angeles",
+      state: "CA",
+      country: "USA",
+      postcode: "90210",
+    },
+    email: "jane.smith@example.com",
+    dob: {
+      date: "1985-05-15",
+      age: 39,
+    },
+    registered: {
+      date: "2019-03-10",
+      age: 5,
+    },
+    phone: "555-0234",
+    cell: "555-0235",
+    picture: {
+      large: "",
+      medium: "",
+      thumbnail: "",
+    },
+    nat: "US",
+  },
+];
+
 export default function Customers() {
   const [users, setUsers] = React.useState<User[]>([]);
   const [loading, setLoading] = React.useState(true);
