@@ -326,7 +326,7 @@ export default function Customers() {
       headerName: "Name",
       flex: 1,
       minWidth: 180,
-      renderCell: (params) => {
+      valueGetter: (params) => {
         const user = params.row as User;
         return `${user.name.title} ${user.name.first} ${user.name.last}`;
       },
@@ -335,7 +335,7 @@ export default function Customers() {
       field: "username",
       headerName: "Username",
       width: 140,
-      renderCell: (params) => {
+      valueGetter: (params) => {
         const user = params.row as User;
         return `@${user.login.username}`;
       },
@@ -350,7 +350,7 @@ export default function Customers() {
       field: "city",
       headerName: "City",
       width: 130,
-      renderCell: (params) => {
+      valueGetter: (params) => {
         const user = params.row as User;
         return user.location.city;
       },
@@ -359,7 +359,7 @@ export default function Customers() {
       field: "country",
       headerName: "Country",
       width: 120,
-      renderCell: (params) => {
+      valueGetter: (params) => {
         const user = params.row as User;
         return user.location.country;
       },
@@ -368,7 +368,7 @@ export default function Customers() {
       field: "age",
       headerName: "Age",
       width: 80,
-      renderCell: (params) => {
+      valueGetter: (params) => {
         const user = params.row as User;
         return user.dob.age;
       },
@@ -398,7 +398,7 @@ export default function Customers() {
       field: "registered",
       headerName: "Registered",
       width: 120,
-      renderCell: (params) => {
+      valueGetter: (params) => {
         const user = params.row as User;
         return formatDate(user.registered.date);
       },
@@ -414,7 +414,10 @@ export default function Customers() {
         return (
           <IconButton
             size="small"
-            onClick={() => handleEditUser(user)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleEditUser(user);
+            }}
             color="primary"
             aria-label="Edit user"
           >
