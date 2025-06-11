@@ -524,6 +524,7 @@ export default function Customers() {
       headerName: "Registered",
       width: 120,
       valueGetter: (params) => {
+        if (!params || !params.row) return "";
         const user = params.row as User;
         if (!user || !user.registered || !user.registered.date) return "";
         return formatDate(user.registered.date);
