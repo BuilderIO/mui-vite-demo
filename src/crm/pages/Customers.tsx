@@ -441,6 +441,7 @@ export default function Customers() {
       flex: 1,
       minWidth: 180,
       valueGetter: (params) => {
+        if (!params || !params.row) return "";
         const user = params.row as User;
         if (!user || !user.name) return "";
         return `${user.name.title || ""} ${user.name.first || ""} ${user.name.last || ""}`.trim();
@@ -451,6 +452,7 @@ export default function Customers() {
       headerName: "Username",
       width: 140,
       valueGetter: (params) => {
+        if (!params || !params.row) return "";
         const user = params.row as User;
         if (!user || !user.login) return "";
         return `@${user.login.username || ""}`;
