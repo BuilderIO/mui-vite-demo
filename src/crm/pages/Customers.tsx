@@ -325,19 +325,19 @@ export default function Customers() {
       field: "name",
       headerName: "Name",
       flex: 1,
-      minWidth: 200,
+      minWidth: 180,
       renderCell: (params) => {
         const user = params.row as User;
-        return (
-          <Box>
-            <Typography variant="body2" fontWeight="medium">
-              {user.name.title} {user.name.first} {user.name.last}
-            </Typography>
-            <Typography variant="caption" color="text.secondary">
-              @{user.login.username}
-            </Typography>
-          </Box>
-        );
+        return `${user.name.title} ${user.name.first} ${user.name.last}`;
+      },
+    },
+    {
+      field: "username",
+      headerName: "Username",
+      width: 140,
+      renderCell: (params) => {
+        const user = params.row as User;
+        return `@${user.login.username}`;
       },
     },
     {
@@ -347,22 +347,21 @@ export default function Customers() {
       minWidth: 200,
     },
     {
-      field: "location",
-      headerName: "Location",
-      flex: 1,
-      minWidth: 180,
+      field: "city",
+      headerName: "City",
+      width: 130,
       renderCell: (params) => {
         const user = params.row as User;
-        return (
-          <Box>
-            <Typography variant="body2">
-              {user.location.city}, {user.location.state}
-            </Typography>
-            <Typography variant="caption" color="text.secondary">
-              {user.location.country}
-            </Typography>
-          </Box>
-        );
+        return user.location.city;
+      },
+    },
+    {
+      field: "country",
+      headerName: "Country",
+      width: 120,
+      renderCell: (params) => {
+        const user = params.row as User;
+        return user.location.country;
       },
     },
     {
