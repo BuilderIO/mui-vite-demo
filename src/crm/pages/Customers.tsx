@@ -436,6 +436,7 @@ export default function Customers() {
       filterable: false,
       renderCell: (params) => {
         const user = params.row as User;
+        if (!user) return null;
         return (
           <IconButton
             size="small"
