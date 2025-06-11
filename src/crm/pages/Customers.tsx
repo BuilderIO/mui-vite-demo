@@ -408,7 +408,10 @@ export default function Customers() {
   };
 
   const getInitials = (user: User) => {
-    return `${user.name.first.charAt(0)}${user.name.last.charAt(0)}`.toUpperCase();
+    if (!user || !user.name) return "??";
+    const first = user.name.first?.charAt(0) || "?";
+    const last = user.name.last?.charAt(0) || "?";
+    return `${first}${last}`.toUpperCase();
   };
 
   const columns: GridColDef[] = [
