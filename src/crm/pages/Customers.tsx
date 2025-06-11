@@ -371,7 +371,8 @@ export default function Customers() {
       width: 130,
       valueGetter: (params) => {
         const user = params.row as User;
-        return user.location.city;
+        if (!user || !user.location) return "";
+        return user.location.city || "";
       },
     },
     {
@@ -380,7 +381,8 @@ export default function Customers() {
       width: 120,
       valueGetter: (params) => {
         const user = params.row as User;
-        return user.location.country;
+        if (!user || !user.location) return "";
+        return user.location.country || "";
       },
     },
     {
@@ -389,7 +391,8 @@ export default function Customers() {
       width: 80,
       valueGetter: (params) => {
         const user = params.row as User;
-        return user.dob.age;
+        if (!user || !user.dob) return "";
+        return user.dob.age || "";
       },
     },
     {
