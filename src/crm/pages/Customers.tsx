@@ -636,71 +636,86 @@ export default function Customers() {
       {/* Data Grid */}
       <Card variant="outlined">
         <Box sx={{ height: 600, width: "100%" }}>
-          <DataGrid
-            rows={users}
-            columns={columns}
-            loading={loading}
-            getRowId={(row) => row.login.uuid}
-            pagination
-            paginationMode="server"
-            rowCount={totalUsers}
-            page={page - 1} // DataGrid uses 0-based pagination
-            pageSize={perPage}
-            onPageChange={(newPage) => {
-              const pageNum = newPage + 1; // Convert to 1-based
-              setPage(pageNum);
-              fetchUsers(searchTerm, pageNum, perPage);
-            }}
-            onPageSizeChange={(newPageSize) => {
-              setPerPage(newPageSize);
-              fetchUsers(searchTerm, 1, newPageSize);
-            }}
-            pageSizeOptions={[10, 20, 50, 100]}
-            checkboxSelection
-            disableColumnResize
-            density="comfortable"
-            slots={{
-              toolbar: GridToolbar,
-            }}
-            slotProps={{
-              toolbar: {
-                showQuickFilter: true,
-                quickFilterProps: { debounceMs: 500 },
-              },
-              filterPanel: {
-                filterFormProps: {
-                  logicOperatorInputProps: {
-                    variant: "outlined",
-                    size: "small",
-                  },
-                  columnInputProps: {
-                    variant: "outlined",
-                    size: "small",
-                    sx: { mt: "auto" },
-                  },
-                  operatorInputProps: {
-                    variant: "outlined",
-                    size: "small",
-                    sx: { mt: "auto" },
-                  },
-                  valueInputProps: {
-                    InputComponentProps: {
+          {loading ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            <DataGrid
+              rows={users || []}
+              columns={columns}
+              loading={loading}
+              getRowId={(row) => row?.login?.uuid || Math.random().toString()}
+              pagination
+              paginationMode="server"
+              rowCount={totalUsers}
+              page={page - 1} // DataGrid uses 0-based pagination
+              pageSize={perPage}
+              onPageChange={(newPage) => {
+                const pageNum = newPage + 1; // Convert to 1-based
+                setPage(pageNum);
+                fetchUsers(searchTerm, pageNum, perPage);
+              }}
+              onPageSizeChange={(newPageSize) => {
+                setPerPage(newPageSize);
+                fetchUsers(searchTerm, 1, newPageSize);
+              }}
+              pageSizeOptions={[10, 20, 50, 100]}
+              checkboxSelection
+              disableColumnResize
+              density="comfortable"
+              slots={{
+                toolbar: GridToolbar,
+              }}
+              slotProps={{
+                toolbar: {
+                  showQuickFilter: true,
+                  quickFilterProps: { debounceMs: 500 },
+                },
+                filterPanel: {
+                  filterFormProps: {
+                    logicOperatorInputProps: {
                       variant: "outlined",
                       size: "small",
                     },
+                    columnInputProps: {
+                      variant: "outlined",
+                      size: "small",
+                      sx: { mt: "auto" },
+                    },
+                    operatorInputProps: {
+                      variant: "outlined",
+                      size: "small",
+                      sx: { mt: "auto" },
+                    },
+                    valueInputProps: {
+                      InputComponentProps: {
+                        variant: "outlined",
+                        size: "small",
+                      },
+                    },
                   },
                 },
-              },
-            }}
-            onRowClick={(params: GridRowParams) => {
-              handleEditUser(params.row as User);
-            }}
-            sx={{
-              "& .MuiDataGrid-row:hover": {
-                cursor: "pointer",
-              },
-            }}
-          />
+              }}
+              onRowClick={(params: GridRowParams) => {
+                if (params && params.row) {
+                  handleEditUser(params.row as User);
+                }
+              }}
+              sx={{
+                "& .MuiDataGrid-row:hover": {
+                  cursor: "pointer",
+                },
+              }}
+            />
+          )}
         </Box>
       </Card>
 
