@@ -422,6 +422,7 @@ export default function Customers() {
       sortable: false,
       filterable: false,
       renderCell: (params) => {
+        if (!params || !params.row) return null;
         const user = params.row as User;
         if (!user) return null;
         return (
