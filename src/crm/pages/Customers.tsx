@@ -401,6 +401,7 @@ export default function Customers() {
       width: 100,
       renderCell: (params) => {
         const user = params.row as User;
+        if (!user || !user.gender) return "";
         return (
           <Chip
             label={user.gender}
