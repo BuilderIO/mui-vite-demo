@@ -327,13 +327,14 @@ export default function Customers() {
       filterable: false,
       renderCell: (params) => {
         const user = params.row as User;
+        if (!user) return null;
         return (
           <Avatar
-            src={user.picture.thumbnail}
-            alt={`${user.name.first} ${user.name.last}`}
+            src={user.picture?.thumbnail}
+            alt={`${user.name?.first || ""} ${user.name?.last || ""}`}
             sx={{ width: 32, height: 32 }}
           >
-            {getInitials(user)}
+            {user.name ? getInitials(user) : "?"}
           </Avatar>
         );
       },
