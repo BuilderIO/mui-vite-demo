@@ -155,7 +155,14 @@ export default function Customers() {
           params.append("search", searchQuery.trim());
         }
 
-        const response = await fetch(`${API_BASE_URL}/users?${params}`);
+        const response = await fetch(`${API_BASE_URL}/users?${params}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+        });
 
         if (!response.ok) {
           throw new Error(
@@ -164,15 +171,25 @@ export default function Customers() {
         }
 
         const data: ApiResponse = await response.json();
-        setUsers(data.data);
-        setTotalUsers(data.total);
-        setPage(data.page);
-        setPerPage(data.perPage);
+
+        // Ensure data is valid
+        if (data && Array.isArray(data.data)) {
+          setUsers(data.data);
+          setTotalUsers(data.total || 0);
+          setPage(data.page || 1);
+          setPerPage(data.perPage || 20);
+        } else {
+          throw new Error("Invalid data format received from API");
+        }
       } catch (err) {
         const errorMessage =
           err instanceof Error ? err.message : "Failed to fetch users";
         setError(errorMessage);
         console.error("Error fetching users:", err);
+
+        // Set empty data on error to prevent undefined access
+        setUsers([]);
+        setTotalUsers(0);
       } finally {
         setLoading(false);
       }
