@@ -266,12 +266,23 @@ export default function Customers() {
       } catch (err) {
         const errorMessage =
           err instanceof Error ? err.message : "Failed to fetch users";
-        setError(errorMessage);
         console.error("Error fetching users:", err);
 
-        // Set empty data on error to prevent undefined access
-        setUsers([]);
-        setTotalUsers(0);
+        // Use fallback data if API is not available
+        if (
+          err instanceof TypeError &&
+          err.message.includes("Failed to fetch")
+        ) {
+          setError("API temporarily unavailable. Showing demo data.");
+          setUsers(FALLBACK_USERS);
+          setTotalUsers(FALLBACK_USERS.length);
+          setPage(1);
+          setPerPage(20);
+        } else {
+          setError(errorMessage);
+          setUsers([]);
+          setTotalUsers(0);
+        }
       } finally {
         setLoading(false);
       }
