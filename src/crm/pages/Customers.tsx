@@ -155,25 +155,19 @@ export default function Customers() {
       headerAlign: "center",
       cellClassName: "avatar-cell",
       renderCell: (params) => (
-        <Box
+        <Avatar
+          src={params.row.picture?.thumbnail}
+          alt={`${params.row.name.first} ${params.row.name.last}`}
           sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: "100%",
-            minHeight: "64px",
+            width: 32,
+            height: 32,
+            mx: "auto",
+            my: "auto",
           }}
         >
-          <Avatar
-            src={params.row.picture?.thumbnail}
-            alt={`${params.row.name.first} ${params.row.name.last}`}
-            sx={{ width: 32, height: 32 }}
-          >
-            {params.row.name.first[0]}
-            {params.row.name.last[0]}
-          </Avatar>
-        </Box>
+          {params.row.name.first[0]}
+          {params.row.name.last[0]}
+        </Avatar>
       ),
     },
     {
