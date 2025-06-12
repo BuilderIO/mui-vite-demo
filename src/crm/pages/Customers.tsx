@@ -335,6 +335,12 @@ export default function Customers() {
               display: "flex",
               alignItems: "center",
             },
+            '& .MuiDataGrid-cell[data-field="avatar"]': {
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "8px",
+            },
             "& .MuiDataGrid-row": {
               "&:hover": {
                 backgroundColor: "action.hover",
