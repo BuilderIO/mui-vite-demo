@@ -347,17 +347,12 @@ export default function Customers() {
               display: "flex",
               alignItems: "center",
             },
-            '& .MuiDataGrid-cell[data-field="avatar"]': {
-              display: "flex !important",
-              alignItems: "center !important",
-              justifyContent: "center !important",
-              padding: "0 !important",
-            },
             "& .avatar-cell": {
+              position: "relative",
               display: "flex !important",
               alignItems: "center !important",
               justifyContent: "center !important",
-              padding: "0 !important",
+              padding: "16px 8px !important",
             },
             "& .MuiDataGrid-row": {
               "&:hover": {
