@@ -329,12 +329,24 @@ export default function Customers() {
           }}
           pageSizeOptions={[10, 20, 50, 100]}
           disableRowSelectionOnClick
+          rowHeight={64}
           slots={{
             toolbar: GridToolbar,
           }}
           slotProps={{
             toolbar: {
               showQuickFilter: false,
+            },
+          }}
+          sx={{
+            "& .MuiDataGrid-cell": {
+              display: "flex",
+              alignItems: "center",
+            },
+            "& .MuiDataGrid-row": {
+              "&:hover": {
+                backgroundColor: "action.hover",
+              },
             },
           }}
         />
