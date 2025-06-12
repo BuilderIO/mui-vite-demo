@@ -153,11 +153,12 @@ export default function Customers() {
       sortable: false,
       align: "center",
       headerAlign: "center",
+      cellClassName: "avatar-cell",
       renderCell: (params) => (
         <Avatar
           src={params.row.picture?.thumbnail}
           alt={`${params.row.name.first} ${params.row.name.last}`}
-          sx={{ width: 32, height: 32 }}
+          sx={{ width: 32, height: 32, margin: "auto" }}
         >
           {params.row.name.first[0]}
           {params.row.name.last[0]}
