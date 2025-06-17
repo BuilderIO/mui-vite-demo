@@ -144,6 +144,13 @@ export default function CrmMainDashboard() {
       </Grid>
 
       <Copyright sx={{ mt: 3, mb: 4 }} />
+
+      {/* New Lead Modal */}
+      <NewLeadModal
+        open={isNewLeadModalOpen}
+        onClose={handleCloseNewLeadModal}
+        onSuccess={handleLeadCreated}
+      />
     </Box>
   );
 }
