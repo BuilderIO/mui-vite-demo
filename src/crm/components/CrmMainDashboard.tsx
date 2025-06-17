@@ -95,6 +95,7 @@ export default function CrmMainDashboard() {
             variant="contained"
             startIcon={<AddRoundedIcon />}
             sx={{ mr: 1 }}
+            onClick={handleOpenNewLeadModal}
           >
             New Lead
           </Button>
