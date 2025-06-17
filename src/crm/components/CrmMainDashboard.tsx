@@ -72,9 +72,10 @@ export default function CrmMainDashboard() {
     setIsNewLeadModalOpen(false);
   };
 
-  const handleLeadCreated = () => {
+  const handleLeadCreated = (formData?: any) => {
     // In a real application, you might want to refresh the data here
     console.log("New lead created successfully!");
+    console.log("Form data:", formData);
     // You could trigger a data refresh, show a success message, etc.
   };
 
