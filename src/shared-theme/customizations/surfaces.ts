@@ -36,7 +36,7 @@ export const surfacesCustomizations: Components<Theme> = {
     styleOverrides: {
       root: ({ theme }) => ({
         border: "none",
-        borderRadius: 12,
+        borderRadius: 8,
         "&:hover": { backgroundColor: gray[50] },
         "&:focus-visible": { backgroundColor: "transparent" },
         ...theme.applyStyles("dark", {
