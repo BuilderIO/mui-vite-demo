@@ -11,6 +11,7 @@ import CrmRecentDealsTable from "./CrmRecentDealsTable";
 import CrmUpcomingTasks from "./CrmUpcomingTasks";
 import CrmSalesChart from "./CrmSalesChart";
 import CrmLeadsBySourceChart from "./CrmLeadsBySourceChart";
+import NewLeadModal from "./NewLeadModal";
 
 // Sample data for stat cards
 const statCardsData = [
