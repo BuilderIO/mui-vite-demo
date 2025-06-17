@@ -62,6 +62,22 @@ const statCardsData = [
 ];
 
 export default function CrmMainDashboard() {
+  const [isNewLeadModalOpen, setIsNewLeadModalOpen] = React.useState(false);
+
+  const handleOpenNewLeadModal = () => {
+    setIsNewLeadModalOpen(true);
+  };
+
+  const handleCloseNewLeadModal = () => {
+    setIsNewLeadModalOpen(false);
+  };
+
+  const handleLeadCreated = () => {
+    // In a real application, you might want to refresh the data here
+    console.log("New lead created successfully!");
+    // You could trigger a data refresh, show a success message, etc.
+  };
+
   return (
     <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
       {/* Header with action buttons */}
