@@ -191,7 +191,7 @@ export default function NewLeadModal({
       setErrors({});
 
       // Call success callback
-      onSuccess?.();
+      onSuccess?.(formData);
 
       // Close modal
       onClose();
