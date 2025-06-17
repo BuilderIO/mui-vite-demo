@@ -21,7 +21,7 @@ import { useState } from "react";
 interface NewLeadModalProps {
   open: boolean;
   onClose: () => void;
-  onSuccess?: () => void;
+  onSuccess?: (formData: LeadFormData) => void;
 }
 
 interface LeadFormData {
