@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Box from "@mui/material/Box"; // Added the missing import
+import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -8,6 +8,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import Tooltip from "@mui/material/Tooltip";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import BusinessCenterRoundedIcon from "@mui/icons-material/BusinessCenterRounded";
