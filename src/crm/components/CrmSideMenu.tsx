@@ -70,7 +70,7 @@ export default function CrmSideMenu({
       >
         {!isCollapsed && (
           <Box sx={{ flex: 1, minWidth: 0 }}>
-            <CrmSelectCompany />
+            <CrmSelectCompany isCollapsed={isCollapsed} />
           </Box>
         )}
         <IconButton
