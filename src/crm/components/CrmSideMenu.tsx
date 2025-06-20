@@ -13,8 +13,8 @@ import CrmSelectCompany from "./CrmSelectCompany";
 import CrmMenuContent from "./CrmMenuContent";
 import CrmOptionsMenu from "./CrmOptionsMenu";
 
-const drawerWidth = 240;
-const collapsedDrawerWidth = 64;
+export const drawerWidth = 240;
+export const collapsedDrawerWidth = 64;
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "isCollapsed",
