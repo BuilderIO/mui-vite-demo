@@ -38,10 +38,19 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-export default function CrmSideMenu() {
+interface CrmSideMenuProps {
+  isCollapsed?: boolean;
+  onToggleCollapse?: () => void;
+}
+
+export default function CrmSideMenu({
+  isCollapsed = false,
+  onToggleCollapse,
+}: CrmSideMenuProps) {
   return (
     <Drawer
       variant="permanent"
+      isCollapsed={isCollapsed}
       sx={{
         display: { xs: "none", md: "block" },
         [`& .${drawerClasses.paper}`]: {
@@ -52,11 +61,31 @@ export default function CrmSideMenu() {
       <Box
         sx={{
           display: "flex",
+          alignItems: "center",
+          justifyContent: isCollapsed ? "center" : "space-between",
           mt: "calc(var(--template-frame-height, 0px) + 4px)",
           p: 1.5,
+          minHeight: 56, // Ensure consistent height
         }}
       >
-        <CrmSelectCompany />
+        {!isCollapsed && (
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <CrmSelectCompany />
+          </Box>
+        )}
+        <IconButton
+          onClick={onToggleCollapse}
+          size="small"
+          sx={{
+            ml: isCollapsed ? 0 : 1,
+            bgcolor: "action.hover",
+            "&:hover": {
+              bgcolor: "action.selected",
+            },
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
       </Box>
       <Divider />
       <Box
@@ -67,16 +96,17 @@ export default function CrmSideMenu() {
           flexDirection: "column",
         }}
       >
-        <CrmMenuContent />
+        <CrmMenuContent isCollapsed={isCollapsed} />
       </Box>
       <Stack
         direction="row"
         sx={{
-          p: 2,
+          p: isCollapsed ? 1 : 2,
           gap: 1,
           alignItems: "center",
           borderTop: "1px solid",
           borderColor: "divider",
+          justifyContent: isCollapsed ? "center" : "flex-start",
         }}
       >
         <Avatar
@@ -87,18 +117,22 @@ export default function CrmSideMenu() {
         >
           AT
         </Avatar>
-        <Box sx={{ mr: "auto" }}>
-          <Typography
-            variant="body2"
-            sx={{ fontWeight: 500, lineHeight: "16px" }}
-          >
-            Alex Thompson
-          </Typography>
-          <Typography variant="caption" sx={{ color: "text.secondary" }}>
-            alex@acmecrm.com
-          </Typography>
-        </Box>
-        <CrmOptionsMenu />
+        {!isCollapsed && (
+          <>
+            <Box sx={{ mr: "auto" }}>
+              <Typography
+                variant="body2"
+                sx={{ fontWeight: 500, lineHeight: "16px" }}
+              >
+                Alex Thompson
+              </Typography>
+              <Typography variant="caption" sx={{ color: "text.secondary" }}>
+                alex@acmecrm.com
+              </Typography>
+            </Box>
+            <CrmOptionsMenu />
+          </>
+        )}
       </Stack>
     </Drawer>
   );
