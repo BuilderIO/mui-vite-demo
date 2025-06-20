@@ -85,7 +85,7 @@ export default function CrmSideMenu({
             },
           }}
         >
-          <MenuIcon />
+          {isCollapsed ? <MenuIcon /> : <ChevronLeftIcon />}
         </IconButton>
       </Box>
       <Divider />
