@@ -7,22 +7,36 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 import CrmSelectCompany from "./CrmSelectCompany";
 import CrmMenuContent from "./CrmMenuContent";
 import CrmOptionsMenu from "./CrmOptionsMenu";
 
 const drawerWidth = 240;
+const collapsedDrawerWidth = 64;
 
-const Drawer = styled(MuiDrawer)({
-  width: drawerWidth,
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "isCollapsed",
+})<{ isCollapsed?: boolean }>(({ theme, isCollapsed }) => ({
+  width: isCollapsed ? collapsedDrawerWidth : drawerWidth,
   flexShrink: 0,
   boxSizing: "border-box",
   mt: 10,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.easeInOut,
+    duration: theme.transitions.duration.standard,
+  }),
   [`& .${drawerClasses.paper}`]: {
-    width: drawerWidth,
+    width: isCollapsed ? collapsedDrawerWidth : drawerWidth,
     boxSizing: "border-box",
+    overflowX: "hidden",
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.easeInOut,
+      duration: theme.transitions.duration.standard,
+    }),
   },
-});
+}));
 
 export default function CrmSideMenu() {
   return (
