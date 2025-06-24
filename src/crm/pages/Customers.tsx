@@ -97,21 +97,10 @@ export default function Customers() {
       minWidth: 200,
       valueGetter: (value, row) => `${row.name.first} ${row.name.last}`,
       renderCell: (params) => (
-        <Box>
-          <Typography
-            variant="body2"
-            fontWeight="medium"
-            sx={{ lineHeight: 1.2 }}
-          >
+        <Box display="flex" alignItems="center" height="100%">
+          <Typography variant="body2" fontWeight="medium">
             {params.row.name.title} {params.row.name.first}{" "}
             {params.row.name.last}
-          </Typography>
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            sx={{ lineHeight: 1 }}
-          >
-            @{params.row.login.username}
           </Typography>
         </Box>
       ),
@@ -122,7 +111,7 @@ export default function Customers() {
       flex: 1.5,
       minWidth: 200,
       renderCell: (params) => (
-        <Box display="flex" alignItems="center" gap={1}>
+        <Box display="flex" alignItems="center" gap={1} height="100%">
           <EmailIcon fontSize="small" color="action" />
           <Typography variant="body2">{params.value}</Typography>
         </Box>
@@ -134,7 +123,7 @@ export default function Customers() {
       flex: 1,
       minWidth: 140,
       renderCell: (params) => (
-        <Box display="flex" alignItems="center" gap={1}>
+        <Box display="flex" alignItems="center" gap={1} height="100%">
           <PhoneIcon fontSize="small" color="action" />
           <Typography variant="body2">{params.value}</Typography>
         </Box>
@@ -148,20 +137,11 @@ export default function Customers() {
       valueGetter: (value, row) =>
         `${row.location.city}, ${row.location.country}`,
       renderCell: (params) => (
-        <Box display="flex" alignItems="center" gap={1}>
+        <Box display="flex" alignItems="center" gap={1} height="100%">
           <LocationOnIcon fontSize="small" color="action" />
-          <Box>
-            <Typography variant="body2" sx={{ lineHeight: 1.2 }}>
-              {params.row.location.city}, {params.row.location.state}
-            </Typography>
-            <Typography
-              variant="caption"
-              color="text.secondary"
-              sx={{ lineHeight: 1 }}
-            >
-              {params.row.location.country}
-            </Typography>
-          </Box>
+          <Typography variant="body2">
+            {params.row.location.city}, {params.row.location.state}
+          </Typography>
         </Box>
       ),
     },
@@ -172,12 +152,19 @@ export default function Customers() {
       type: "number",
       valueGetter: (value, row) => row.dob.age,
       renderCell: (params) => (
-        <Chip
-          label={params.value}
-          size="small"
-          variant="outlined"
-          color="primary"
-        />
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height="100%"
+        >
+          <Chip
+            label={params.value}
+            size="small"
+            variant="outlined"
+            color="primary"
+          />
+        </Box>
       ),
     },
     {
@@ -190,9 +177,11 @@ export default function Customers() {
         return date.toLocaleDateString();
       },
       renderCell: (params) => (
-        <Typography variant="body2">
-          {new Date(params.row.registered.date).toLocaleDateString()}
-        </Typography>
+        <Box display="flex" alignItems="center" height="100%">
+          <Typography variant="body2">
+            {new Date(params.row.registered.date).toLocaleDateString()}
+          </Typography>
+        </Box>
       ),
     },
     {
