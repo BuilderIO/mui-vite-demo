@@ -98,11 +98,19 @@ export default function Customers() {
       valueGetter: (value, row) => `${row.name.first} ${row.name.last}`,
       renderCell: (params) => (
         <Box>
-          <Typography variant="body2" fontWeight="medium">
+          <Typography
+            variant="body2"
+            fontWeight="medium"
+            sx={{ lineHeight: 1.2 }}
+          >
             {params.row.name.title} {params.row.name.first}{" "}
             {params.row.name.last}
           </Typography>
-          <Typography variant="caption" color="text.secondary">
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ lineHeight: 1 }}
+          >
             @{params.row.login.username}
           </Typography>
         </Box>
@@ -143,10 +151,14 @@ export default function Customers() {
         <Box display="flex" alignItems="center" gap={1}>
           <LocationOnIcon fontSize="small" color="action" />
           <Box>
-            <Typography variant="body2">
+            <Typography variant="body2" sx={{ lineHeight: 1.2 }}>
               {params.row.location.city}, {params.row.location.state}
             </Typography>
-            <Typography variant="caption" color="text.secondary">
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ lineHeight: 1 }}
+            >
               {params.row.location.country}
             </Typography>
           </Box>
