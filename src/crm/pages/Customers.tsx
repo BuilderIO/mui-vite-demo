@@ -14,7 +14,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import {
-  DataGrid,
+  DataGridPro,
   GridColDef,
   GridActionsCellItem,
   GridPaginationModel,
@@ -282,7 +282,7 @@ export default function Customers() {
       {/* Data Grid */}
       <Card>
         <CardContent sx={{ p: 0 }}>
-          <DataGrid
+          <DataGridPro
             rows={users}
             columns={columns}
             loading={loading}
