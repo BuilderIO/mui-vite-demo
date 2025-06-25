@@ -119,15 +119,9 @@ export default function Customers() {
       valueGetter: (value, row) =>
         `${row.name.title} ${row.name.first} ${row.name.last}`,
       renderCell: (params) => (
-        <Box>
-          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-            {params.row.name.title} {params.row.name.first}{" "}
-            {params.row.name.last}
-          </Typography>
-          <Typography variant="caption" color="text.secondary">
-            @{params.row.login.username}
-          </Typography>
-        </Box>
+        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+          {params.row.name.title} {params.row.name.first} {params.row.name.last}
+        </Typography>
       ),
     },
     {
@@ -140,19 +134,20 @@ export default function Customers() {
     },
     {
       field: "location",
-      headerName: "Location",
-      width: 200,
-      valueGetter: (value, row) =>
-        `${row.location.city}, ${row.location.country}`,
+      headerName: "City",
+      width: 150,
+      valueGetter: (value, row) => row.location.city,
       renderCell: (params) => (
-        <Box>
-          <Typography variant="body2">
-            {params.row.location.city}, {params.row.location.state}
-          </Typography>
-          <Typography variant="caption" color="text.secondary">
-            {params.row.location.country}
-          </Typography>
-        </Box>
+        <Typography variant="body2">{params.value}</Typography>
+      ),
+    },
+    {
+      field: "country",
+      headerName: "Country",
+      width: 120,
+      valueGetter: (value, row) => row.location.country,
+      renderCell: (params) => (
+        <Typography variant="body2">{params.value}</Typography>
       ),
     },
     {
