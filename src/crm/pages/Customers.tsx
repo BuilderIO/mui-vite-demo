@@ -237,127 +237,15 @@ export default function Customers() {
       )}
 
       {/* Customers Table */}
-      <Card variant="outlined">
-        <CardContent sx={{ pb: 0 }}>
-          <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-            Customer List
-          </Typography>
-        </CardContent>
-
-        <TableContainer>
-          <Table aria-label="customers table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Customer</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell align="center">Gender</TableCell>
-                <TableCell align="center">Age</TableCell>
-                <TableCell>Registered</TableCell>
-                <TableCell align="right">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {loading ? (
-                <TableRow>
-                  <TableCell colSpan={8} align="center" sx={{ py: 4 }}>
-                    <CircularProgress size={32} />
-                  </TableCell>
-                </TableRow>
-              ) : users.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={8} align="center" sx={{ py: 4 }}>
-                    <Typography color="text.secondary">
-                      No customers found
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              ) : (
-                users.map((user) => (
-                  <TableRow key={user.login.uuid} hover>
-                    <TableCell>
-                      <Box
-                        sx={{ display: "flex", alignItems: "center", gap: 2 }}
-                      >
-                        <Avatar
-                          src={user.picture.thumbnail}
-                          sx={{ width: 40, height: 40 }}
-                        >
-                          {getInitials(user.name.first, user.name.last)}
-                        </Avatar>
-                        <Box>
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {user.name.title} {user.name.first} {user.name.last}
-                          </Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            @{user.login.username}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2">{user.email}</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Box>
-                        <Typography variant="body2">{user.phone}</Typography>
-                        <Typography variant="caption" color="text.secondary">
-                          Cell: {user.cell}
-                        </Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Box>
-                        <Typography variant="body2">
-                          {user.location.city}, {user.location.state}
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary">
-                          {user.location.country}
-                        </Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell align="center">
-                      <Chip
-                        label={user.gender}
-                        size="small"
-                        color={getGenderColor(user.gender)}
-                        variant="outlined"
-                      />
-                    </TableCell>
-                    <TableCell align="center">
-                      <Typography variant="body2">{user.dob.age}</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2">
-                        {formatDate(user.registered.date)}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="right">
-                      <IconButton size="small" aria-label="more options">
-                        <MoreVertRoundedIcon fontSize="small" />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-        {/* Pagination */}
-        <TablePagination
-          component="div"
-          count={total}
-          page={page}
-          onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          rowsPerPageOptions={[5, 10, 20, 50]}
-          showFirstButton
-          showLastButton
-        />
-      </Card>
+      <CustomersTable
+        users={users}
+        loading={loading}
+        total={total}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Box>
   );
 }
