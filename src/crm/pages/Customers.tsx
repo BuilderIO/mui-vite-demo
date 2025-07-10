@@ -88,26 +88,6 @@ const sortOptions = [
   { value: "registered.date", label: "Registration Date" },
 ];
 
-// Format date
-const formatDate = (dateString: string) => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  };
-  return new Date(dateString).toLocaleDateString("en-US", options);
-};
-
-// Get initials for avatar
-const getInitials = (firstName: string, lastName: string) => {
-  return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-};
-
-// Get gender color
-const getGenderColor = (gender: string): "primary" | "secondary" => {
-  return gender === "male" ? "primary" : "secondary";
-};
-
 export default function Customers() {
   const [users, setUsers] = React.useState<User[]>([]);
   const [loading, setLoading] = React.useState(true);
