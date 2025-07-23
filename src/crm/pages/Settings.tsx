@@ -25,7 +25,7 @@ export default function Settings() {
   return (
     <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1200px" }, p: 2 }}>
       <Typography variant="h4" component="h1" sx={{ mb: 4, fontWeight: 600 }}>
-        Settings
+        Account Settings
       </Typography>
 
       <Grid container spacing={3}>
