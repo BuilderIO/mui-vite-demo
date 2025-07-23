@@ -70,6 +70,7 @@ export default function CrmDashboard() {
               <Route path="tasks" element={<Tasks />} />
               <Route path="reports" element={<Reports />} />
               <Route path="settings" element={<Settings />} />
+              <Route path="hello-world" element={<HelloWorld />} />
             </Routes>
             <Outlet />
           </Stack>
