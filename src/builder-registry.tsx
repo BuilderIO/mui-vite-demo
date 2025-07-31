@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Builder } from '@builder.io/sdk-react';
 
 // Example custom component for Builder.io
