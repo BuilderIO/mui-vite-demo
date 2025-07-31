@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Content, fetchOneEntry, isPreviewing } from '@builder.io/sdk-react';
 import { Box, Typography, Container, Card, CardContent } from '@mui/material';
 import { useEffect, useState } from 'react';
+import initBuilder from '../builder-registry';
 
 // You'll need to set your Builder.io API key here
 // For now, using a placeholder - replace with your actual API key
