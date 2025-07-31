@@ -20,6 +20,7 @@ import WavingHandIcon from "@mui/icons-material/WavingHand";
 
 const mainListItems = [
   { text: "Dashboard", icon: <DashboardRoundedIcon />, path: "/" },
+  { text: "Hello World", icon: <WavingHandIcon />, path: "/hello-world" },
   { text: "Customers", icon: <PeopleRoundedIcon />, path: "/customers" },
   { text: "Deals", icon: <BusinessCenterRoundedIcon />, path: "/deals" },
   { text: "Contacts", icon: <ContactsRoundedIcon />, path: "/contacts" },
