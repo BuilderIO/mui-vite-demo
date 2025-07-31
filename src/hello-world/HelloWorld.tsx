@@ -17,6 +17,9 @@ export default function HelloWorld(props: HelloWorldProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Initialize Builder.io component registry
+    initBuilder();
+
     const fetchContent = async () => {
       try {
         // Fetch content from Builder.io for the hello world page
