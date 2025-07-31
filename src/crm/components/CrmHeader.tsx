@@ -38,6 +38,15 @@ export default function CrmHeader() {
         <Button
           variant="outlined"
           size="small"
+          startIcon={<PublicIcon />}
+          onClick={() => navigate('/hello-world')}
+          color="primary"
+        >
+          Hello World
+        </Button>
+        <Button
+          variant="outlined"
+          size="small"
           startIcon={<CalendarTodayRoundedIcon />}
         >
           This Month
