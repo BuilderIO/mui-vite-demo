@@ -1,3 +1,4 @@
+import React from 'react';
 import { Builder } from '@builder.io/react';
 
 // Register custom components with Builder.io
@@ -5,23 +6,25 @@ import { Builder } from '@builder.io/react';
 
 // Simple Hello World component
 const HelloWorldComponent = () => {
-  return (
-    <div style={{ 
+  return React.createElement('div', {
+    style: { 
       padding: '40px', 
       textAlign: 'center',
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       color: 'white',
       borderRadius: '10px',
       margin: '20px'
-    }}>
-      <h1 style={{ fontSize: '3rem', marginBottom: '20px' }}>
-        Hello World! 🌍
-      </h1>
-      <p style={{ fontSize: '1.2rem', marginBottom: '0' }}>
-        Welcome to your Builder.io powered application!
-      </p>
-    </div>
-  );
+    }
+  }, [
+    React.createElement('h1', {
+      key: 'title',
+      style: { fontSize: '3rem', marginBottom: '20px' }
+    }, 'Hello World! 🌍'),
+    React.createElement('p', {
+      key: 'subtitle',
+      style: { fontSize: '1.2rem', marginBottom: '0' }
+    }, 'Welcome to your Builder.io powered application!')
+  ]);
 };
 
 // Register the component with Builder.io
@@ -37,23 +40,25 @@ const CustomHelloWorldComponent = (props: {
   backgroundColor?: string;
   textColor?: string;
 }) => {
-  return (
-    <div style={{ 
+  return React.createElement('div', {
+    style: { 
       padding: '40px', 
       textAlign: 'center',
       backgroundColor: props.backgroundColor || '#667eea',
       color: props.textColor || 'white',
       borderRadius: '10px',
       margin: '20px'
-    }}>
-      <h1 style={{ fontSize: '3rem', marginBottom: '20px' }}>
-        {props.title || 'Hello World! 🌍'}
-      </h1>
-      <p style={{ fontSize: '1.2rem', marginBottom: '0' }}>
-        {props.subtitle || 'Welcome to your Builder.io powered application!'}
-      </p>
-    </div>
-  );
+    }
+  }, [
+    React.createElement('h1', {
+      key: 'title',
+      style: { fontSize: '3rem', marginBottom: '20px' }
+    }, props.title || 'Hello World! 🌍'),
+    React.createElement('p', {
+      key: 'subtitle',
+      style: { fontSize: '1.2rem', marginBottom: '0' }
+    }, props.subtitle || 'Welcome to your Builder.io powered application!')
+  ]);
 };
 
 // Register the customizable component
