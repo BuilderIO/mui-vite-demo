@@ -18,6 +18,7 @@ import Contacts from "./pages/Contacts";
 import Tasks from "./pages/Tasks";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import HelloWorld from "./pages/HelloWorld";
 import AppTheme from "../shared-theme/AppTheme";
 import {
   chartsCustomizations,
