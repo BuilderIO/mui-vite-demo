@@ -27,3 +27,16 @@ It includes `@mui/material` and its peer dependencies, including [Emotion](https
 
 You now have a working example project.
 You can head back to the documentation and continue by browsing the [templates](https://mui.com/material-ui/getting-started/templates/) section.
+
+## New Features
+
+### Hello World with Builder.io Integration
+- **Route**: `/hello-world`
+- **Description**: A demo page showcasing Builder.io CMS integration with Material-UI components
+- **Features**:
+  - Static hello world content
+  - Dynamic content managed through Builder.io
+  - Custom MUI components registered with Builder.io
+  - Visual content editing capabilities
+
+See `BUILDER_SETUP.md` for detailed setup instructions.
