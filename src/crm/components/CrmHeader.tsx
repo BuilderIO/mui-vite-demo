@@ -12,6 +12,8 @@ import CalendarTodayRoundedIcon from "@mui/icons-material/CalendarTodayRounded";
 import PublicIcon from "@mui/icons-material/Public";
 
 export default function CrmHeader() {
+  const navigate = useNavigate();
+
   return (
     <Stack
       direction="row"
