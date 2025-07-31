@@ -4,6 +4,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CrmDashboard from "./crm/CrmDashboard";
+import HelloWorldPage from "./hello-world/HelloWorldPage";
+import "./builder-registry";
 
 function NotFound() {
   return (
