@@ -64,6 +64,7 @@ export default function CrmDashboard() {
             <CrmHeader />
             <Routes>
               <Route index element={<CrmMainDashboard />} />
+              <Route path="hello-world" element={<HelloWorld />} />
               <Route path="customers" element={<Customers />} />
               <Route path="deals" element={<Deals />} />
               <Route path="contacts" element={<Contacts />} />
