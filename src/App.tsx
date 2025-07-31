@@ -4,6 +4,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CrmDashboard from "./crm/CrmDashboard";
+import HelloWorld from "./hello-world/HelloWorld";
+
+// Initialize Builder.io component registry
+import "./hello-world/builder-registry";
 
 function NotFound() {
   return (
