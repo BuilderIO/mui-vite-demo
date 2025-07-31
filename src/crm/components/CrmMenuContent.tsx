@@ -28,6 +28,7 @@ const mainListItems = [
 ];
 
 const secondaryListItems = [
+  { text: "Hello World", icon: <PublicIcon />, path: "/hello-world" },
   { text: "Settings", icon: <SettingsRoundedIcon />, path: "/settings" },
   { text: "Help & Support", icon: <HelpOutlineRoundedIcon />, path: "/help" },
 ];
