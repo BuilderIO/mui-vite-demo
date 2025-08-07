@@ -72,6 +72,7 @@ export default function CrmDashboard() {
             <Outlet />
           </Stack>
         </Box>
+        <CrmSideMenu />
       </Box>
     </AppTheme>
   );
