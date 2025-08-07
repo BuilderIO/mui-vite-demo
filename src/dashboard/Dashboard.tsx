@@ -31,7 +31,6 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex" }}>
-        <SideMenu />
         <AppNavbar />
         {/* Main content */}
         <Box
@@ -42,6 +41,7 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
               ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
               : alpha(theme.palette.background.default, 1),
             overflow: "auto",
+            marginRight: { xs: 0, md: "240px" },
           })}
         >
           <Stack
@@ -57,6 +57,7 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
             <MainGrid />
           </Stack>
         </Box>
+        <SideMenu />
       </Box>
     </AppTheme>
   );
