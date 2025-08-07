@@ -21,6 +21,8 @@ const Drawer = styled(MuiDrawer)({
   [`& .${drawerClasses.paper}`]: {
     width: drawerWidth,
     boxSizing: "border-box",
+    right: 0,
+    left: "auto",
   },
 });
 
@@ -28,6 +30,7 @@ export default function SideMenu() {
   return (
     <Drawer
       variant="permanent"
+      anchor="right"
       sx={{
         display: { xs: "none", md: "block" },
         [`& .${drawerClasses.paper}`]: {
