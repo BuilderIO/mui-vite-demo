@@ -38,7 +38,6 @@ export default function CrmDashboard() {
     <AppTheme themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex", height: "100vh" }}>
-        <CrmSideMenu />
         <CrmAppNavbar />
         {/* Main content */}
         <Box
@@ -73,6 +72,7 @@ export default function CrmDashboard() {
             <Outlet />
           </Stack>
         </Box>
+        <CrmSideMenu />
       </Box>
     </AppTheme>
   );
