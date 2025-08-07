@@ -38,7 +38,6 @@ export default function CrmDashboard() {
     <AppTheme themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex", height: "100vh" }}>
-        <CrmSideMenu />
         <CrmAppNavbar />
         {/* Main content */}
         <Box
@@ -49,6 +48,7 @@ export default function CrmDashboard() {
               ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
               : alpha(theme.palette.background.default, 1),
             overflow: "auto",
+            marginRight: { xs: 0, md: "240px" },
           })}
         >
           <Stack
@@ -73,6 +73,7 @@ export default function CrmDashboard() {
             <Outlet />
           </Stack>
         </Box>
+        <CrmSideMenu />
       </Box>
     </AppTheme>
   );
