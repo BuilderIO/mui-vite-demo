@@ -56,6 +56,7 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
             <MainGrid />
           </Stack>
         </Box>
+        <SideMenu />
       </Box>
     </AppTheme>
   );
