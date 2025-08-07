@@ -28,6 +28,7 @@ export default function CrmSideMenu() {
   return (
     <Drawer
       variant="permanent"
+      anchor="right"
       sx={{
         display: { xs: "none", md: "block" },
         [`& .${drawerClasses.paper}`]: {
