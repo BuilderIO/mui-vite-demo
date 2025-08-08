@@ -242,7 +242,7 @@ export default function CustomerDetail() {
         {/* Activity Timeline */}
         <Grid item xs={12} lg={8}>
           <Paper elevation={2} sx={{ p: { xs: 2, md: 3 } }}>
-            <Typography variant="h5" component="h2" gutterBottom>
+            <Typography variant="h5" component="h2" id="timeline-title" gutterBottom>
               Activity Timeline
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
