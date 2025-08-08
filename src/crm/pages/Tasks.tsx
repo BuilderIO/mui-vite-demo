@@ -25,6 +25,7 @@ import TaskFilters from '../components/tasks/TaskFilters';
 import TaskSortControls from '../components/tasks/TaskSortControls';
 import TaskCard from '../components/tasks/TaskCard';
 import TaskCreateDialog from '../components/tasks/TaskCreateDialog';
+import TaskEditDialog from '../components/tasks/TaskEditDialog';
 import NotificationCenter from '../components/tasks/NotificationCenter';
 import { Task, TaskStatus } from '../types/TaskTypes';
 
