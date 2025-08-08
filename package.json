@@ -25,6 +25,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "^7.6.0",
+    "recharts": "^2.13.3",
     "tailwindcss": "latest"
   },
   "devDependencies": {
