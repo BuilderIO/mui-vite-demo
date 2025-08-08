@@ -279,19 +279,66 @@ export default function CustomerDetail() {
                       {index < sortedActivities.length - 1 && <TimelineConnector />}
                     </TimelineSeparator>
                     <TimelineContent sx={{ flex: 1 }}>
-                      <Accordion elevation={0} sx={{ border: '1px solid', borderColor: 'divider' }}>
+                      <Accordion
+                        elevation={0}
+                        sx={{
+                          border: '1px solid',
+                          borderColor: 'divider',
+                          '&:before': { display: 'none' }
+                        }}
+                      >
                         <AccordionSummary
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls={`activity-${activity.id}-content`}
                           id={`activity-${activity.id}-header`}
+                          sx={{
+                            minHeight: { xs: 48, sm: 56 },
+                            '& .MuiAccordionSummary-content': {
+                              margin: { xs: '8px 0', sm: '12px 0' }
+                            }
+                          }}
                         >
-                          <Box>
-                            <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
-                              {activity.title}
-                            </Typography>
-                            <Typography variant="caption" sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
-                              {activity.type}
-                            </Typography>
+                          <Box sx={{ width: '100%' }}>
+                            <Box sx={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'flex-start',
+                              flexWrap: 'wrap',
+                              gap: 1
+                            }}>
+                              <Box sx={{ flex: 1, minWidth: 0 }}>
+                                <Typography
+                                  variant="subtitle2"
+                                  sx={{
+                                    fontWeight: 'bold',
+                                    fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                                    wordBreak: 'break-word'
+                                  }}
+                                >
+                                  {activity.title}
+                                </Typography>
+                                <Typography
+                                  variant="caption"
+                                  sx={{
+                                    color: 'text.secondary',
+                                    textTransform: 'capitalize',
+                                    display: 'block'
+                                  }}
+                                >
+                                  {activity.type}
+                                </Typography>
+                              </Box>
+                              <Typography
+                                variant="caption"
+                                sx={{
+                                  color: 'text.secondary',
+                                  display: { xs: 'block', sm: 'none' },
+                                  flexShrink: 0
+                                }}
+                              >
+                                {formatDateTime(activity.date)}
+                              </Typography>
+                            </Box>
                           </Box>
                         </AccordionSummary>
                         <AccordionDetails>
