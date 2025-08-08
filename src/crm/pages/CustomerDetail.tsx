@@ -172,16 +172,30 @@ export default function CustomerDetail() {
 
   return (
     <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
-      <Box sx={{ mb: 3, display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Button 
-          startIcon={<ArrowBackIcon />} 
+      <Box sx={{
+        mb: 3,
+        display: 'flex',
+        alignItems: { xs: 'flex-start', sm: 'center' },
+        flexDirection: { xs: 'column', sm: 'row' },
+        gap: 2
+      }}>
+        <Button
+          startIcon={<ArrowBackIcon />}
           onClick={() => navigate('/customers')}
           variant="outlined"
           size="small"
+          sx={{ alignSelf: { xs: 'flex-start', sm: 'auto' } }}
         >
           Back to Customers
         </Button>
-        <Typography variant="h4" component="h1">
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontSize: { xs: '1.5rem', sm: '2rem' },
+            order: { xs: -1, sm: 0 }
+          }}
+        >
           Customer Details
         </Typography>
       </Box>
