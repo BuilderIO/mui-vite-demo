@@ -289,9 +289,19 @@ export default function CustomerDetail() {
                               color={getActivityColor(activity.type) as any}
                               variant="outlined"
                             />
-                            <Typography variant="subtitle1" component="h3">
+                            <Typography variant="subtitle1" component="h3" sx={{ flexGrow: 1 }}>
                               {activity.title}
                             </Typography>
+                            {/* Show date on mobile */}
+                            <Box sx={{ display: { xs: 'block', sm: 'none' }, textAlign: 'right' }}>
+                              <Typography variant="caption" color="text.secondary">
+                                {formatDate(activity.date)}
+                              </Typography>
+                              <br />
+                              <Typography variant="caption" color="text.secondary">
+                                {formatTime(activity.date)}
+                              </Typography>
+                            </Box>
                           </Stack>
                           
                           <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
