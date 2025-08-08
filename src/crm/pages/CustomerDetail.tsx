@@ -124,8 +124,8 @@ export default function CustomerDetail() {
 
       <Grid container spacing={3}>
         {/* Customer Information */}
-        <Grid item xs={12} md={4}>
-          <Paper elevation={2} sx={{ p: 3, height: "fit-content" }}>
+        <Grid item xs={12} lg={4}>
+          <Paper elevation={2} sx={{ p: { xs: 2, md: 3 }, height: "fit-content" }}>
             <Stack spacing={3} alignItems="center">
               <Avatar
                 sx={{
