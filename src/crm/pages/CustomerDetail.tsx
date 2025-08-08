@@ -85,7 +85,7 @@ export default function CustomerDetail() {
 
       <Grid container spacing={3}>
         {/* Customer Information Card */}
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} lg={4}>
           <Card variant="outlined" sx={{ height: 'fit-content' }}>
             <CardContent>
               <Box sx={{ textAlign: 'center', mb: 3 }}>
