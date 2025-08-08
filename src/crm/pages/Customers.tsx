@@ -49,15 +49,15 @@ export default function Customers() {
       </Typography>
       
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer>
-          <Table stickyHeader aria-label="customers table">
+        <TableContainer sx={{ maxHeight: { xs: 'calc(100vh - 200px)', md: 'none' } }}>
+          <Table stickyHeader aria-label="customers table" size={{ xs: 'small', md: 'medium' }}>
             <TableHead>
               <TableRow>
                 <TableCell>Customer Name</TableCell>
-                <TableCell>Company</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Last Contact</TableCell>
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Company</TableCell>
+                <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Email</TableCell>
+                <TableCell sx={{ display: { xs: 'none', lg: 'table-cell' } }}>Phone</TableCell>
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Last Contact</TableCell>
                 <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>
@@ -77,11 +77,14 @@ export default function Customers() {
                     <Typography variant="body2" fontWeight={500}>
                       {customer.name}
                     </Typography>
+                    <Typography variant="caption" color="text.secondary" sx={{ display: { sm: 'none' } }}>
+                      {customer.company}
+                    </Typography>
                   </TableCell>
-                  <TableCell>{customer.company}</TableCell>
-                  <TableCell>{customer.email}</TableCell>
-                  <TableCell>{customer.phone}</TableCell>
-                  <TableCell>{formatDate(customer.lastContactDate)}</TableCell>
+                  <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{customer.company}</TableCell>
+                  <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{customer.email}</TableCell>
+                  <TableCell sx={{ display: { xs: 'none', lg: 'table-cell' } }}>{customer.phone}</TableCell>
+                  <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{formatDate(customer.lastContactDate)}</TableCell>
                   <TableCell>
                     <Chip
                       label={customer.status}

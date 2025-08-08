@@ -64,7 +64,7 @@ export default function CustomerDetail() {
 
       <Grid container spacing={3}>
         {/* Customer Information Card */}
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} lg={4} md={5}>
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
@@ -136,7 +136,7 @@ export default function CustomerDetail() {
         </Grid>
 
         {/* Activity Timeline */}
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} lg={8} md={7}>
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
