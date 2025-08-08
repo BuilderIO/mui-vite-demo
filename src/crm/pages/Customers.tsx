@@ -55,16 +55,16 @@ export default function Customers() {
       </Typography>
 
       <Paper elevation={2} sx={{ mb: 4, overflow: "hidden" }}>
-        <TableContainer>
+        <TableContainer sx={{ maxHeight: { xs: 400, md: 600 } }}>
           <Table stickyHeader aria-label="customer table">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ fontWeight: 600 }}>Customer</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Company</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Contact Information</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Last Contact</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
-                <TableCell sx={{ fontWeight: 600 }} align="center">Actions</TableCell>
+                <TableCell sx={{ fontWeight: 600, minWidth: 200 }}>Customer</TableCell>
+                <TableCell sx={{ fontWeight: 600, minWidth: 150, display: { xs: 'none', sm: 'table-cell' } }}>Company</TableCell>
+                <TableCell sx={{ fontWeight: 600, minWidth: 250, display: { xs: 'none', md: 'table-cell' } }}>Contact Information</TableCell>
+                <TableCell sx={{ fontWeight: 600, minWidth: 120, display: { xs: 'none', sm: 'table-cell' } }}>Last Contact</TableCell>
+                <TableCell sx={{ fontWeight: 600, minWidth: 100 }}>Status</TableCell>
+                <TableCell sx={{ fontWeight: 600, minWidth: 80 }} align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
