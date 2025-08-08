@@ -139,7 +139,7 @@ export default function CustomerDetail() {
               </Avatar>
               
               <Box textAlign="center">
-                <Typography variant="h5" component="h2" gutterBottom>
+                <Typography variant="h5" component="h2" id="customer-info-title" gutterBottom>
                   {customer.name}
                 </Typography>
                 {customer.title && (
