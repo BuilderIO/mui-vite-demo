@@ -11,6 +11,9 @@ import CrmRecentDealsTable from "./CrmRecentDealsTable";
 import CrmUpcomingTasks from "./CrmUpcomingTasks";
 import CrmSalesChart from "./CrmSalesChart";
 import CrmLeadsBySourceChart from "./CrmLeadsBySourceChart";
+import CrmTasksWidget from "./CrmTasksWidget";
+import { TaskProvider } from "../context/TaskContext";
+import { mockTasks } from "../data/taskData";
 
 // Sample data for stat cards
 const statCardsData = [
