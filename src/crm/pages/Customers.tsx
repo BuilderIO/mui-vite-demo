@@ -53,8 +53,12 @@ export default function Customers() {
       </Typography>
 
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer>
-          <Table sx={{ minWidth: 650 }} aria-label="customer table">
+        <TableContainer sx={{ maxHeight: { xs: 400, sm: 600, md: 'none' } }}>
+          <Table
+            sx={{ minWidth: { xs: 300, sm: 650 } }}
+            aria-label="customer management table"
+            size="medium"
+          >
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: 'bold' }}>Customer Name</TableCell>
