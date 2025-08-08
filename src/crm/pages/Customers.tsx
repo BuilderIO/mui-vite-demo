@@ -61,9 +61,9 @@ export default function Customers() {
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: 'bold' }}>Customer Name</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }}>Company</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }}>Contact Information</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }}>Last Contact</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', display: { xs: 'none', sm: 'table-cell' } }}>Company</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', display: { xs: 'none', md: 'table-cell' } }}>Contact Information</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', display: { xs: 'none', sm: 'table-cell' } }}>Last Contact</TableCell>
                 <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
                 <TableCell sx={{ fontWeight: 'bold' }} align="center">Actions</TableCell>
               </TableRow>
