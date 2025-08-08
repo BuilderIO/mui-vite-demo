@@ -185,7 +185,7 @@ export default function CustomerDetail() {
           </Typography>
         </Paper>
       ) : (
-        <Timeline position="alternate">
+        <Timeline position={{ xs: "right", md: "alternate" }}>
           {activities.map((activity, index) => (
             <TimelineItem key={activity.id}>
               <TimelineOppositeContent
