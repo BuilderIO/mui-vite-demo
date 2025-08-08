@@ -13,6 +13,7 @@ import CrmHeader from "./components/CrmHeader";
 import CrmSideMenu from "./components/CrmSideMenu";
 import CrmMainDashboard from "./components/CrmMainDashboard";
 import Customers from "./pages/Customers";
+import CustomerDetail from "./pages/CustomerDetail";
 import Deals from "./pages/Deals";
 import Contacts from "./pages/Contacts";
 import Tasks from "./pages/Tasks";
@@ -64,6 +65,7 @@ export default function CrmDashboard() {
             <Routes>
               <Route index element={<CrmMainDashboard />} />
               <Route path="customers" element={<Customers />} />
+              <Route path="customers/:customerId" element={<CustomerDetail />} />
               <Route path="deals" element={<Deals />} />
               <Route path="contacts" element={<Contacts />} />
               <Route path="tasks" element={<Tasks />} />
