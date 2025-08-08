@@ -82,16 +82,26 @@ export default function Customers() {
                   }}
                 >
                   <TableCell component="th" scope="row">
-                    <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                      {customer.name}
-                    </Typography>
+                    <Box>
+                      <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                        {customer.name}
+                      </Typography>
+                      {/* Show company on mobile when column is hidden */}
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ display: { xs: 'block', sm: 'none' } }}
+                      >
+                        {customer.company}
+                      </Typography>
+                    </Box>
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
                     <Typography variant="body2" color="text.secondary">
                       {customer.company}
                     </Typography>
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>
                     <Box>
                       <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
                         {customer.email}
@@ -101,7 +111,7 @@ export default function Customers() {
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
                     <Typography variant="body2">
                       {formatDate(customer.lastContactDate)}
                     </Typography>
