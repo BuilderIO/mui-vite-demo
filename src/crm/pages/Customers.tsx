@@ -104,22 +104,22 @@ export default function Customers() {
                     </Stack>
                   </TableCell>
                   
-                  <TableCell>
+                  <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
                     <Typography variant="body2" sx={{ fontWeight: 500 }}>
                       {customer.company}
                     </Typography>
                   </TableCell>
-                  
-                  <TableCell>
+
+                  <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>
                     <Stack spacing={1}>
                       <Stack direction="row" spacing={1} alignItems="center">
                         <EmailIcon sx={{ fontSize: 16, color: "text.secondary" }} />
-                        <Typography 
-                          variant="body2" 
+                        <Typography
+                          variant="body2"
                           component="a"
                           href={`mailto:${customer.email}`}
                           onClick={(e) => handleEmailClick(customer.email, e)}
-                          sx={{ 
+                          sx={{
                             textDecoration: "none",
                             color: "primary.main",
                             "&:hover": {
@@ -132,12 +132,12 @@ export default function Customers() {
                       </Stack>
                       <Stack direction="row" spacing={1} alignItems="center">
                         <PhoneIcon sx={{ fontSize: 16, color: "text.secondary" }} />
-                        <Typography 
+                        <Typography
                           variant="body2"
                           component="a"
                           href={`tel:${customer.phone}`}
                           onClick={(e) => handlePhoneClick(customer.phone, e)}
-                          sx={{ 
+                          sx={{
                             textDecoration: "none",
                             color: "primary.main",
                             "&:hover": {
@@ -150,8 +150,8 @@ export default function Customers() {
                       </Stack>
                     </Stack>
                   </TableCell>
-                  
-                  <TableCell>
+
+                  <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
                     <Typography variant="body2">
                       {formatDate(customer.lastContactDate)}
                     </Typography>
