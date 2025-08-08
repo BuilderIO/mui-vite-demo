@@ -259,10 +259,15 @@ export default function CustomerDetail() {
                 No activities recorded for this customer.
               </Typography>
             ) : (
-              <Timeline>
+              <Timeline sx={{ px: { xs: 0, sm: 2 } }}>
                 {sortedActivities.map((activity, index) => (
                   <TimelineItem key={activity.id}>
-                    <TimelineOppositeContent sx={{ flex: 0.3 }}>
+                    <TimelineOppositeContent
+                      sx={{
+                        flex: { xs: 0, sm: 0.3 },
+                        display: { xs: 'none', sm: 'block' }
+                      }}
+                    >
                       <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                         {formatDateTime(activity.date)}
                       </Typography>
