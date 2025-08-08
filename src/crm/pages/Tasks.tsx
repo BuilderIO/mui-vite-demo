@@ -229,14 +229,20 @@ export default function Tasks() {
         )}
       </Paper>
 
-      {/* Create/Edit Task Dialog */}
+      {/* Create Task Dialog */}
       <TaskCreateDialog
         open={createDialogOpen}
-        onClose={() => {
-          setCreateDialogOpen(false);
-          setEditingTask(null);
-        }}
+        onClose={() => setCreateDialogOpen(false)}
         onSubmit={handleCreateTask}
+        users={users}
+      />
+
+      {/* Edit Task Dialog */}
+      <TaskEditDialog
+        open={!!editingTask}
+        task={editingTask}
+        onClose={() => setEditingTask(null)}
+        onSubmit={handleUpdateTask}
         users={users}
       />
 
