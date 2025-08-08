@@ -19,6 +19,7 @@ import Tasks from "./pages/Tasks";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import AppTheme from "../shared-theme/AppTheme";
+import { TaskProvider } from "./context/TaskContext";
 import {
   chartsCustomizations,
   dataGridCustomizations,
