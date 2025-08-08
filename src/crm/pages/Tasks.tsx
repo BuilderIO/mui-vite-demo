@@ -20,6 +20,7 @@ import TaskDashboard from "../components/TaskDashboard";
 import TaskList from "../components/TaskList";
 import TaskFilters from "../components/TaskFilters";
 import TaskForm from "../components/TaskForm";
+import TaskFeatureOverview from "../components/TaskFeatureOverview";
 
 interface TabPanelProps {
   children?: React.ReactNode;
