@@ -162,9 +162,5 @@ function DashboardContent() {
 }
 
 export default function CrmMainDashboard() {
-  return (
-    <TaskProvider>
-      <DashboardContent />
-    </TaskProvider>
-  );
+  return <DashboardContent />;
 }
