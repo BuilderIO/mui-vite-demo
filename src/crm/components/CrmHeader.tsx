@@ -6,6 +6,7 @@ import MenuButton from "../../dashboard/components/MenuButton";
 import ColorModeIconDropdown from "../../shared-theme/ColorModeIconDropdown";
 import CrmSearch from "./CrmSearch";
 import CrmNavbarBreadcrumbs from "./CrmNavbarBreadcrumbs";
+import NotificationCenter from "./NotificationCenter";
 import Button from "@mui/material/Button";
 import CalendarTodayRoundedIcon from "@mui/icons-material/CalendarTodayRounded";
 
