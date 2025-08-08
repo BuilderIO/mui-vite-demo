@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField,
+  Badge,
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -26,14 +26,8 @@ import {
 } from '@mui/icons-material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Task, TaskFilters, TaskStatus, Notification } from '../types/taskTypes';
-import { 
-  mockTasks, 
-  mockNotifications, 
-  calculateTaskStats,
-  isTaskOverdue,
-  isTaskDueSoon
-} from '../data/taskData';
+import { Task } from '../types/taskTypes';
+import { useTaskContext } from '../context/TaskContext';
 import TaskCreateForm from '../components/TaskCreateForm';
 import TaskList from '../components/TaskList';
 import TaskFilters from '../components/TaskFilters';
@@ -70,119 +64,34 @@ export default function Tasks() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   
-  // State management
-  const [tasks, setTasks] = React.useState<Task[]>(mockTasks);
-  const [notifications, setNotifications] = React.useState<Notification[]>(mockNotifications);
-  const [filters, setFilters] = React.useState<TaskFilters>({});
+  // Use TaskContext
+  const {
+    tasks,
+    notifications,
+    filters,
+    stats,
+    filteredTasks,
+    unreadNotificationCount,
+    createTask,
+    updateTask,
+    deleteTask,
+    updateTaskStatus,
+    setFilters,
+    markNotificationAsRead,
+    markAllNotificationsAsRead,
+    deleteNotification,
+  } = useTaskContext();
+
+  // Local state
   const [createFormOpen, setCreateFormOpen] = React.useState(false);
   const [editTask, setEditTask] = React.useState<Task | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
   const [taskToDelete, setTaskToDelete] = React.useState<string>('');
   const [activeTab, setActiveTab] = React.useState(0);
 
-  // Filter tasks based on current filters
-  const filteredTasks = React.useMemo(() => {
-    return tasks.filter(task => {
-      // Search filter
-      if (filters.search) {
-        const searchLower = filters.search.toLowerCase();
-        const matchesTitle = task.title.toLowerCase().includes(searchLower);
-        const matchesDescription = task.description?.toLowerCase().includes(searchLower);
-        if (!matchesTitle && !matchesDescription) return false;
-      }
-
-      // Status filter
-      if (filters.status && filters.status.length > 0) {
-        if (!filters.status.includes(task.status)) return false;
-      }
-
-      // Priority filter
-      if (filters.priority && filters.priority.length > 0) {
-        if (!filters.priority.includes(task.priority)) return false;
-      }
-
-      // Assignee filter
-      if (filters.assigneeId && filters.assigneeId.length > 0) {
-        if (!task.assigneeId || !filters.assigneeId.includes(task.assigneeId)) return false;
-      }
-
-      // Due date filter
-      if (filters.dueDateFrom || filters.dueDateTo) {
-        if (!task.dueDate) return false;
-        const taskDate = new Date(task.dueDate);
-        
-        if (filters.dueDateFrom) {
-          const fromDate = new Date(filters.dueDateFrom);
-          if (taskDate < fromDate) return false;
-        }
-        
-        if (filters.dueDateTo) {
-          const toDate = new Date(filters.dueDateTo);
-          if (taskDate > toDate) return false;
-        }
-      }
-
-      return true;
-    });
-  }, [tasks, filters]);
-
-  // Calculate statistics
-  const stats = React.useMemo(() => calculateTaskStats(tasks), [tasks]);
-
-  // Update task status due to overdue/due soon conditions
-  React.useEffect(() => {
-    const updatedTasks = tasks.map(task => {
-      let newStatus = task.status;
-      
-      // Auto-mark overdue tasks (except completed ones)
-      if (isTaskOverdue(task) && task.status !== 'completed') {
-        newStatus = 'overdue' as any; // This would need to be added to TaskStatus enum
-      }
-      
-      return task.status !== newStatus ? { ...task, status: newStatus } : task;
-    });
-    
-    const hasChanges = updatedTasks.some((task, index) => task.status !== tasks[index].status);
-    if (hasChanges) {
-      setTasks(updatedTasks);
-    }
-  }, [tasks]);
-
   // Handlers
   const handleCreateTask = (taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'statusHistory'>) => {
-    const newTask: Task = {
-      ...taskData,
-      id: Date.now().toString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      statusHistory: [
-        {
-          id: `sh-${Date.now()}`,
-          taskId: Date.now().toString(),
-          fromStatus: null,
-          toStatus: taskData.status,
-          changedBy: '1', // Current user
-          changedAt: new Date().toISOString(),
-        },
-      ],
-    };
-
-    setTasks(prev => [newTask, ...prev]);
-
-    // Create notification if task is assigned to someone
-    if (taskData.assigneeId && taskData.assigneeId !== '1') {
-      const newNotification: Notification = {
-        id: `notif-${Date.now()}`,
-        type: 'task_assigned',
-        taskId: newTask.id,
-        recipientId: taskData.assigneeId,
-        title: 'New Task Assigned',
-        message: `You have been assigned a new task: "${taskData.title}".`,
-        read: false,
-        createdAt: new Date().toISOString(),
-      };
-      setNotifications(prev => [newNotification, ...prev]);
-    }
+    createTask(taskData);
   };
 
   const handleEditTask = (task: Task) => {
@@ -193,10 +102,8 @@ export default function Tasks() {
   const handleUpdateTask = (taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'statusHistory'>) => {
     if (!editTask) return;
 
-    const updatedTask: Task = {
-      ...editTask,
+    updateTask(editTask.id, {
       ...taskData,
-      updatedAt: new Date().toISOString(),
       statusHistory: [
         ...editTask.statusHistory,
         {
@@ -208,9 +115,8 @@ export default function Tasks() {
           changedAt: new Date().toISOString(),
         },
       ],
-    };
-
-    setTasks(prev => prev.map(task => task.id === editTask.id ? updatedTask : task));
+    });
+    
     setEditTask(null);
   };
 
@@ -220,72 +126,14 @@ export default function Tasks() {
   };
 
   const confirmDeleteTask = () => {
-    setTasks(prev => prev.filter(task => task.id !== taskToDelete));
-    setNotifications(prev => prev.filter(notif => notif.taskId !== taskToDelete));
+    deleteTask(taskToDelete);
     setDeleteDialogOpen(false);
     setTaskToDelete('');
-  };
-
-  const handleUpdateTaskStatus = (taskId: string, status: TaskStatus) => {
-    setTasks(prev => prev.map(task => {
-      if (task.id === taskId) {
-        const updatedTask = {
-          ...task,
-          status,
-          updatedAt: new Date().toISOString(),
-          statusHistory: [
-            ...task.statusHistory,
-            {
-              id: `sh-${Date.now()}`,
-              taskId: task.id,
-              fromStatus: task.status,
-              toStatus: status,
-              changedBy: '1', // Current user
-              changedAt: new Date().toISOString(),
-            },
-          ],
-        };
-
-        // Create notification for task completion
-        if (status === 'completed' && task.assigneeId) {
-          const newNotification: Notification = {
-            id: `notif-${Date.now()}`,
-            type: 'task_completed',
-            taskId: task.id,
-            recipientId: task.assigneeId,
-            title: 'Task Completed',
-            message: `Task "${task.title}" has been completed.`,
-            read: false,
-            createdAt: new Date().toISOString(),
-          };
-          setNotifications(prev => [newNotification, ...prev]);
-        }
-
-        return updatedTask;
-      }
-      return task;
-    }));
-  };
-
-  const handleMarkNotificationAsRead = (notificationId: string) => {
-    setNotifications(prev => prev.map(notif => 
-      notif.id === notificationId ? { ...notif, read: true } : notif
-    ));
-  };
-
-  const handleMarkAllNotificationsAsRead = () => {
-    setNotifications(prev => prev.map(notif => ({ ...notif, read: true })));
-  };
-
-  const handleDeleteNotification = (notificationId: string) => {
-    setNotifications(prev => prev.filter(notif => notif.id !== notificationId));
   };
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
   };
-
-  const unreadNotificationCount = notifications.filter(n => !n.read).length;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -338,8 +186,12 @@ export default function Tasks() {
               iconPosition="start"
             />
             <Tab
-              icon={<NotificationsIcon />}
-              label={`Notifications ${unreadNotificationCount > 0 ? `(${unreadNotificationCount})` : ''}`}
+              icon={
+                <Badge badgeContent={unreadNotificationCount} color="error">
+                  <NotificationsIcon />
+                </Badge>
+              }
+              label={`Notifications`}
               iconPosition="start"
             />
           </Tabs>
@@ -374,7 +226,7 @@ export default function Tasks() {
               tasks={filteredTasks}
               onEditTask={handleEditTask}
               onDeleteTask={handleDeleteTask}
-              onUpdateTaskStatus={handleUpdateTaskStatus}
+              onUpdateTaskStatus={updateTaskStatus}
             />
           </Stack>
         </TabPanel>
@@ -388,9 +240,9 @@ export default function Tasks() {
           {/* Notifications */}
           <TaskNotifications
             notifications={notifications}
-            onMarkAsRead={handleMarkNotificationAsRead}
-            onMarkAllAsRead={handleMarkAllNotificationsAsRead}
-            onDeleteNotification={handleDeleteNotification}
+            onMarkAsRead={markNotificationAsRead}
+            onMarkAllAsRead={markAllNotificationsAsRead}
+            onDeleteNotification={deleteNotification}
           />
         </TabPanel>
 
