@@ -12,8 +12,9 @@ import CrmUpcomingTasks from "./CrmUpcomingTasks";
 import CrmSalesChart from "./CrmSalesChart";
 import CrmLeadsBySourceChart from "./CrmLeadsBySourceChart";
 import CrmTasksWidget from "./CrmTasksWidget";
-import { TaskProvider } from "../context/TaskContext";
-import { mockTasks } from "../data/taskData";
+import TaskCreateForm from "./TaskCreateForm";
+import { TaskProvider, useTaskContext } from "../context/TaskContext";
+import { Task } from "../types/taskTypes";
 
 // Sample data for stat cards
 const statCardsData = [
@@ -63,72 +64,107 @@ const statCardsData = [
   },
 ];
 
-export default function CrmMainDashboard() {
-  return (
-    <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
-      {/* Header with action buttons */}
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ mb: 3, display: { xs: "none", sm: "flex" } }}
-      >
-        <Typography variant="h5" component="h2">
-          Dashboard Overview
-        </Typography>
-        <Box>
-          <Button
-            variant="contained"
-            startIcon={<AddRoundedIcon />}
-            sx={{ mr: 1 }}
-          >
-            New Lead
-          </Button>
-          <Button variant="outlined" startIcon={<AddRoundedIcon />}>
-            New Deal
-          </Button>
-        </Box>
-      </Stack>
+function DashboardContent() {
+  const { tasks, createTask } = useTaskContext();
+  const [createTaskOpen, setCreateTaskOpen] = React.useState(false);
 
-      {/* Stats Cards row */}
-      <Grid container spacing={2} sx={{ mb: 3 }}>
-        {statCardsData.map((card, index) => (
-          <Grid key={index} item xs={12} sm={6} lg={3}>
-            <CrmStatCard
-              title={card.title}
-              value={card.value}
-              interval={card.interval}
-              trend={card.trend as "up" | "down"}
-              trendValue={card.trendValue}
-              data={card.data}
+  const handleCreateTask = () => {
+    setCreateTaskOpen(true);
+  };
+
+  const handleTaskSubmit = (taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'statusHistory'>) => {
+    createTask(taskData);
+  };
+
+  return (
+    <>
+      <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
+        {/* Header with action buttons */}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ mb: 3, display: { xs: "none", sm: "flex" } }}
+        >
+          <Typography variant="h5" component="h2">
+            Dashboard Overview
+          </Typography>
+          <Box>
+            <Button
+              variant="contained"
+              startIcon={<AddRoundedIcon />}
+              sx={{ mr: 1 }}
+            >
+              New Lead
+            </Button>
+            <Button variant="outlined" startIcon={<AddRoundedIcon />}>
+              New Deal
+            </Button>
+          </Box>
+        </Stack>
+
+        {/* Stats Cards row */}
+        <Grid container spacing={2} sx={{ mb: 3 }}>
+          {statCardsData.map((card, index) => (
+            <Grid key={index} item xs={12} sm={6} lg={3}>
+              <CrmStatCard
+                title={card.title}
+                value={card.value}
+                interval={card.interval}
+                trend={card.trend as "up" | "down"}
+                trendValue={card.trendValue}
+                data={card.data}
+              />
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Charts row */}
+        <Grid container spacing={2} sx={{ mb: 3 }}>
+          <Grid item xs={12} md={8}>
+            <CrmSalesChart />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <CrmLeadsBySourceChart />
+          </Grid>
+        </Grid>
+
+        {/* Tables & Other content with Tasks Widget */}
+        <Grid container spacing={2} sx={{ mb: 3 }}>
+          <Grid item xs={12} lg={6}>
+            <CrmRecentDealsTable />
+          </Grid>
+          <Grid item xs={12} lg={3}>
+            <Stack spacing={2}>
+              <CrmUpcomingTasks />
+            </Stack>
+          </Grid>
+          <Grid item xs={12} lg={3}>
+            <CrmTasksWidget 
+              tasks={tasks}
+              onCreateTask={handleCreateTask}
+              maxTasks={4}
             />
           </Grid>
-        ))}
-      </Grid>
+        </Grid>
 
-      {/* Charts row */}
-      <Grid container spacing={2} sx={{ mb: 3 }}>
-        <Grid item xs={12} md={8}>
-          <CrmSalesChart />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <CrmLeadsBySourceChart />
-        </Grid>
-      </Grid>
+        <Copyright sx={{ mt: 3, mb: 4 }} />
+      </Box>
 
-      {/* Tables & Other content */}
-      <Grid container spacing={2} sx={{ mb: 3 }}>
-        <Grid item xs={12} lg={8}>
-          <CrmRecentDealsTable />
-        </Grid>
-        <Grid item xs={12} lg={4}>
-          <Stack spacing={2}>
-            <CrmUpcomingTasks />
-          </Stack>
-        </Grid>
-      </Grid>
+      {/* Task Create Form */}
+      <TaskCreateForm
+        open={createTaskOpen}
+        onClose={() => setCreateTaskOpen(false)}
+        onSubmit={handleTaskSubmit}
+      />
+    </>
+  );
+}
 
-      <Copyright sx={{ mt: 3, mb: 4 }} />
-    </Box>
+export default function CrmMainDashboard() {
+  return (
+    <TaskProvider>
+      <DashboardContent />
+    </TaskProvider>
   );
 }
