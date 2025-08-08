@@ -14,6 +14,7 @@ import {
   Add as AddIcon,
   Dashboard as DashboardIcon,
   List as ListIcon,
+  Info as InfoIcon,
 } from "@mui/icons-material";
 import { Task } from "../contexts/TaskContext";
 import TaskDashboard from "../components/TaskDashboard";
