@@ -55,9 +55,9 @@ export default function Customers() {
         View and manage your customer relationships. Click on any customer to see their detailed activity history.
       </Typography>
 
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <TableContainer>
-          <Table sx={{ minWidth: 750 }} aria-label="customers table">
+      <Paper sx={{ width: "100%", mb: 2, overflow: 'hidden' }}>
+        <TableContainer sx={{ overflowX: 'auto' }}>
+          <Table sx={{ minWidth: 750 }} aria-label="customers table"  stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: 'bold' }}>Customer Name</TableCell>
