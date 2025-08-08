@@ -73,6 +73,7 @@ export default function CrmAppNavbar() {
               Acme CRM
             </Typography>
           </Stack>
+          <TaskNotifications />
           <ColorModeIconDropdown />
           <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
             <MenuRoundedIcon />
