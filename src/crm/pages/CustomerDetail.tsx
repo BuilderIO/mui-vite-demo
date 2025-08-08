@@ -216,7 +216,10 @@ export default function CustomerDetail() {
     <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
       {/* Header */}
       <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
-        <IconButton onClick={() => navigate('/customers')}>
+        <IconButton
+          onClick={() => navigate('/customers')}
+          aria-label="Go back to customers list"
+        >
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h4" component="h1">
@@ -287,9 +290,10 @@ export default function CustomerDetail() {
                         {customer.email}
                       </Typography>
                     </Box>
-                    <IconButton 
-                      size="small" 
+                    <IconButton
+                      size="small"
                       onClick={() => window.open(`mailto:${customer.email}`, '_blank')}
+                      aria-label={`Send email to ${customer.email}`}
                     >
                       <EmailIcon fontSize="small" />
                     </IconButton>
@@ -305,9 +309,10 @@ export default function CustomerDetail() {
                         {customer.phone}
                       </Typography>
                     </Box>
-                    <IconButton 
+                    <IconButton
                       size="small"
                       onClick={() => window.open(`tel:${customer.phone}`, '_blank')}
+                      aria-label={`Call ${customer.phone}`}
                     >
                       <PhoneIcon fontSize="small" />
                     </IconButton>
