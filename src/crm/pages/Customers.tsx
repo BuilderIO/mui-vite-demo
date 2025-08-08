@@ -209,7 +209,7 @@ export default function Customers() {
 
       {/* Customer Table */}
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="customers table">
+        <Table sx={{ minWidth: 650 }} aria-label="customers table" role="table">
           <TableHead>
             <TableRow>
               <TableCell>Customer</TableCell>
@@ -227,12 +227,21 @@ export default function Customers() {
                 key={customer.id}
                 hover
                 onClick={() => handleRowClick(customer.id)}
-                sx={{ 
+                sx={{
                   cursor: 'pointer',
                   '&:hover': {
                     backgroundColor: 'action.hover',
                   }
                 }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleRowClick(customer.id);
+                  }
+                }}
+                aria-label={`View details for ${customer.name} from ${customer.company}`}
               >
                 <TableCell>
                   <Stack direction="row" alignItems="center" spacing={2}>
