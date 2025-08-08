@@ -63,7 +63,11 @@ export default function Tasks() {
 
   const handleEditTask = (task: Task) => {
     setEditingTask(task);
-    setCreateDialogOpen(true);
+  };
+
+  const handleUpdateTask = (taskId: string, updates: Partial<Task>) => {
+    updateTask(taskId, updates);
+    setEditingTask(null);
   };
 
   const handleDeleteTask = (taskId: string) => {
