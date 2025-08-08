@@ -188,8 +188,14 @@ export default function CustomerDetail() {
 
       <Grid container spacing={3}>
         {/* Customer Basic Information */}
-        <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, height: 'fit-content' }}>
+        <Grid item xs={12} lg={4}>
+          <Paper
+            sx={{
+              p: { xs: 2, sm: 3 },
+              height: 'fit-content',
+              mb: { xs: 2, lg: 0 }
+            }}
+          >
             <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold' }}>
               {customer.name}
             </Typography>
