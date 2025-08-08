@@ -126,10 +126,14 @@ function TasksContent() {
 
       {/* Tab Panels */}
       <TabPanel value={tabValue} index={0}>
-        <TaskDashboard />
+        <TaskFeatureOverview />
       </TabPanel>
 
       <TabPanel value={tabValue} index={1}>
+        <TaskDashboard />
+      </TabPanel>
+
+      <TabPanel value={tabValue} index={2}>
         <Stack spacing={3}>
           <TaskFilters
             searchQuery={searchQuery}
