@@ -39,9 +39,7 @@ export default function CrmHeader() {
         >
           This Month
         </Button>
-        <MenuButton showBadge aria-label="Open notifications">
-          <NotificationsRoundedIcon />
-        </MenuButton>
+        <NotificationCenter />
         <ColorModeIconDropdown />
       </Stack>
     </Stack>
