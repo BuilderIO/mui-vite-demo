@@ -189,7 +189,10 @@ export default function CustomerDetail() {
           {activities.map((activity, index) => (
             <TimelineItem key={activity.id}>
               <TimelineOppositeContent
-                sx={{ m: 'auto 0' }}
+                sx={{
+                  m: 'auto 0',
+                  display: { xs: 'none', md: 'block' }
+                }}
                 align={index % 2 === 0 ? "right" : "left"}
                 variant="body2"
                 color="text.secondary"
