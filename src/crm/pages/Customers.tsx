@@ -73,10 +73,24 @@ export default function Customers() {
                   key={customer.id}
                   hover
                   onClick={() => handleCustomerClick(customer.id)}
-                  sx={{ 
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`View details for ${customer.name} at ${customer.company}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleCustomerClick(customer.id);
+                    }
+                  }}
+                  sx={{
                     cursor: "pointer",
                     "&:hover": {
                       backgroundColor: "action.hover"
+                    },
+                    "&:focus": {
+                      backgroundColor: "action.hover",
+                      outline: "2px solid",
+                      outlineColor: "primary.main"
                     }
                   }}
                 >
