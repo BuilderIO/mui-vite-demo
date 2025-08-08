@@ -126,7 +126,7 @@ export default function CustomerDetail() {
         {/* Customer Information */}
         <Grid item xs={12} lg={4}>
           <Paper elevation={2} sx={{ p: { xs: 2, md: 3 }, height: "fit-content" }}>
-            <Stack spacing={3} alignItems="center">
+            <Stack spacing={3} alignItems="center" role="region" aria-labelledby="customer-info-title">
               <Avatar
                 sx={{
                   bgcolor: "primary.main",
