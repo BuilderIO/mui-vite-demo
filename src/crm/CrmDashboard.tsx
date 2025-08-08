@@ -37,44 +37,46 @@ const xThemeComponents = {
 export default function CrmDashboard() {
   return (
     <AppTheme themeComponents={xThemeComponents}>
-      <CssBaseline enableColorScheme />
-      <Box sx={{ display: "flex", height: "100vh" }}>
-        <CrmSideMenu />
-        <CrmAppNavbar />
-        {/* Main content */}
-        <Box
-          component="main"
-          sx={(theme) => ({
-            flexGrow: 1,
-            backgroundColor: theme.vars
-              ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
-              : alpha(theme.palette.background.default, 1),
-            overflow: "auto",
-          })}
-        >
-          <Stack
-            spacing={2}
-            sx={{
-              alignItems: "center",
-              mx: 3,
-              pb: 5,
-              mt: { xs: 8, md: 0 },
-            }}
+      <TaskProvider>
+        <CssBaseline enableColorScheme />
+        <Box sx={{ display: "flex", height: "100vh" }}>
+          <CrmSideMenu />
+          <CrmAppNavbar />
+          {/* Main content */}
+          <Box
+            component="main"
+            sx={(theme) => ({
+              flexGrow: 1,
+              backgroundColor: theme.vars
+                ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
+                : alpha(theme.palette.background.default, 1),
+              overflow: "auto",
+            })}
           >
-            <CrmHeader />
-            <Routes>
-              <Route index element={<CrmMainDashboard />} />
-              <Route path="customers" element={<Customers />} />
-              <Route path="deals" element={<Deals />} />
-              <Route path="contacts" element={<Contacts />} />
-              <Route path="tasks" element={<Tasks />} />
-              <Route path="reports" element={<Reports />} />
-              <Route path="settings" element={<Settings />} />
-            </Routes>
-            <Outlet />
-          </Stack>
+            <Stack
+              spacing={2}
+              sx={{
+                alignItems: "center",
+                mx: 3,
+                pb: 5,
+                mt: { xs: 8, md: 0 },
+              }}
+            >
+              <CrmHeader />
+              <Routes>
+                <Route index element={<CrmMainDashboard />} />
+                <Route path="customers" element={<Customers />} />
+                <Route path="deals" element={<Deals />} />
+                <Route path="contacts" element={<Contacts />} />
+                <Route path="tasks" element={<Tasks />} />
+                <Route path="reports" element={<Reports />} />
+                <Route path="settings" element={<Settings />} />
+              </Routes>
+              <Outlet />
+            </Stack>
+          </Box>
         </Box>
-      </Box>
+      </TaskProvider>
     </AppTheme>
   );
 }
