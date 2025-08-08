@@ -256,7 +256,7 @@ export default function CustomerDetail() {
                 </Typography>
               </Box>
             ) : (
-              <Timeline sx={{ px: { xs: 0, md: 2 } }}>
+              <Timeline sx={{ px: { xs: 0, md: 2 } }} role="region" aria-labelledby="timeline-title">
                 {activities.map((activity: Activity) => (
                   <TimelineItem key={activity.id}>
                     <TimelineOppositeContent
