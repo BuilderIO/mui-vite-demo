@@ -163,9 +163,5 @@ function TasksContent() {
 }
 
 export default function Tasks() {
-  return (
-    <TaskProvider>
-      <TasksContent />
-    </TaskProvider>
-  );
+  return <TasksContent />;
 }
