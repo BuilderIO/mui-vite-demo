@@ -181,7 +181,7 @@ export default function CustomerDetail() {
         </Grid>
 
         {/* Activity Timeline */}
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} lg={8}>
           <CustomerActivityTimeline activities={activities} />
         </Grid>
       </Grid>
