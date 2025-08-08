@@ -15,7 +15,7 @@ import {
   Dashboard as DashboardIcon,
   List as ListIcon,
 } from "@mui/icons-material";
-import { TaskProvider, Task } from "../contexts/TaskContext";
+import { Task } from "../contexts/TaskContext";
 import TaskDashboard from "../components/TaskDashboard";
 import TaskList from "../components/TaskList";
 import TaskFilters from "../components/TaskFilters";
