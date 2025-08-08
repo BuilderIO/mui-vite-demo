@@ -256,11 +256,15 @@ export default function CustomerDetail() {
                 </Typography>
               </Box>
             ) : (
-              <Timeline>
+              <Timeline sx={{ px: { xs: 0, md: 2 } }}>
                 {activities.map((activity: Activity) => (
                   <TimelineItem key={activity.id}>
                     <TimelineOppositeContent
-                      sx={{ m: 'auto 0', minWidth: 120 }}
+                      sx={{
+                        m: 'auto 0',
+                        minWidth: { xs: 80, md: 120 },
+                        display: { xs: 'none', sm: 'block' }
+                      }}
                       align="right"
                       variant="body2"
                       color="text.secondary"
