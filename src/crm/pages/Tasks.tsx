@@ -103,16 +103,23 @@ function TasksContent() {
           <Tab
             icon={<DashboardIcon />}
             iconPosition="start"
-            label="Dashboard"
+            label="Overview"
             id="task-tab-0"
             aria-controls="task-tabpanel-0"
+          />
+          <Tab
+            icon={<DashboardIcon />}
+            iconPosition="start"
+            label="Dashboard"
+            id="task-tab-1"
+            aria-controls="task-tabpanel-1"
           />
           <Tab
             icon={<ListIcon />}
             iconPosition="start"
             label="Task List"
-            id="task-tab-1"
-            aria-controls="task-tabpanel-1"
+            id="task-tab-2"
+            aria-controls="task-tabpanel-2"
           />
         </Tabs>
       </Box>
