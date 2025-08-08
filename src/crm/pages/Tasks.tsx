@@ -36,6 +36,7 @@ import TaskEditForm from "../components/TaskEditForm";
 import TaskFiltersComponent from "../components/TaskFilters";
 import TaskListItem from "../components/TaskListItem";
 import TaskDashboard from "../components/TaskDashboard";
+import MobileTaskView from "../components/MobileTaskView";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -179,6 +180,78 @@ export default function Tasks() {
     setSnackbar(prev => ({ ...prev, open: false }));
   };
 
+  // Mobile view
+  if (isMobile) {
+    return (
+      <>
+        <MobileTaskView
+          tasks={paginatedTasks}
+          filters={filters}
+          onFiltersChange={setFilters}
+          onEditTask={handleEditTask}
+          onCreateTask={() => setShowCreateForm(true)}
+          onStatusChange={handleStatusChange}
+          teamMembers={mockTeamMembers}
+        />
+
+        {/* Forms and Dialogs */}
+        <TaskCreateForm
+          open={showCreateForm}
+          onClose={() => setShowCreateForm(false)}
+          onSubmit={handleCreateTask}
+          teamMembers={mockTeamMembers}
+        />
+
+        <TaskEditForm
+          open={showEditForm}
+          task={editingTask}
+          onClose={() => {
+            setShowEditForm(false);
+            setEditingTask(null);
+          }}
+          onSubmit={handleUpdateTask}
+          teamMembers={mockTeamMembers}
+        />
+
+        {/* Delete Confirmation Dialog */}
+        <Dialog
+          open={deleteDialogOpen}
+          onClose={() => setDeleteDialogOpen(false)}
+        >
+          <DialogTitle>Delete Task</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to delete "{taskToDelete?.title}"? This action cannot be undone.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+            <Button onClick={confirmDeleteTask} color="error" variant="contained">
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Snackbar for notifications */}
+        <Snackbar
+          open={snackbar.open}
+          autoHideDuration={4000}
+          onClose={handleSnackbarClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        >
+          <Alert
+            onClose={handleSnackbarClose}
+            severity={snackbar.severity}
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            {snackbar.message}
+          </Alert>
+        </Snackbar>
+      </>
+    );
+  }
+
   return (
     <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
       {/* Header */}
@@ -309,21 +382,6 @@ export default function Tasks() {
         )}
       </TabPanel>
 
-      {/* Floating Action Button for Mobile */}
-      {isMobile && (
-        <Fab
-          color="primary"
-          aria-label="add task"
-          onClick={() => setShowCreateForm(true)}
-          sx={{
-            position: "fixed",
-            bottom: 16,
-            right: 16,
-          }}
-        >
-          <AddIcon />
-        </Fab>
-      )}
 
       {/* Forms and Dialogs */}
       <TaskCreateForm
