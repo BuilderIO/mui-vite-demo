@@ -48,7 +48,7 @@ export default function Customers() {
       <Card variant="outlined">
         <CardContent sx={{ p: 0 }}>
           <TableContainer>
-            <Table aria-label="customers table">
+            <Table aria-label="customers table" sx={{ minWidth: 650 }}>
               <TableHead>
                 <TableRow>
                   <TableCell>Customer</TableCell>
