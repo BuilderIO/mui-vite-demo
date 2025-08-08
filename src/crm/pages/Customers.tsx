@@ -100,6 +100,17 @@ export default function Customers() {
                             {customer.title}
                           </Typography>
                         )}
+                        {/* Show additional info on mobile */}
+                        <Box sx={{ display: { xs: 'block', sm: 'none' }, mt: 0.5 }}>
+                          <Typography variant="caption" color="text.secondary">
+                            {customer.company}
+                          </Typography>
+                        </Box>
+                        <Box sx={{ display: { xs: 'block', md: 'none' }, mt: 0.5 }}>
+                          <Typography variant="caption" color="primary.main">
+                            {customer.email}
+                          </Typography>
+                        </Box>
                       </Box>
                     </Stack>
                   </TableCell>
