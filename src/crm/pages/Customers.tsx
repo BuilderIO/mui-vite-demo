@@ -83,35 +83,70 @@ export default function Customers() {
                 <TableRow
                   key={customer.id}
                   onClick={() => handleRowClick(customer.id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleRowClick(customer.id);
+                    }
+                  }}
                   sx={{
                     cursor: 'pointer',
                     '&:hover': {
                       backgroundColor: 'action.hover',
                     },
+                    '&:focus': {
+                      backgroundColor: 'action.focus',
+                      outline: '2px solid',
+                      outlineColor: 'primary.main',
+                    },
                     '&:last-child td, &:last-child th': { border: 0 },
                   }}
+                  aria-label={`View details for ${customer.name}`}
                 >
                   <TableCell component="th" scope="row">
-                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                      {customer.name}
-                    </Typography>
+                    <Box>
+                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                        {customer.name}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: 'text.secondary',
+                          display: { xs: 'block', sm: 'none' }
+                        }}
+                      >
+                        {customer.company}
+                      </Typography>
+                    </Box>
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
                     <Typography variant="body2">
                       {customer.company}
                     </Typography>
                   </TableCell>
                   <TableCell>
                     <Box>
-                      <Typography variant="body2" sx={{ mb: 0.5 }}>
+                      <Typography variant="body2" sx={{ mb: 0.5, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
                         {customer.email}
                       </Typography>
                       <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                         {customer.phone}
                       </Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: 'text.secondary',
+                          display: { xs: 'block', md: 'none' },
+                          mt: 0.5
+                        }}
+                      >
+                        Last: {formatDate(customer.lastContact)}
+                      </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>
                     <Typography variant="body2">
                       {formatDate(customer.lastContact)}
                     </Typography>
