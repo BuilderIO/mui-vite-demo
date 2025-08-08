@@ -8,6 +8,8 @@ import CrmSearch from "./CrmSearch";
 import CrmNavbarBreadcrumbs from "./CrmNavbarBreadcrumbs";
 import Button from "@mui/material/Button";
 import CalendarTodayRoundedIcon from "@mui/icons-material/CalendarTodayRounded";
+import TaskNotificationCenter from "./TaskNotificationCenter";
+import { mockTasks } from "../data/mockTaskData";
 
 export default function CrmHeader() {
   return (
@@ -38,9 +40,10 @@ export default function CrmHeader() {
         >
           This Month
         </Button>
-        <MenuButton showBadge aria-label="Open notifications">
-          <NotificationsRoundedIcon />
-        </MenuButton>
+        <TaskNotificationCenter
+          tasks={mockTasks}
+          currentUserId="1" // Current user ID (Alex Thompson)
+        />
         <ColorModeIconDropdown />
       </Stack>
     </Stack>
