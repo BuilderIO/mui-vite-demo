@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -324,14 +324,13 @@ export default function Tasks() {
           ) : (
             <Grid container spacing={3}>
               {filteredTasks.map((task) => (
-                <Grid 
-                  key={task.id} 
-                  size={{ 
-                    xs: 12, 
-                    sm: viewMode === 'grid' ? 6 : 12, 
-                    md: viewMode === 'grid' ? 4 : 12,
-                    lg: viewMode === 'grid' ? 3 : 12
-                  }}
+                <Grid
+                  key={task.id}
+                  item
+                  xs={12}
+                  sm={viewMode === 'grid' ? 6 : 12}
+                  md={viewMode === 'grid' ? 4 : 12}
+                  lg={viewMode === 'grid' ? 3 : 12}
                 >
                   <TaskCard
                     task={task}
