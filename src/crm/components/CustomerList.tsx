@@ -19,6 +19,31 @@ interface Customer {
   value: number;
 }
 
+interface ApiUser {
+  login: {
+    uuid: string;
+    username: string;
+  };
+  name: {
+    title: string;
+    first: string;
+    last: string;
+  };
+  email: string;
+  phone: string;
+  cell: string;
+  location: {
+    city: string;
+    country: string;
+  };
+  dob: {
+    age: number;
+  };
+  registered: {
+    date: string;
+  };
+}
+
 function renderCustomerAvatar(params: any) {
   const name = params.row.name;
   const initials = name
