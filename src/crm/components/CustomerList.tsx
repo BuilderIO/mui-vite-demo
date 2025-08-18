@@ -263,6 +263,11 @@ export default function CustomerList({ onCustomerSelect }: CustomerListProps) {
       <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
         Customer List
       </Typography>
+      {error && (
+        <Typography variant="body2" color="warning.main" sx={{ mb: 2 }}>
+          {error}
+        </Typography>
+      )}
       <Box
         sx={{
           height: 600,
@@ -282,6 +287,7 @@ export default function CustomerList({ onCustomerSelect }: CustomerListProps) {
           rows={customers}
           columns={columns}
           onRowClick={handleRowClick}
+          loading={loading}
           initialState={{
             pagination: { paginationModel: { pageSize: 10 } },
           }}
