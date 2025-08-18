@@ -14,6 +14,7 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
+import { useNavigate } from "react-router-dom";
 
 // Sample data for upcoming tasks
 const upcomingTasks = [
