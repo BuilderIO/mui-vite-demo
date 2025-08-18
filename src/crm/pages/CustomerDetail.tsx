@@ -234,17 +234,17 @@ export default function CustomerDetail() {
       <Grid container spacing={3}>
         {/* Customer Information */}
         <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 3 }}>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+          <Paper sx={{ p: { xs: 2, md: 3 } }}>
+            <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, alignItems: { xs: "center", sm: "flex-start" }, mb: 3 }}>
               <Avatar
                 src={customer.picture.large}
                 alt={fullName}
-                sx={{ width: 80, height: 80, mr: 2 }}
+                sx={{ width: { xs: 64, sm: 80 }, height: { xs: 64, sm: 80 }, mr: { xs: 0, sm: 2 }, mb: { xs: 2, sm: 0 } }}
               >
                 {customer.name.first[0]}{customer.name.last[0]}
               </Avatar>
-              <Box>
-                <Typography variant="h4" component="h1">
+              <Box sx={{ textAlign: { xs: "center", sm: "left" } }}>
+                <Typography variant="h4" component="h1" sx={{ fontSize: { xs: "1.5rem", sm: "2rem" } }}>
                   {fullName}
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
