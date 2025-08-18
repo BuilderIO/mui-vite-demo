@@ -29,7 +29,7 @@ export default function TaskStats({ stats }: TaskStatsProps) {
   return (
     <Box sx={{ width: '100%', mb: 3 }}>
       <Grid container spacing={2}>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <CrmStatCard
             title="Total Tasks"
             value={stats.total.toString()}
@@ -40,7 +40,7 @@ export default function TaskStats({ stats }: TaskStatsProps) {
           />
         </Grid>
         
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <CrmStatCard
             title="Completed"
             value={stats.completed.toString()}
@@ -51,7 +51,7 @@ export default function TaskStats({ stats }: TaskStatsProps) {
           />
         </Grid>
         
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <CrmStatCard
             title="In Progress"
             value={stats.inProgress.toString()}
@@ -62,7 +62,7 @@ export default function TaskStats({ stats }: TaskStatsProps) {
           />
         </Grid>
         
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
           <CrmStatCard
             title="Overdue"
             value={stats.overdue.toString()}
