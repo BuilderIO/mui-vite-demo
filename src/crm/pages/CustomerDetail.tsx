@@ -317,8 +317,8 @@ export default function CustomerDetail() {
 
         {/* Customer Activities */}
         <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 3 }}>
-            <Typography variant="h5" component="h2" sx={{ mb: 3 }}>
+          <Paper sx={{ p: { xs: 2, md: 3 } }}>
+            <Typography variant="h5" component="h2" sx={{ mb: 3, fontSize: { xs: "1.25rem", sm: "1.5rem" } }}>
               Recent Activities
             </Typography>
             
