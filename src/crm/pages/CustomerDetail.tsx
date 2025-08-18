@@ -233,7 +233,7 @@ export default function CustomerDetail() {
 
       <Grid container spacing={3}>
         {/* Customer Information */}
-        <Grid size={{ xs: 12, md: 6 }}>
+        <Grid item xs={12} md={6}>
           <Paper sx={{ p: 3 }}>
             <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
               <Avatar
