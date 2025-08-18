@@ -71,6 +71,7 @@ const getPriorityColor = (
 
 export default function CrmUpcomingTasks() {
   const [tasks, setTasks] = React.useState(upcomingTasks);
+  const navigate = useNavigate();
 
   const handleToggle = (id: number) => () => {
     setTasks(
