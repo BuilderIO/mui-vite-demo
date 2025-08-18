@@ -101,7 +101,11 @@ export default function CrmUpcomingTasks() {
           <Typography variant="h6" component="h3">
             Upcoming Tasks
           </Typography>
-          <Button endIcon={<ArrowForwardRoundedIcon />} size="small">
+          <Button
+            endIcon={<ArrowForwardRoundedIcon />}
+            size="small"
+            onClick={() => navigate('/tasks')}
+          >
             View All
           </Button>
         </Stack>
