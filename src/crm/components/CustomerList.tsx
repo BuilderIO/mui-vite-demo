@@ -206,7 +206,48 @@ interface CustomerListProps {
 export default function CustomerList({ onCustomerSelect }: CustomerListProps) {
   const navigate = useNavigate();
   const theme = useTheme();
-  const [customers, setCustomers] = React.useState<GridRowsProp>(sampleCustomers);
+  const [customers, setCustomers] = React.useState<GridRowsProp>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('https://user-api.builder-io.workers.dev/api/users?perPage=20');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch customers');
+        }
+
+        const result = await response.json();
+        const apiUsers: ApiUser[] = result.data || [];
+
+        // Transform API users to customer format
+        const transformedCustomers: Customer[] = apiUsers.map((user, index) => ({
+          id: user.login.uuid,
+          name: `${user.name.first} ${user.name.last}`,
+          email: user.email,
+          phone: user.phone || user.cell,
+          city: user.location.city,
+          country: user.location.country,
+          status: index % 4 === 0 ? "Inactive" : "Active", // Random status for demo
+          lastContact: new Date(user.registered.date).toISOString().split('T')[0],
+          value: Math.floor(Math.random() * 100000) + 10000, // Random value for demo
+        }));
+
+        setCustomers(transformedCustomers);
+      } catch (err) {
+        console.error('Error fetching customers:', err);
+        setError('Failed to load customers. Using sample data.');
+        setCustomers(sampleCustomers);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCustomers();
+  }, []);
 
   const handleRowClick = (params: GridRowParams) => {
     const customerId = params.id as string;
