@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import CrmStatCard from './CrmStatCard';
 import type { TaskPriority, TaskStatus } from '../types/taskTypes';
 
