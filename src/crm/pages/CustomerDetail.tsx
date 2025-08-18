@@ -11,17 +11,19 @@ import {
   IconButton,
   Chip,
   Divider,
+  CircularProgress,
+  Alert,
+  Button,
+  Stack,
+} from "@mui/material";
+import {
   Timeline,
   TimelineItem,
   TimelineSeparator,
   TimelineConnector,
   TimelineContent,
   TimelineDot,
-  CircularProgress,
-  Alert,
-  Button,
-  Stack,
-} from "@mui/material";
+} from "@mui/lab";
 import {
   ArrowBack,
   Phone,
