@@ -316,7 +316,7 @@ export default function CustomerDetail() {
         </Grid>
 
         {/* Customer Activities */}
-        <Grid size={{ xs: 12, md: 6 }}>
+        <Grid item xs={12} md={6}>
           <Paper sx={{ p: 3 }}>
             <Typography variant="h5" component="h2" sx={{ mb: 3 }}>
               Recent Activities
