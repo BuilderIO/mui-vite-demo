@@ -104,7 +104,7 @@ export default function Customers() {
   // If we have a customerId in URL, we're viewing a specific customer
   const isViewingDetail = Boolean(customerId);
 
-  if (isViewingDetail && selectedCustomer) {
+  if (isViewingDetail) {
     return (
       <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
         <Stack
@@ -122,7 +122,29 @@ export default function Customers() {
             </Typography>
           </Stack>
         </Stack>
-        <CustomerDetail customer={selectedCustomer} />
+
+        {loading && (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "400px",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        )}
+
+        {error && (
+          <Alert severity="error" sx={{ mb: 3 }}>
+            {error}
+          </Alert>
+        )}
+
+        {selectedCustomer && !loading && !error && (
+          <CustomerDetail customer={selectedCustomer} />
+        )}
       </Box>
     );
   }
