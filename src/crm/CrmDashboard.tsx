@@ -13,6 +13,7 @@ import CrmHeader from "./components/CrmHeader";
 import CrmSideMenu from "./components/CrmSideMenu";
 import CrmMainDashboard from "./components/CrmMainDashboard";
 import Customers from "./pages/Customers";
+import CustomerDetail from "./pages/CustomerDetail";
 import Deals from "./pages/Deals";
 import Contacts from "./pages/Contacts";
 import Tasks from "./pages/Tasks";
