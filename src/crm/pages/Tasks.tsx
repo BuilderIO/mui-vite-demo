@@ -32,10 +32,17 @@ import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Tooltip from "@mui/material/Tooltip";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
+
+// Import custom components
+import TaskBoard from "../components/TaskBoard";
+import TaskAnalytics from "../components/TaskAnalytics";
+import TaskReminderSystem from "../components/TaskReminderSystem";
 
 // Icons
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
@@ -49,6 +56,10 @@ import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUnch
 import PauseCircleRoundedIcon from "@mui/icons-material/PauseCircleRounded";
 import PlayCircleRoundedIcon from "@mui/icons-material/PlayCircleRounded";
 import NotificationsActiveRoundedIcon from "@mui/icons-material/NotificationsActiveRounded";
+import TableRowsRoundedIcon from "@mui/icons-material/TableRowsRounded";
+import ViewKanbanRoundedIcon from "@mui/icons-material/ViewKanbanRounded";
+import AnalyticsRoundedIcon from "@mui/icons-material/AnalyticsRounded";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 
 // Types
 interface Task {
@@ -195,6 +206,7 @@ export default function Tasks() {
   const [statusFilter, setStatusFilter] = React.useState("all");
   const [priorityFilter, setPriorityFilter] = React.useState("all");
   const [assigneeFilter, setAssigneeFilter] = React.useState("all");
+  const [currentView, setCurrentView] = React.useState(0); // 0: Table, 1: Board, 2: Analytics, 3: Settings
   
   // Dialog states
   const [createDialogOpen, setCreateDialogOpen] = React.useState(false);
@@ -328,6 +340,10 @@ export default function Tasks() {
     handleMenuClose();
   };
 
+  const handleViewChange = (event: React.SyntheticEvent, newValue: number) => {
+    setCurrentView(newValue);
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
@@ -338,9 +354,14 @@ export default function Tasks() {
           alignItems="center"
           sx={{ mb: 3 }}
         >
-          <Typography variant="h4" component="h1">
-            Task Management
-          </Typography>
+          <Box>
+            <Typography variant="h4" component="h1">
+              Task Management
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+              Manage, track, and analyze your team's tasks efficiently
+            </Typography>
+          </Box>
           <Button
             variant="contained"
             startIcon={<AddRoundedIcon />}
@@ -350,232 +371,299 @@ export default function Tasks() {
           </Button>
         </Stack>
 
-        {/* Stats Cards */}
-        <Grid container spacing={2} sx={{ mb: 3 }}>
-          <Grid item xs={6} sm={3}>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography color="text.secondary" gutterBottom variant="body2">
-                  Total Tasks
-                </Typography>
-                <Typography variant="h4">{stats.total}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography color="text.secondary" gutterBottom variant="body2">
-                  In Progress
-                </Typography>
-                <Typography variant="h4" color="primary">
-                  {stats.inProgress}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography color="text.secondary" gutterBottom variant="body2">
-                  Completed
-                </Typography>
-                <Typography variant="h4" color="success.main">
-                  {stats.completed}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography color="text.secondary" gutterBottom variant="body2">
-                  Overdue
-                </Typography>
-                <Typography variant="h4" color="error.main">
-                  {stats.overdue}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+        {/* View Tabs */}
+        <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 3 }}>
+          <Tabs value={currentView} onChange={handleViewChange} aria-label="task management views">
+            <Tab
+              icon={<TableRowsRoundedIcon />}
+              label="Table View"
+              iconPosition="start"
+              sx={{ minHeight: 48 }}
+            />
+            <Tab
+              icon={<ViewKanbanRoundedIcon />}
+              label="Board View"
+              iconPosition="start"
+              sx={{ minHeight: 48 }}
+            />
+            <Tab
+              icon={<AnalyticsRoundedIcon />}
+              label="Analytics"
+              iconPosition="start"
+              sx={{ minHeight: 48 }}
+            />
+            <Tab
+              icon={<SettingsRoundedIcon />}
+              label="Reminders"
+              iconPosition="start"
+              sx={{ minHeight: 48 }}
+            />
+          </Tabs>
+        </Box>
 
-        {/* Filters and Search */}
-        <Card variant="outlined" sx={{ mb: 3 }}>
-          <CardContent>
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={2} alignItems="center">
-              <Paper
-                component="form"
-                sx={{ display: "flex", alignItems: "center", width: { xs: "100%", sm: 300 } }}
-                variant="outlined"
-              >
-                <SearchRoundedIcon sx={{ p: "10px", color: "text.secondary" }} />
-                <InputBase
-                  sx={{ ml: 1, flex: 1 }}
-                  placeholder="Search tasks..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </Paper>
-              
-              <FormControl size="small" sx={{ minWidth: 120 }}>
-                <InputLabel>Status</InputLabel>
-                <Select
-                  value={statusFilter}
-                  label="Status"
-                  onChange={(e) => setStatusFilter(e.target.value)}
+        {/* Stats Cards - Show only in Table and Board views */}
+        {(currentView === 0 || currentView === 1) && (
+          <Grid container spacing={2} sx={{ mb: 3 }}>
+            <Grid item xs={6} sm={3}>
+              <Card variant="outlined">
+                <CardContent>
+                  <Typography color="text.secondary" gutterBottom variant="body2">
+                    Total Tasks
+                  </Typography>
+                  <Typography variant="h4">{stats.total}</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Card variant="outlined">
+                <CardContent>
+                  <Typography color="text.secondary" gutterBottom variant="body2">
+                    In Progress
+                  </Typography>
+                  <Typography variant="h4" color="primary">
+                    {stats.inProgress}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Card variant="outlined">
+                <CardContent>
+                  <Typography color="text.secondary" gutterBottom variant="body2">
+                    Completed
+                  </Typography>
+                  <Typography variant="h4" color="success.main">
+                    {stats.completed}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Card variant="outlined">
+                <CardContent>
+                  <Typography color="text.secondary" gutterBottom variant="body2">
+                    Overdue
+                  </Typography>
+                  <Typography variant="h4" color="error.main">
+                    {stats.overdue}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        )}
+
+        {/* Filters and Search - Show only in Table and Board views */}
+        {(currentView === 0 || currentView === 1) && (
+          <Card variant="outlined" sx={{ mb: 3 }}>
+            <CardContent>
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={2} alignItems="center">
+                <Paper
+                  component="form"
+                  sx={{ display: "flex", alignItems: "center", width: { xs: "100%", sm: 300 } }}
+                  variant="outlined"
                 >
-                  <MenuItem value="all">All</MenuItem>
-                  <MenuItem value="todo">To Do</MenuItem>
-                  <MenuItem value="in_progress">In Progress</MenuItem>
-                  <MenuItem value="completed">Completed</MenuItem>
-                  <MenuItem value="on_hold">On Hold</MenuItem>
-                </Select>
-              </FormControl>
+                  <SearchRoundedIcon sx={{ p: "10px", color: "text.secondary" }} />
+                  <InputBase
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="Search tasks..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </Paper>
 
-              <FormControl size="small" sx={{ minWidth: 120 }}>
-                <InputLabel>Priority</InputLabel>
-                <Select
-                  value={priorityFilter}
-                  label="Priority"
-                  onChange={(e) => setPriorityFilter(e.target.value)}
-                >
-                  <MenuItem value="all">All</MenuItem>
-                  <MenuItem value="high">High</MenuItem>
-                  <MenuItem value="medium">Medium</MenuItem>
-                  <MenuItem value="low">Low</MenuItem>
-                </Select>
-              </FormControl>
+                <FormControl size="small" sx={{ minWidth: 120 }}>
+                  <InputLabel>Status</InputLabel>
+                  <Select
+                    value={statusFilter}
+                    label="Status"
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                  >
+                    <MenuItem value="all">All</MenuItem>
+                    <MenuItem value="todo">To Do</MenuItem>
+                    <MenuItem value="in_progress">In Progress</MenuItem>
+                    <MenuItem value="completed">Completed</MenuItem>
+                    <MenuItem value="on_hold">On Hold</MenuItem>
+                  </Select>
+                </FormControl>
 
-              <FormControl size="small" sx={{ minWidth: 150 }}>
-                <InputLabel>Assignee</InputLabel>
-                <Select
-                  value={assigneeFilter}
-                  label="Assignee"
-                  onChange={(e) => setAssigneeFilter(e.target.value)}
-                >
-                  <MenuItem value="all">All</MenuItem>
-                  {teamMembers.map((member) => (
-                    <MenuItem key={member.email} value={member.email}>
-                      {member.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Stack>
-          </CardContent>
-        </Card>
+                <FormControl size="small" sx={{ minWidth: 120 }}>
+                  <InputLabel>Priority</InputLabel>
+                  <Select
+                    value={priorityFilter}
+                    label="Priority"
+                    onChange={(e) => setPriorityFilter(e.target.value)}
+                  >
+                    <MenuItem value="all">All</MenuItem>
+                    <MenuItem value="high">High</MenuItem>
+                    <MenuItem value="medium">Medium</MenuItem>
+                    <MenuItem value="low">Low</MenuItem>
+                  </Select>
+                </FormControl>
 
-        {/* Tasks Table */}
-        <Card variant="outlined">
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Task</TableCell>
-                  <TableCell>Assignee</TableCell>
-                  <TableCell>Priority</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Due Date</TableCell>
-                  <TableCell>Category</TableCell>
-                  <TableCell align="center">Reminder</TableCell>
-                  <TableCell align="center">Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {filteredTasks.map((task) => (
-                  <TableRow key={task.id} hover>
-                    <TableCell>
-                      <Box>
-                        <Typography variant="subtitle2" sx={{ fontWeight: 500 }}>
-                          {task.title}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary" noWrap>
-                          {task.description}
-                        </Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                        <Avatar sx={{ width: 32, height: 32, fontSize: "0.875rem" }}>
-                          {task.assignee.avatar}
-                        </Avatar>
+                <FormControl size="small" sx={{ minWidth: 150 }}>
+                  <InputLabel>Assignee</InputLabel>
+                  <Select
+                    value={assigneeFilter}
+                    label="Assignee"
+                    onChange={(e) => setAssigneeFilter(e.target.value)}
+                  >
+                    <MenuItem value="all">All</MenuItem>
+                    {teamMembers.map((member) => (
+                      <MenuItem key={member.email} value={member.email}>
+                        {member.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Stack>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Content based on current view */}
+        {currentView === 0 && (
+          /* Tasks Table */
+          <Card variant="outlined">
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Task</TableCell>
+                    <TableCell>Assignee</TableCell>
+                    <TableCell>Priority</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Due Date</TableCell>
+                    <TableCell>Category</TableCell>
+                    <TableCell align="center">Reminder</TableCell>
+                    <TableCell align="center">Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredTasks.map((task) => (
+                    <TableRow key={task.id} hover>
+                      <TableCell>
                         <Box>
-                          <Typography variant="body2">{task.assignee.name}</Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            {task.assignee.email}
+                          <Typography variant="subtitle2" sx={{ fontWeight: 500 }}>
+                            {task.title}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary" noWrap>
+                            {task.description}
                           </Typography>
                         </Box>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Chip
-                        label={task.priority.toUpperCase()}
-                        size="small"
-                        color={getPriorityColor(task.priority)}
-                        variant="outlined"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                        <Checkbox
-                          icon={getStatusIcon(task.status)}
-                          checkedIcon={<CheckCircleRoundedIcon />}
-                          checked={task.status === "completed"}
-                          onChange={(e) => 
-                            handleTaskStatusChange(task.id, e.target.checked ? "completed" : "todo")
-                          }
-                          size="small"
-                        />
+                      </TableCell>
+                      <TableCell>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                          <Avatar sx={{ width: 32, height: 32, fontSize: "0.875rem" }}>
+                            {task.assignee.avatar}
+                          </Avatar>
+                          <Box>
+                            <Typography variant="body2">{task.assignee.name}</Typography>
+                            <Typography variant="caption" color="text.secondary">
+                              {task.assignee.email}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
                         <Chip
-                          label={task.status.replace("_", " ").toUpperCase()}
+                          label={task.priority.toUpperCase()}
                           size="small"
-                          color={getStatusColor(task.status)}
+                          color={getPriorityColor(task.priority)}
                           variant="outlined"
                         />
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Typography
-                        variant="body2"
-                        color={isOverdue(task.dueDate, task.status) ? "error.main" : "text.primary"}
-                        sx={{ fontWeight: isOverdue(task.dueDate, task.status) ? 500 : 400 }}
-                      >
-                        {formatDate(task.dueDate)}
-                      </Typography>
-                      {isOverdue(task.dueDate, task.status) && (
-                        <Typography variant="caption" color="error.main">
-                          Overdue
-                        </Typography>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <Chip label={task.category} size="small" variant="outlined" />
-                    </TableCell>
-                    <TableCell align="center">
-                      {task.reminderEnabled && (
-                        <Tooltip title="Reminders enabled">
-                          <NotificationsActiveRoundedIcon 
-                            fontSize="small" 
-                            color="primary" 
+                      </TableCell>
+                      <TableCell>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                          <Checkbox
+                            icon={getStatusIcon(task.status)}
+                            checkedIcon={<CheckCircleRoundedIcon />}
+                            checked={task.status === "completed"}
+                            onChange={(e) =>
+                              handleTaskStatusChange(task.id, e.target.checked ? "completed" : "todo")
+                            }
+                            size="small"
                           />
-                        </Tooltip>
-                      )}
-                    </TableCell>
-                    <TableCell align="center">
-                      <IconButton
-                        size="small"
-                        onClick={(e) => handleMenuOpen(e, task.id)}
-                      >
-                        <MoreVertRoundedIcon fontSize="small" />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Card>
+                          <Chip
+                            label={task.status.replace("_", " ").toUpperCase()}
+                            size="small"
+                            color={getStatusColor(task.status)}
+                            variant="outlined"
+                          />
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Typography
+                          variant="body2"
+                          color={isOverdue(task.dueDate, task.status) ? "error.main" : "text.primary"}
+                          sx={{ fontWeight: isOverdue(task.dueDate, task.status) ? 500 : 400 }}
+                        >
+                          {formatDate(task.dueDate)}
+                        </Typography>
+                        {isOverdue(task.dueDate, task.status) && (
+                          <Typography variant="caption" color="error.main">
+                            Overdue
+                          </Typography>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <Chip label={task.category} size="small" variant="outlined" />
+                      </TableCell>
+                      <TableCell align="center">
+                        {task.reminderEnabled && (
+                          <Tooltip title="Reminders enabled">
+                            <NotificationsActiveRoundedIcon
+                              fontSize="small"
+                              color="primary"
+                            />
+                          </Tooltip>
+                        )}
+                      </TableCell>
+                      <TableCell align="center">
+                        <IconButton
+                          size="small"
+                          onClick={(e) => handleMenuOpen(e, task.id)}
+                        >
+                          <MoreVertRoundedIcon fontSize="small" />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Card>
+        )}
+
+        {currentView === 1 && (
+          /* Task Board View */
+          <TaskBoard
+            tasks={filteredTasks}
+            onTaskEdit={(task) => {
+              setSelectedTask(task);
+              setEditDialogOpen(true);
+            }}
+            onTaskDelete={(task) => {
+              setSelectedTask(task);
+              setDeleteDialogOpen(true);
+            }}
+            onTaskView={(task) => {
+              setSelectedTask(task);
+              setEditDialogOpen(true);
+            }}
+            onTaskMove={handleTaskStatusChange}
+          />
+        )}
+
+        {currentView === 2 && (
+          /* Analytics View */
+          <TaskAnalytics />
+        )}
+
+        {currentView === 3 && (
+          /* Reminder Settings View */
+          <TaskReminderSystem />
+        )}
 
         {/* Context Menu */}
         <Menu
