@@ -202,6 +202,43 @@ export default function CustomerDetail() {
     navigate("/customers");
   };
 
+  const handleBackClick = () => {
+    navigate("/customers");
+  };
+
+  if (loading) {
+    return (
+      <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
+        <Typography variant="h4" component="h1" sx={{ mb: 4 }}>
+          Loading customer details...
+        </Typography>
+      </Box>
+    );
+  }
+
+  if (error || !customer) {
+    return (
+      <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
+        <Box sx={{ mb: 4, display: "flex", alignItems: "center", gap: 2 }}>
+          <Button
+            onClick={handleBackClick}
+            startIcon={<ArrowBackIcon />}
+            variant="outlined"
+            size="small"
+          >
+            Back to Customers
+          </Button>
+          <Typography variant="h4" component="h1">
+            Customer Not Found
+          </Typography>
+        </Box>
+        <Typography variant="body1" color="error">
+          {error || "Customer not found"}
+        </Typography>
+      </Box>
+    );
+  }
+
   const customerInitials = customer.name
     .split(" ")
     .map((word) => word.charAt(0))
