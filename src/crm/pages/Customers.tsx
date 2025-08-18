@@ -56,6 +56,40 @@ export default function Customers() {
   const navigate = useNavigate();
   const { customerId } = useParams();
   const [selectedCustomer, setSelectedCustomer] = React.useState<Customer | null>(null);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+
+  // Fetch customer details when customerId is in URL
+  React.useEffect(() => {
+    if (customerId && !selectedCustomer) {
+      fetchCustomerById(customerId);
+    }
+  }, [customerId]);
+
+  const fetchCustomerById = async (id: string) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await fetch(
+        `https://user-api.builder-io.workers.dev/api/users/${id}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Customer not found");
+      }
+
+      const customer = await response.json();
+      setSelectedCustomer({
+        ...customer,
+        id: customer.login.uuid,
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load customer");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleCustomerClick = (customer: Customer) => {
     setSelectedCustomer(customer);
