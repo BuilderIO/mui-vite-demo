@@ -214,10 +214,19 @@ export default function CustomersDataGrid() {
         pageSizeOptions={[10, 25, 50]}
         onRowClick={handleRowClick}
         sx={{
-          height: 600,
+          height: { xs: 400, sm: 500, md: 600 },
           cursor: "pointer",
           "& .MuiDataGrid-row:hover": {
             backgroundColor: "action.hover",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: "background.paper",
+            borderBottom: "1px solid",
+            borderColor: "divider",
+          },
+          "& .MuiDataGrid-cell": {
+            borderBottom: "1px solid",
+            borderColor: "divider",
           },
         }}
       />
