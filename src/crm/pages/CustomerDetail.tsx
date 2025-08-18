@@ -149,10 +149,54 @@ export default function CustomerDetail() {
   const { customerId } = useParams<{ customerId: string }>();
   const navigate = useNavigate();
   const theme = useTheme();
-  
-  // In a real app, you would fetch customer data based on customerId
-  const [customer] = React.useState<CustomerData>(sampleCustomer);
+
+  const [customer, setCustomer] = React.useState<CustomerData | null>(null);
   const [activities] = React.useState<CustomerActivity[]>(sampleActivities);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const fetchCustomer = async () => {
+      if (!customerId) return;
+
+      try {
+        setLoading(true);
+        const response = await fetch(`https://user-api.builder-io.workers.dev/api/users/${customerId}`);
+
+        if (!response.ok) {
+          throw new Error('Customer not found');
+        }
+
+        const apiUser = await response.json();
+
+        // Transform API user to customer format
+        const transformedCustomer: CustomerData = {
+          id: apiUser.login.uuid,
+          name: `${apiUser.name.first} ${apiUser.name.last}`,
+          email: apiUser.email,
+          phone: apiUser.phone || apiUser.cell,
+          city: apiUser.location.city,
+          country: apiUser.location.country,
+          company: `${apiUser.name.last} Corp`, // Demo company name
+          status: "Active",
+          value: Math.floor(Math.random() * 100000) + 10000,
+          joinDate: apiUser.registered.date,
+          lastContact: new Date().toISOString().split('T')[0],
+        };
+
+        setCustomer(transformedCustomer);
+      } catch (err) {
+        console.error('Error fetching customer:', err);
+        setError('Failed to load customer details');
+        // Fallback to sample data
+        setCustomer(sampleCustomer);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCustomer();
+  }, [customerId]);
 
   const handleBackClick = () => {
     navigate("/customers");
