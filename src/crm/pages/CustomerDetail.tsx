@@ -202,10 +202,6 @@ export default function CustomerDetail() {
     navigate("/customers");
   };
 
-  const handleBackClick = () => {
-    navigate("/customers");
-  };
-
   if (loading) {
     return (
       <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
