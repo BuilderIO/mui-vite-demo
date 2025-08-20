@@ -647,10 +647,10 @@ export default function Tasks() {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpen(false)}>Cancel</Button>
-            <Button 
-              onClick={handleSave} 
+            <Button
+              onClick={handleSave}
               variant="contained"
-              disabled={!formData.title || !formData.assignee}
+              disabled={!formData.title || !formData.assigneeId}
             >
               {editingTask ? "Update" : "Create"}
             </Button>
