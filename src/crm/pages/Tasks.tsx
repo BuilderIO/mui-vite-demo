@@ -28,6 +28,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SearchIcon from "@mui/icons-material/Search";
 import dayjs, { Dayjs } from "dayjs";
+import { useUsers, getUserFullName, getUserInitials, formatUserForDisplay } from "../components/TaskUserAPI";
+import { CircularProgress } from "@mui/material";
 
 // Task interface
 interface Task {
@@ -38,6 +40,7 @@ interface Task {
   priority: "low" | "medium" | "high";
   assignee: string;
   assigneeAvatar: string;
+  assigneeId?: string;
   dueDate: string;
   createdDate: string;
   completedDate?: string;
@@ -101,17 +104,6 @@ const initialTasks: Task[] = [
     dueDate: "2024-02-25",
     createdDate: "2024-02-01",
   },
-];
-
-// Team members for assignment
-const teamMembers = [
-  { name: "John Smith", avatar: "JS" },
-  { name: "Sarah Wilson", avatar: "SW" },
-  { name: "Mike Johnson", avatar: "MJ" },
-  { name: "Emily Brown", avatar: "EB" },
-  { name: "David Lee", avatar: "DL" },
-  { name: "Lisa Chen", avatar: "LC" },
-  { name: "Tom Anderson", avatar: "TA" },
 ];
 
 // Get color for priority
