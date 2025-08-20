@@ -71,6 +71,7 @@ const getPriorityColor = (
 
 export default function CrmUpcomingTasks() {
   const [tasks, setTasks] = React.useState(upcomingTasks);
+  const navigate = useNavigate();
 
   const handleToggle = (id: number) => () => {
     setTasks(
@@ -78,6 +79,10 @@ export default function CrmUpcomingTasks() {
         task.id === id ? { ...task, completed: !task.completed } : task,
       ),
     );
+  };
+
+  const handleViewAllTasks = () => {
+    navigate("/tasks");
   };
 
   return (
