@@ -101,6 +101,12 @@ export default function CrmAppNavbar() {
               Acme CRM
             </Typography>
           </Stack>
+          <Box sx={{ position: "relative" }}>
+            <TaskNotifications
+              tasks={sampleTasks}
+              currentUserId="1"
+            />
+          </Box>
           <ColorModeIconDropdown />
           <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
             <MenuRoundedIcon />
