@@ -482,6 +482,20 @@ export default function Tasks() {
           checkboxSelection
           disableRowSelectionOnClick
           autoHeight
+          getRowId={(row) => row.id}
+          localeText={{
+            noRowsLabel: "No tasks found",
+            footerRowSelected: (count) =>
+              count !== 1
+                ? `${count.toLocaleString()} tasks selected`
+                : `${count.toLocaleString()} task selected`,
+          }}
+          slotProps={{
+            pagination: {
+              labelDisplayedRows: ({ from, to, count }) =>
+                `${from}–${to} of ${count !== -1 ? count : `more than ${to}`} tasks`,
+            },
+          }}
           sx={{
             border: "none",
             "& .MuiDataGrid-cell": {
@@ -489,6 +503,22 @@ export default function Tasks() {
             },
             "& .MuiDataGrid-row": {
               minHeight: "60px !important",
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              backgroundColor: "action.hover",
+            },
+            // Responsive column hiding
+            "& .MuiDataGrid-columnHeader[data-field='tags']": {
+              display: { xs: "none", lg: "flex" },
+            },
+            "& .MuiDataGrid-cell[data-field='tags']": {
+              display: { xs: "none", lg: "block" },
+            },
+            "& .MuiDataGrid-columnHeader[data-field='assignee']": {
+              display: { xs: "none", md: "flex" },
+            },
+            "& .MuiDataGrid-cell[data-field='assignee']": {
+              display: { xs: "none", md: "block" },
             },
           }}
         />
