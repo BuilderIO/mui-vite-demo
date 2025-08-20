@@ -199,7 +199,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
   return (
     <Box>
       <Grid container spacing={3}>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Total Tasks"
             value={stats.total}
@@ -207,7 +207,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
             icon={<AssignmentIcon />}
           />
         </Grid>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Completed"
             value={stats.completed}
@@ -218,7 +218,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
             trend={{ value: 12, direction: "up" }}
           />
         </Grid>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="In Progress"
             value={stats.inProgress}
@@ -226,7 +226,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
             icon={<PlayCircleIcon />}
           />
         </Grid>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Overdue"
             value={stats.overdue}
@@ -236,7 +236,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Due Soon"
             value={stats.dueSoon}
@@ -244,7 +244,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
             icon={<AccessTimeIcon />}
           />
         </Grid>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="High Priority"
             value={stats.byPriority.high}
@@ -252,7 +252,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
             icon={<PriorityHighIcon />}
           />
         </Grid>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="On Hold"
             value={stats.byStatus.on_hold}
@@ -260,7 +260,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
             icon={<PauseCircleIcon />}
           />
         </Grid>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card variant="outlined">
             <CardContent>
               <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -287,7 +287,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
           </Card>
         </Grid>
 
-        <Grid xs={12} md={6}>
+        <Grid item xs={12} md={6}>
           <Card variant="outlined">
             <CardContent>
               <Typography variant="h6" gutterBottom>
@@ -318,7 +318,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
           </Card>
         </Grid>
 
-        <Grid xs={12} md={6}>
+        <Grid item xs={12} md={6}>
           <Card variant="outlined">
             <CardContent>
               <Typography variant="h6" gutterBottom>
@@ -344,7 +344,7 @@ export default function TaskStats({ tasks, teamMembers }: TaskStatsProps) {
         </Grid>
 
         {teamProductivity.length > 0 && (
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h6" gutterBottom>
