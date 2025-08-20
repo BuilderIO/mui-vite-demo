@@ -36,6 +36,34 @@ export default function CrmAppNavbar() {
     setOpen(newOpen);
   };
 
+  // Sample tasks for notifications - in real app, this would come from context or props
+  const sampleTasks = [
+    {
+      id: 1,
+      title: "Complete project review",
+      description: "Review and finalize the Q4 project deliverables",
+      status: "in_progress" as const,
+      priority: "high" as const,
+      assignee: "Current User",
+      assigneeAvatar: "CU",
+      assigneeId: "1",
+      dueDate: new Date().toISOString().split('T')[0], // Due today
+      createdDate: "2024-01-20",
+    },
+    {
+      id: 2,
+      title: "Update documentation",
+      description: "Update API documentation with recent changes",
+      status: "pending" as const,
+      priority: "medium" as const,
+      assignee: "Current User",
+      assigneeAvatar: "CU",
+      assigneeId: "1",
+      dueDate: new Date(Date.now() - 86400000).toISOString().split('T')[0], // Overdue
+      createdDate: "2024-01-15",
+    },
+  ];
+
   return (
     <AppBar
       position="fixed"
