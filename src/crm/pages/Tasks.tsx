@@ -220,6 +220,7 @@ export default function Tasks() {
       priority: task.priority,
       assignee: task.assignee,
       assigneeAvatar: task.assigneeAvatar,
+      assigneeId: task.assigneeId || "",
       dueDate: dayjs(task.dueDate),
     });
     setOpen(true);
