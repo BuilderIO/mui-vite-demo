@@ -240,16 +240,17 @@ export default function Tasks() {
       priority: formData.priority,
       assignee: formData.assignee,
       assigneeAvatar: formData.assigneeAvatar,
+      assigneeId: formData.assigneeId,
       dueDate: formData.dueDate.format("YYYY-MM-DD"),
       createdDate: editingTask?.createdDate || dayjs().format("YYYY-MM-DD"),
-      ...(formData.status === "completed" && !editingTask?.completedDate ? 
+      ...(formData.status === "completed" && !editingTask?.completedDate ?
          { completedDate: dayjs().format("YYYY-MM-DD") } : {}),
-      ...(editingTask?.completedDate && formData.status !== "completed" ? 
+      ...(editingTask?.completedDate && formData.status !== "completed" ?
          { completedDate: undefined } : { completedDate: editingTask?.completedDate }),
     };
 
     if (editingTask) {
-      setTasks(tasks.map(task => 
+      setTasks(tasks.map(task =>
         task.id === editingTask.id ? { ...task, ...taskData } : task
       ));
     } else {
@@ -265,12 +266,13 @@ export default function Tasks() {
   };
 
   // Handle assignee selection
-  const handleAssigneeChange = (assigneeName: string) => {
-    const member = teamMembers.find(m => m.name === assigneeName);
+  const handleAssigneeChange = (assigneeId: string) => {
+    const member = teamMembers.find(m => m.id === assigneeId);
     setFormData({
       ...formData,
-      assignee: assigneeName,
-      assigneeAvatar: member?.avatar || "",
+      assignee: member?.name || "",
+      assigneeAvatar: member?.initials || "",
+      assigneeId: assigneeId,
     });
   };
 
