@@ -604,20 +604,33 @@ export default function Tasks() {
                   <FormControl fullWidth>
                     <InputLabel>Assignee</InputLabel>
                     <Select
-                      value={formData.assignee}
+                      value={formData.assigneeId}
                       label="Assignee"
                       onChange={(e) => handleAssigneeChange(e.target.value)}
+                      disabled={usersLoading}
                     >
-                      {teamMembers.map((member) => (
-                        <MenuItem key={member.name} value={member.name}>
-                          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                            <Avatar sx={{ width: 24, height: 24, fontSize: "0.75rem" }}>
-                              {member.avatar}
-                            </Avatar>
-                            {member.name}
-                          </Box>
+                      {usersLoading ? (
+                        <MenuItem disabled>
+                          <CircularProgress size={20} sx={{ mr: 1 }} />
+                          Loading users...
                         </MenuItem>
-                      ))}
+                      ) : (
+                        teamMembers.map((member) => (
+                          <MenuItem key={member.id} value={member.id}>
+                            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                              <Avatar sx={{ width: 24, height: 24, fontSize: "0.75rem" }}>
+                                {member.initials}
+                              </Avatar>
+                              <Box>
+                                <Typography variant="body2">{member.name}</Typography>
+                                <Typography variant="caption" color="text.secondary">
+                                  {member.email}
+                                </Typography>
+                              </Box>
+                            </Box>
+                          </MenuItem>
+                        ))
+                      )}
                     </Select>
                   </FormControl>
                 </Grid>
