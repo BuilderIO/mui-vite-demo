@@ -198,6 +198,7 @@ export default function Tasks() {
       priority: "medium",
       assignee: "",
       assigneeAvatar: "",
+      assigneeId: "",
       dueDate: dayjs().add(7, "day"),
     });
     setEditingTask(null);
