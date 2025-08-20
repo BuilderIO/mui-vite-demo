@@ -400,8 +400,18 @@ export default function Tasks() {
       </Stack>
 
       {/* Stats Cards */}
-      <Stack direction="row" spacing={2} sx={{ mb: 3 }} flexWrap="wrap">
-        <Card variant="outlined" sx={{ minWidth: 120 }}>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "repeat(2, 1fr)",
+            sm: "repeat(4, 1fr)",
+          },
+          gap: 2,
+          mb: 3,
+        }}
+      >
+        <Card variant="outlined" sx={{ minWidth: 0 }}>
           <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
             <Typography variant="h6" component="div">
               {taskStats.total}
@@ -411,7 +421,7 @@ export default function Tasks() {
             </Typography>
           </CardContent>
         </Card>
-        <Card variant="outlined" sx={{ minWidth: 120 }}>
+        <Card variant="outlined" sx={{ minWidth: 0 }}>
           <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
             <Typography variant="h6" component="div" color="primary">
               {taskStats.inProgress}
@@ -421,7 +431,7 @@ export default function Tasks() {
             </Typography>
           </CardContent>
         </Card>
-        <Card variant="outlined" sx={{ minWidth: 120 }}>
+        <Card variant="outlined" sx={{ minWidth: 0 }}>
           <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
             <Typography variant="h6" component="div" color="success.main">
               {taskStats.completed}
@@ -431,7 +441,7 @@ export default function Tasks() {
             </Typography>
           </CardContent>
         </Card>
-        <Card variant="outlined" sx={{ minWidth: 120 }}>
+        <Card variant="outlined" sx={{ minWidth: 0 }}>
           <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
             <Typography variant="h6" component="div" color="error.main">
               {taskStats.overdue}
@@ -441,7 +451,7 @@ export default function Tasks() {
             </Typography>
           </CardContent>
         </Card>
-      </Stack>
+      </Box>
 
       {/* Tasks Data Grid */}
       <Card variant="outlined">
