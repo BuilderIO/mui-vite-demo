@@ -44,7 +44,7 @@ const priorityOptions = [
   { value: "low", label: "Low" },
 ];
 
-const sortOptions = [
+const sortFieldOptions = [
   { value: "dueDate", label: "Due Date" },
   { value: "priority", label: "Priority" },
   { value: "status", label: "Status" },
