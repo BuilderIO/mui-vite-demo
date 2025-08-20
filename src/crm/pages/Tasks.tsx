@@ -227,6 +227,7 @@ export default function Tasks() {
       field: "assignee",
       headerName: "Assignee",
       width: 150,
+      hideable: true,
       renderCell: (params) => {
         if (!params.value) {
           return (
@@ -254,6 +255,7 @@ export default function Tasks() {
       field: "priority",
       headerName: "Priority",
       width: 100,
+      hideable: true,
       renderCell: (params) => (
         <Chip
           label={params.value.charAt(0).toUpperCase() + params.value.slice(1)}
@@ -280,11 +282,12 @@ export default function Tasks() {
       field: "dueDate",
       headerName: "Due Date",
       width: 130,
+      hideable: true,
       renderCell: (params) => {
         const dueDate = parseISO(params.value);
         const now = new Date();
         const isOverdue = dueDate < now && params.row.status !== "completed";
-        
+
         return (
           <Tooltip title={format(dueDate, "PPpp")}>
             <Typography
@@ -302,6 +305,7 @@ export default function Tasks() {
       field: "tags",
       headerName: "Tags",
       width: 150,
+      hideable: true,
       renderCell: (params) => {
         if (!params.value || params.value.length === 0) return null;
         return (
@@ -332,15 +336,17 @@ export default function Tasks() {
       type: "actions",
       headerName: "Actions",
       width: 100,
+      sortable: false,
+      filterable: false,
       getActions: (params) => [
         <GridActionsCellItem
           icon={<EditIcon />}
-          label="Edit"
+          label="Edit task"
           onClick={() => handleEditClick(params.row)}
         />,
         <GridActionsCellItem
           icon={<DeleteIcon />}
-          label="Delete"
+          label="Delete task"
           onClick={() => handleDeleteTask(params.id as string)}
           sx={{ color: "error.main" }}
         />,
