@@ -49,6 +49,7 @@ const commonTags = [
 ];
 
 export default function TaskCreateDialog({ open, onClose, onSubmit }: TaskCreateDialogProps) {
+  const { teamMembers, loading: membersLoading } = useTeamMembers();
   const [formData, setFormData] = React.useState({
     title: "",
     description: "",
