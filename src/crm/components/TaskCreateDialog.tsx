@@ -20,54 +20,15 @@ import dayjs, { Dayjs } from "dayjs";
 import Autocomplete from "@mui/material/Autocomplete";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 import { Task, TaskPriority, TaskStatus } from "../pages/Tasks";
+import { useTeamMembers, TeamMember } from "../hooks/useTeamMembers";
 
 interface TaskCreateDialogProps {
   open: boolean;
   onClose: () => void;
   onSubmit: (task: Omit<Task, "id" | "createdAt" | "updatedAt">) => void;
 }
-
-interface TeamMember {
-  id: string;
-  name: string;
-  email: string;
-  avatar?: string;
-}
-
-// Sample team members - in real app, this would come from the Users API
-const teamMembers: TeamMember[] = [
-  {
-    id: "user1",
-    name: "John Smith",
-    email: "john.smith@company.com",
-    avatar: "JS"
-  },
-  {
-    id: "user2",
-    name: "Sarah Johnson",
-    email: "sarah.johnson@company.com",
-    avatar: "SJ"
-  },
-  {
-    id: "user3",
-    name: "Mike Davis",
-    email: "mike.davis@company.com",
-    avatar: "MD"
-  },
-  {
-    id: "user4",
-    name: "Emily Chen",
-    email: "emily.chen@company.com",
-    avatar: "EC"
-  },
-  {
-    id: "user5",
-    name: "Alex Rodriguez",
-    email: "alex.rodriguez@company.com",
-    avatar: "AR"
-  }
-];
 
 const priorityOptions: { value: TaskPriority; label: string; color: string }[] = [
   { value: "low", label: "Low", color: "#2196f3" },
