@@ -263,7 +263,7 @@ export default function TaskList({
             <Collapse in={showFilters}>
               <Stack spacing={2}>
                 <Grid container spacing={2}>
-                  <Grid xs={12} sm={6} md={3}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <FormControl fullWidth size="small">
                       <InputLabel>Status</InputLabel>
                       <Select
@@ -288,7 +288,7 @@ export default function TaskList({
                     </FormControl>
                   </Grid>
 
-                  <Grid xs={12} sm={6} md={3}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <FormControl fullWidth size="small">
                       <InputLabel>Priority</InputLabel>
                       <Select
@@ -313,7 +313,7 @@ export default function TaskList({
                     </FormControl>
                   </Grid>
 
-                  <Grid xs={12} sm={6} md={3}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <FormControl fullWidth size="small">
                       <InputLabel>Assignee</InputLabel>
                       <Select
@@ -341,7 +341,7 @@ export default function TaskList({
                     </FormControl>
                   </Grid>
 
-                  <Grid xs={12} sm={6} md={3}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <Button
                       variant="outlined"
                       onClick={clearFilters}
