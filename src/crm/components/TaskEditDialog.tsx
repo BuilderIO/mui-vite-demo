@@ -259,11 +259,21 @@ export default function TaskEditDialog({ open, onClose, onSubmit, task }: TaskEd
               getOptionLabel={(option) => option.name}
               value={formData.assignee}
               onChange={handleAssigneeChange}
+              loading={membersLoading}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  placeholder="Select team member"
+                  placeholder={membersLoading ? "Loading team members..." : "Select team member"}
                   size="small"
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <>
+                        {membersLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                        {params.InputProps.endAdornment}
+                      </>
+                    ),
+                  }}
                 />
               )}
               renderOption={(props, option) => (
