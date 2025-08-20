@@ -11,6 +11,7 @@ import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
 import CrmSideMenuMobile from "./CrmSideMenuMobile";
 import MenuButton from "../../dashboard/components/MenuButton";
 import ColorModeIconDropdown from "../../shared-theme/ColorModeIconDropdown";
+import TaskNotifications from "./TaskNotifications";
 
 const Toolbar = styled(MuiToolbar)({
   width: "100%",
