@@ -364,9 +364,9 @@ export default function Tasks() {
     <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
       {/* Header */}
       <Stack
-        direction="row"
+        direction={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
-        alignItems="flex-start"
+        alignItems={{ xs: "stretch", sm: "flex-start" }}
         spacing={2}
         sx={{ mb: 3 }}
       >
@@ -378,14 +378,25 @@ export default function Tasks() {
             Track, manage, and organize your team's tasks and activities
           </Typography>
         </Box>
-        <Stack direction="row" spacing={1}>
-          <IconButton size="small">
-            <FilterListIcon />
-          </IconButton>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={1}
+          sx={{ mt: { xs: 2, sm: 0 } }}
+        >
+          <Tooltip title="Filter tasks">
+            <IconButton
+              size="small"
+              aria-label="Filter tasks"
+              sx={{ alignSelf: { xs: "flex-start", sm: "center" } }}
+            >
+              <FilterListIcon />
+            </IconButton>
+          </Tooltip>
           <Button
             variant="outlined"
             startIcon={<RefreshIcon />}
             size="small"
+            aria-label="Refresh task list"
           >
             Refresh
           </Button>
@@ -393,6 +404,7 @@ export default function Tasks() {
             variant="contained"
             startIcon={<AddIcon />}
             onClick={() => setCreateDialogOpen(true)}
+            aria-label="Create new task"
           >
             New Task
           </Button>
