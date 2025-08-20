@@ -21,6 +21,7 @@
     "@mui/x-tree-view": "^8.3.1",
     "@react-spring/web": "^10.0.0",
     "@tailwindcss/vite": "latest",
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "react": "latest",
     "react-dom": "latest",
