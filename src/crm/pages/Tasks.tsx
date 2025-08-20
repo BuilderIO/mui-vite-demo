@@ -159,6 +159,9 @@ export default function Tasks() {
   const [statusFilter, setStatusFilter] = React.useState<string>("all");
   const [priorityFilter, setPriorityFilter] = React.useState<string>("all");
 
+  // Fetch users from API
+  const { users, loading: usersLoading, error: usersError } = useUsers();
+
   // Form state
   const [formData, setFormData] = React.useState({
     title: "",
