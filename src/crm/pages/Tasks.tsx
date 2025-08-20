@@ -170,8 +170,24 @@ export default function Tasks() {
     priority: "medium" as Task["priority"],
     assignee: "",
     assigneeAvatar: "",
+    assigneeId: "",
     dueDate: dayjs().add(7, "day"),
   });
+
+  // Format users for display in dropdown
+  const teamMembers = React.useMemo(() => {
+    if (usersLoading || !users.length) {
+      // Fallback to static members while loading
+      return [
+        { id: "1", name: "John Smith", initials: "JS", email: "john@example.com" },
+        { id: "2", name: "Sarah Wilson", initials: "SW", email: "sarah@example.com" },
+        { id: "3", name: "Mike Johnson", initials: "MJ", email: "mike@example.com" },
+        { id: "4", name: "Emily Brown", initials: "EB", email: "emily@example.com" },
+        { id: "5", name: "David Lee", initials: "DL", email: "david@example.com" },
+      ];
+    }
+    return users.map(formatUserForDisplay);
+  }, [users, usersLoading]);
 
   // Reset form
   const resetForm = () => {
