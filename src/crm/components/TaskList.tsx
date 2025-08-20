@@ -384,7 +384,7 @@ export default function TaskList({
       ) : (
         <Grid container spacing={2}>
           {filteredAndSortedTasks.map((task) => (
-            <Grid key={task.id} xs={12} sm={6} lg={4}>
+            <Grid item key={task.id} xs={12} sm={6} lg={4}>
               <TaskCard
                 task={task}
                 onEdit={onEdit}
