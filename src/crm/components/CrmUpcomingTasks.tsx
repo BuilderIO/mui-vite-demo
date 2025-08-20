@@ -105,7 +105,11 @@ export default function CrmUpcomingTasks() {
           <Typography variant="h6" component="h3">
             Upcoming Tasks
           </Typography>
-          <Button endIcon={<ArrowForwardRoundedIcon />} size="small">
+          <Button
+            endIcon={<ArrowForwardRoundedIcon />}
+            size="small"
+            onClick={handleViewAllTasks}
+          >
             View All
           </Button>
         </Stack>
