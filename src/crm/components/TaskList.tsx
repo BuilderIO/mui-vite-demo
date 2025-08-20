@@ -245,7 +245,7 @@ export default function TaskList({
                   label="Sort by"
                   onChange={(e) => handleSortChange(e.target.value as TaskSortOptions["field"])}
                 >
-                  {sortOptions.map((option) => (
+                  {sortFieldOptions.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.label}
                     </MenuItem>
