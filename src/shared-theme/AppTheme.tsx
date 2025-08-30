@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import type { ThemeOptions } from "@mui/material/styles";
+import { useColorScheme } from "@mui/material/styles";
 import { inputsCustomizations } from "./customizations/inputs";
 import { dataDisplayCustomizations } from "./customizations/dataDisplay";
 import { feedbackCustomizations } from "./customizations/feedback";
@@ -17,6 +18,20 @@ interface AppThemeProps {
   themeComponents?: ThemeOptions["components"];
 }
 
+function EnsureLightMode() {
+  const { mode, setMode } = useColorScheme();
+  const forcedRef = React.useRef(false);
+  React.useEffect(() => {
+    if (!forcedRef.current) {
+      forcedRef.current = true;
+      if (mode !== "light") {
+        setMode("light");
+      }
+    }
+  }, [mode, setMode]);
+  return null;
+}
+
 export default function AppTheme(props: AppThemeProps) {
   const { children, disableCustomTheme, themeComponents } = props;
   const theme = React.useMemo(() => {
@@ -28,8 +43,8 @@ export default function AppTheme(props: AppThemeProps) {
             colorSchemeSelector: "data-mui-color-scheme",
             cssVarPrefix: "template",
           },
-          defaultColorScheme: "light", // Set light mode as default instead of using system preference
-          colorSchemes, // Recently added in v6 for building light & dark mode app, see https://mui.com/material-ui/customization/palette/#color-schemes
+          defaultColorScheme: "light",
+          colorSchemes,
           typography,
           shadows,
           shape,
@@ -48,6 +63,7 @@ export default function AppTheme(props: AppThemeProps) {
   }
   return (
     <ThemeProvider theme={theme} disableTransitionOnChange>
+      <EnsureLightMode />
       {children}
     </ThemeProvider>
   );
