@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -109,19 +110,19 @@ const customerStatsData = [
 ];
 
 export default function Customers() {
-  const [customers, setCustomers] = React.useState<User[]>([]);
-  const [loading, setLoading] = React.useState(true);
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [sortBy, setSortBy] = React.useState("name.first");
-  const [page, setPage] = React.useState(0);
-  const [pageSize, setPageSize] = React.useState(25);
-  const [totalRows, setTotalRows] = React.useState(0);
-  const [statsData, setStatsData] = React.useState(customerStatsData);
-  const [editModalOpen, setEditModalOpen] = React.useState(false);
-  const [selectedCustomer, setSelectedCustomer] = React.useState<User | null>(null);
+  const [customers, setCustomers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("name.first");
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(25);
+  const [totalRows, setTotalRows] = useState(0);
+  const [statsData, setStatsData] = useState(customerStatsData);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedCustomer, setSelectedCustomer] = useState<User | null>(null);
 
   // Fetch customers from API
-  const fetchCustomers = React.useCallback(async () => {
+  const fetchCustomers = useCallback(async () => {
     try {
       setLoading(true);
       const searchParam = searchTerm ? `&search=${encodeURIComponent(searchTerm)}` : "";
@@ -151,12 +152,12 @@ export default function Customers() {
     }
   }, [page, pageSize, sortBy, searchTerm]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchCustomers();
   }, [fetchCustomers]);
 
   // Handle search with debounce
-  const debouncedSearch = React.useMemo(
+  const debouncedSearch = useMemo(
     () => {
       let timeoutId: NodeJS.Timeout;
       return (value: string) => {
