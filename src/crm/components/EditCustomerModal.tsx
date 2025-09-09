@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -53,12 +54,12 @@ export default function EditCustomerModal({
   customer, 
   onSave 
 }: EditCustomerModalProps) {
-  const [formData, setFormData] = React.useState<Partial<User>>({});
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
+  const [formData, setFormData] = useState<Partial<User>>({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Initialize form data when customer changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (customer) {
       setFormData({
         name: {
