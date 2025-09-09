@@ -19,6 +19,7 @@ import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Copyright from "../../dashboard/internals/components/Copyright";
 import CrmStatCard from "../components/CrmStatCard";
+import EditCustomerModal from "../components/EditCustomerModal";
 
 // Types for the API response
 interface User {
@@ -116,6 +117,8 @@ export default function Customers() {
   const [pageSize, setPageSize] = React.useState(25);
   const [totalRows, setTotalRows] = React.useState(0);
   const [statsData, setStatsData] = React.useState(customerStatsData);
+  const [editModalOpen, setEditModalOpen] = React.useState(false);
+  const [selectedCustomer, setSelectedCustomer] = React.useState<User | null>(null);
 
   // Fetch customers from API
   const fetchCustomers = React.useCallback(async () => {
@@ -174,6 +177,43 @@ export default function Customers() {
   const handleSortChange = (event: any) => {
     setSortBy(event.target.value);
     setPage(0); // Reset to first page on sort change
+  };
+
+  const handleEditCustomer = (customer: User) => {
+    setSelectedCustomer(customer);
+    setEditModalOpen(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setEditModalOpen(false);
+    setSelectedCustomer(null);
+  };
+
+  const handleSaveCustomer = async (updatedCustomer: Partial<User>) => {
+    if (!selectedCustomer) return;
+
+    try {
+      const response = await fetch(
+        `https://user-api.builder-io.workers.dev/api/users/${selectedCustomer.login.uuid}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedCustomer),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Refresh the customers list
+      await fetchCustomers();
+    } catch (error) {
+      console.error("Error updating customer:", error);
+      throw error;
+    }
   };
 
   // DataGrid columns configuration
@@ -255,8 +295,12 @@ export default function Customers() {
       headerName: "",
       width: 60,
       sortable: false,
-      renderCell: () => (
-        <IconButton size="small">
+      renderCell: (params: GridRenderCellParams) => (
+        <IconButton
+          size="small"
+          onClick={() => handleEditCustomer(params.row)}
+          aria-label="Edit customer"
+        >
           <MoreVertIcon fontSize="small" />
         </IconButton>
       ),
@@ -371,6 +415,14 @@ export default function Customers() {
       </Box>
 
       <Copyright sx={{ mt: 4, mb: 4 }} />
+
+      {/* Edit Customer Modal */}
+      <EditCustomerModal
+        open={editModalOpen}
+        onClose={handleCloseEditModal}
+        customer={selectedCustomer}
+        onSave={handleSaveCustomer}
+      />
     </Box>
   );
 }
