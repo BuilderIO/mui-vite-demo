@@ -34,9 +34,18 @@ A comprehensive About Us page that showcases company information, team members, 
 Navigate to `/about-us` to view the page. The page is fully integrated with the application's routing system.
 
 ## Responsive Breakpoints
-- **Mobile (xs)**: Optimized for mobile devices
-- **Tablet (sm/md)**: Adjusted layout for tablets
-- **Desktop (lg/xl)**: Full desktop experience
+- **Mobile (xs)**: Optimized for mobile devices with smaller typography, reduced padding, and single-column layouts
+- **Small (sm)**: Tablet portrait with adjusted spacing and 2-column grid for cards
+- **Medium (md)**: Tablet landscape with enhanced spacing and improved grid layouts
+- **Large (lg)**: Desktop with full 4-column layout for team and values sections
+- **Extra Large (xl)**: Wide desktop with maximum spacing and typography
+
+## Enhanced Responsive Features
+- **Typography Scaling**: All headings and text scale appropriately across breakpoints
+- **Grid Adaptability**: Smart grid layouts that adapt from single column on mobile to multi-column on larger screens
+- **Avatar Sizing**: Team member avatars scale from 60px on mobile to 80px on larger screens
+- **Spacing Optimization**: Container padding, card padding, and section spacing adjust for optimal mobile experience
+- **Content Readability**: Text content includes responsive padding and font sizes for better mobile readability
 
 ## Theme Support
 - Supports both light and dark color schemes
