@@ -139,14 +139,14 @@ function AboutUsContent() {
                   : alpha(theme.palette.background.paper, 1),
             }}
           >
-            <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-              <Typography variant="h4" component="h2" sx={{ mb: 3, textAlign: "center" }}>
+            <CardContent sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
+              <Typography variant="h4" component="h2" sx={{ mb: 3, textAlign: "center", fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" } }}>
                 Our Mission
               </Typography>
               <Typography
                 variant="body1"
                 sx={{
-                  fontSize: "1.1rem",
+                  fontSize: { xs: "1rem", sm: "1.1rem" },
                   lineHeight: 1.8,
                   textAlign: "center",
                   maxWidth: 700,
