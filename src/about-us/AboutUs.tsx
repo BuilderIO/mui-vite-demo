@@ -200,12 +200,12 @@ function AboutUsContent() {
 
           {/* Team Section */}
           <Box>
-            <Typography variant="h4" component="h2" sx={{ mb: 4, textAlign: "center" }}>
+            <Typography variant="h4" component="h2" sx={{ mb: { xs: 3, md: 4 }, textAlign: "center", fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" } }}>
               Meet Our Team
             </Typography>
-            <Grid container spacing={4}>
+            <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
               {teamMembers.map((member, index) => (
-                <Grid item xs={12} sm={6} md={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} key={index}>
                   <Card
                     variant="outlined"
                     sx={{
@@ -216,11 +216,11 @@ function AboutUsContent() {
                       },
                     }}
                   >
-                    <CardContent sx={{ p: 3 }}>
+                    <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
                       <Box
                         sx={{
-                          width: 80,
-                          height: 80,
+                          width: { xs: 60, sm: 80 },
+                          height: { xs: 60, sm: 80 },
                           borderRadius: "50%",
                           backgroundColor: "primary.main",
                           display: "flex",
@@ -230,7 +230,7 @@ function AboutUsContent() {
                           mb: 2,
                         }}
                       >
-                        <Typography variant="h4" sx={{ color: "primary.contrastText" }}>
+                        <Typography variant="h4" sx={{ color: "primary.contrastText", fontSize: { xs: "1.5rem", sm: "2rem" } }}>
                           {member.name.split(" ").map(n => n[0]).join("")}
                         </Typography>
                       </Box>
