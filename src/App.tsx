@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CrmDashboard from "./crm/CrmDashboard";
+import AboutUs from "./about-us/AboutUs";
 
 function NotFound() {
   return (
