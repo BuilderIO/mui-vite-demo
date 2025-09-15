@@ -265,26 +265,26 @@ function AboutUsContent() {
               </Typography>
               <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} sx={{ textAlign: "center" }}>
                 <Grid item xs={12} sm={4}>
-                  <Typography variant="h3" color="primary" sx={{ fontWeight: 700, mb: 1 }}>
+                  <Typography variant="h3" color="primary" sx={{ fontWeight: 700, mb: 1, fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" } }}>
                     5+
                   </Typography>
-                  <Typography variant="h6" color="text.secondary">
+                  <Typography variant="h6" color="text.secondary" sx={{ fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" } }}>
                     Years of Excellence
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <Typography variant="h3" color="primary" sx={{ fontWeight: 700, mb: 1 }}>
+                  <Typography variant="h3" color="primary" sx={{ fontWeight: 700, mb: 1, fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" } }}>
                     10K+
                   </Typography>
-                  <Typography variant="h6" color="text.secondary">
+                  <Typography variant="h6" color="text.secondary" sx={{ fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" } }}>
                     Happy Customers
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <Typography variant="h3" color="primary" sx={{ fontWeight: 700, mb: 1 }}>
+                  <Typography variant="h3" color="primary" sx={{ fontWeight: 700, mb: 1, fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" } }}>
                     50+
                   </Typography>
-                  <Typography variant="h6" color="text.secondary">
+                  <Typography variant="h6" color="text.secondary" sx={{ fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" } }}>
                     Team Members
                   </Typography>
                 </Grid>
