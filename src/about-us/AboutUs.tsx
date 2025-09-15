@@ -259,11 +259,11 @@ function AboutUsContent() {
 
           {/* Company Stats */}
           <Card variant="outlined">
-            <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-              <Typography variant="h4" component="h2" sx={{ mb: 4, textAlign: "center" }}>
+            <CardContent sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
+              <Typography variant="h4" component="h2" sx={{ mb: { xs: 3, md: 4 }, textAlign: "center", fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" } }}>
                 Our Journey
               </Typography>
-              <Grid container spacing={4} sx={{ textAlign: "center" }}>
+              <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} sx={{ textAlign: "center" }}>
                 <Grid item xs={12} sm={4}>
                   <Typography variant="h3" color="primary" sx={{ fontWeight: 700, mb: 1 }}>
                     5+
