@@ -295,11 +295,11 @@ function AboutUsContent() {
           <Divider sx={{ my: 2 }} />
 
           {/* Contact Section */}
-          <Box sx={{ textAlign: "center", py: 2 }}>
-            <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
+          <Box sx={{ textAlign: "center", py: { xs: 2, md: 3 }, px: { xs: 1, sm: 2 } }}>
+            <Typography variant="h5" component="h2" sx={{ mb: 2, fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" } }}>
               Ready to Work Together?
             </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 600, mx: "auto" }}>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 600, mx: "auto", fontSize: { xs: "0.9rem", sm: "1rem" }, px: { xs: 1, sm: 0 } }}>
               We'd love to hear from you. Whether you have a question about our services,
               need support, or want to explore partnership opportunities, our team is here to help.
             </Typography>
