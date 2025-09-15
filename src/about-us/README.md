@@ -6,10 +6,11 @@ A comprehensive About Us page that showcases company information, team members, 
 ## Features
 
 ### 🎨 Design & Layout
-- **Responsive Design**: Fully responsive layout that works on all screen sizes
+- **Enhanced Responsive Design**: Fully responsive layout optimized for mobile, tablet, and desktop
 - **Material-UI Integration**: Uses the project's custom MUI theme with proper color schemes
 - **Dark/Light Mode**: Includes color mode toggle with full dark/light theme support
 - **Smooth Animations**: Hover effects and transitions for enhanced user experience
+- **Mobile-First Approach**: Optimized typography and spacing for mobile devices
 
 ### 📝 Content Sections
 1. **Hero Section**: Eye-catching title with gradient text effect
