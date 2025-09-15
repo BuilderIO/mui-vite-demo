@@ -164,12 +164,12 @@ function AboutUsContent() {
 
           {/* Company Values */}
           <Box>
-            <Typography variant="h4" component="h2" sx={{ mb: 4, textAlign: "center" }}>
+            <Typography variant="h4" component="h2" sx={{ mb: { xs: 3, md: 4 }, textAlign: "center", fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" } }}>
               Our Values
             </Typography>
-            <Grid container spacing={3}>
+            <Grid container spacing={{ xs: 2, sm: 3 }}>
               {companyValues.map((value, index) => (
-                <Grid item xs={12} sm={6} md={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} key={index}>
                   <Card
                     variant="outlined"
                     sx={{
@@ -181,7 +181,7 @@ function AboutUsContent() {
                       },
                     }}
                   >
-                    <CardContent sx={{ textAlign: "center", p: 3 }}>
+                    <CardContent sx={{ textAlign: "center", p: { xs: 2, sm: 3 } }}>
                       <Typography variant="h2" component="div" sx={{ mb: 2 }}>
                         {value.icon}
                       </Typography>
