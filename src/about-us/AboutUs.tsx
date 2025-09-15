@@ -93,10 +93,10 @@ function AboutUsContent() {
         <ColorModeIconDropdown />
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 4, md: 8 } }}>
-        <Stack spacing={{ xs: 4, md: 6 }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 2, sm: 4, md: 8 }, px: { xs: 2, sm: 3 } }}>
+        <Stack spacing={{ xs: 3, sm: 4, md: 6 }}>
           {/* Hero Section */}
-          <Box sx={{ textAlign: "center", maxWidth: 800, mx: "auto" }}>
+          <Box sx={{ textAlign: "center", maxWidth: 800, mx: "auto", px: { xs: 1, sm: 2 } }}>
             <Typography
               variant="h2"
               component="h1"
@@ -108,7 +108,7 @@ function AboutUsContent() {
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 color: "transparent",
-                fontSize: { xs: "2.5rem", md: "3.5rem" },
+                fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3.5rem" },
               }}
             >
               About Us
@@ -120,7 +120,8 @@ function AboutUsContent() {
                 color: "text.secondary",
                 lineHeight: 1.6,
                 mb: 4,
-                fontSize: { xs: "1.1rem", md: "1.3rem" },
+                fontSize: { xs: "1rem", sm: "1.1rem", md: "1.3rem" },
+                px: { xs: 1, sm: 2 },
               }}
             >
               We're a passionate team dedicated to building innovative solutions
