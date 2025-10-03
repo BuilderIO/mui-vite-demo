@@ -130,7 +130,7 @@ export default function Hero() {
               size="small"
               sx={{ minWidth: "fit-content" }}
             >
-              Start now
+              Get Started
             </Button>
           </Stack>
           <Typography
