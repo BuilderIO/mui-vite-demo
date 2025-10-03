@@ -138,7 +138,7 @@ export default function Hero() {
             color="text.secondary"
             sx={{ textAlign: "center" }}
           >
-            By clicking &quot;Start now&quot; you agree to our&nbsp;
+            By clicking &quot;Get Started&quot; you agree to our&nbsp;
             <Link href="#" color="primary">
               Terms & Conditions
             </Link>
