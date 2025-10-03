@@ -28,7 +28,7 @@ export default function CrmNavbarBreadcrumbs() {
         sx={{ display: "flex", alignItems: "center" }}
       >
         <HomeRoundedIcon sx={{ mr: 0.5 }} fontSize="small" />
-        Home
+        Get Started
       </Link>
       {pathnames.map((value, index) => {
         const last = index === pathnames.length - 1;
