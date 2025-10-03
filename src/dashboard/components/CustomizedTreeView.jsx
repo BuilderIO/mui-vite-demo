@@ -26,7 +26,7 @@ const ITEMS = [
     id: "1",
     label: "Website",
     children: [
-      { id: "1.1", label: "Home", color: "green" },
+      { id: "1.1", label: "Get Started", color: "green" },
       { id: "1.2", label: "Pricing", color: "green" },
       { id: "1.3", label: "About us", color: "green" },
       {
