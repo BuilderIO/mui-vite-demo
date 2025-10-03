@@ -26,7 +26,7 @@ export default function CrmHeader() {
       <Stack direction="column" spacing={1}>
         <CrmNavbarBreadcrumbs />
         <Typography variant="h4" component="h1" sx={{ fontWeight: 600 }}>
-          JIRA Dashboard
+          Orbit Studio Launch
         </Typography>
       </Stack>
       <Stack direction="row" sx={{ gap: 1 }}>
