@@ -74,7 +74,7 @@ export default function Hero() {
               fontSize: "clamp(3rem, 10vw, 3.5rem)",
             }}
           >
-            Our&nbsp;latest&nbsp;
+            Orbit&nbsp;Studio&nbsp;
             <Typography
               component="span"
               variant="h1"
@@ -86,7 +86,7 @@ export default function Hero() {
                 }),
               })}
             >
-              products
+              Launch
             </Typography>
           </Typography>
           <Typography
