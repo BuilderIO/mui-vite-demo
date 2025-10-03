@@ -30,9 +30,18 @@ export const inputsCustomizations: Components<Theme> = {
   MuiButton: {
     styleOverrides: {
       root: ({ theme }) => ({
-        boxShadow: "none",
-        borderRadius: (theme.vars || theme).shape.borderRadius,
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+        borderRadius: "12px",
         textTransform: "none",
+        fontWeight: 600,
+        transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+        "&:hover": {
+          transform: "translateY(-1px)",
+          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.16)",
+        },
+        "&:active": {
+          transform: "translateY(0)",
+        },
         variants: [
           {
             props: {
@@ -58,17 +67,18 @@ export const inputsCustomizations: Components<Theme> = {
             },
             style: {
               color: "white",
-              backgroundColor: gray[900],
-              backgroundImage: `linear-gradient(to bottom, ${gray[700]}, ${gray[800]})`,
-              boxShadow: `inset 0 1px 0 ${gray[600]}, inset 0 -1px 0 1px hsl(220, 0%, 0%)`,
-              border: `1px solid ${gray[700]}`,
+              backgroundColor: brand[500],
+              backgroundImage: `linear-gradient(135deg, ${brand[400]} 0%, ${brand[600]} 100%)`,
+              boxShadow: `0 4px 16px ${alpha(brand[500], 0.4)}`,
+              border: "none",
               "&:hover": {
-                backgroundImage: "none",
-                backgroundColor: gray[700],
-                boxShadow: "none",
+                backgroundImage: `linear-gradient(135deg, ${brand[300]} 0%, ${brand[500]} 100%)`,
+                boxShadow: `0 6px 20px ${alpha(brand[500], 0.5)}`,
+                transform: "translateY(-2px)",
               },
               "&:active": {
-                backgroundColor: gray[800],
+                transform: "translateY(0)",
+                boxShadow: `0 2px 8px ${alpha(brand[500], 0.3)}`,
               },
               ...theme.applyStyles("dark", {
                 color: "black",
@@ -114,15 +124,20 @@ export const inputsCustomizations: Components<Theme> = {
             },
             style: {
               color: (theme.vars || theme).palette.text.primary,
-              border: "1px solid",
-              borderColor: gray[200],
-              backgroundColor: alpha(gray[50], 0.3),
+              border: "2px solid",
+              borderColor: gray[300],
+              backgroundColor: "white",
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
               "&:hover": {
-                backgroundColor: gray[100],
-                borderColor: gray[300],
+                backgroundColor: gray[50],
+                borderColor: brand[400],
+                color: brand[600],
+                boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
+                transform: "translateY(-1px)",
               },
               "&:active": {
-                backgroundColor: gray[200],
+                transform: "translateY(0)",
+                backgroundColor: gray[100],
               },
               ...theme.applyStyles("dark", {
                 backgroundColor: gray[800],
