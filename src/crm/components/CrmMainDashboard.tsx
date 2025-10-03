@@ -77,11 +77,28 @@ export default function CrmMainDashboard() {
           <Button
             variant="contained"
             startIcon={<AddRoundedIcon />}
-            sx={{ mr: 1 }}
+            sx={{
+              mr: 2,
+              borderRadius: "12px",
+              padding: "10px 24px",
+              fontWeight: 600,
+              textTransform: "none",
+              fontSize: "0.95rem"
+            }}
           >
             New Lead
           </Button>
-          <Button variant="outlined" startIcon={<AddRoundedIcon />}>
+          <Button
+            variant="outlined"
+            startIcon={<AddRoundedIcon />}
+            sx={{
+              borderRadius: "12px",
+              padding: "10px 24px",
+              fontWeight: 600,
+              textTransform: "none",
+              fontSize: "0.95rem"
+            }}
+          >
             New Deal
           </Button>
         </Box>

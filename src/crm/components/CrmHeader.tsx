@@ -33,8 +33,15 @@ export default function CrmHeader() {
         <CrmSearch />
         <Button
           variant="outlined"
-          size="small"
+          size="medium"
           startIcon={<CalendarTodayRoundedIcon />}
+          sx={{
+            borderRadius: "10px",
+            padding: "8px 16px",
+            fontWeight: 500,
+            textTransform: "none",
+            fontSize: "0.9rem"
+          }}
         >
           This Month
         </Button>
