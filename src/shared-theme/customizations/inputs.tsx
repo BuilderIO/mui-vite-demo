@@ -239,21 +239,25 @@ export const inputsCustomizations: Components<Theme> = {
   MuiIconButton: {
     styleOverrides: {
       root: ({ theme }) => ({
-        boxShadow: "none",
-        borderRadius: (theme.vars || theme).shape.borderRadius,
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
+        borderRadius: "10px",
         textTransform: "none",
         fontWeight: theme.typography.fontWeightMedium,
         letterSpacing: 0,
         color: (theme.vars || theme).palette.text.primary,
-        border: "1px solid ",
+        border: "2px solid",
         borderColor: gray[200],
-        backgroundColor: alpha(gray[50], 0.3),
+        backgroundColor: "white",
+        transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
         "&:hover": {
-          backgroundColor: gray[100],
-          borderColor: gray[300],
+          backgroundColor: brand[50],
+          borderColor: brand[300],
+          transform: "translateY(-1px)",
+          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
         },
         "&:active": {
-          backgroundColor: gray[200],
+          transform: "translateY(0)",
+          backgroundColor: brand[100],
         },
         ...theme.applyStyles("dark", {
           backgroundColor: gray[800],
@@ -399,18 +403,22 @@ export const inputsCustomizations: Components<Theme> = {
         padding: 0,
       },
       root: ({ theme }) => ({
-        padding: "8px 12px",
+        padding: "12px 16px",
         color: (theme.vars || theme).palette.text.primary,
-        borderRadius: (theme.vars || theme).shape.borderRadius,
-        border: `1px solid ${(theme.vars || theme).palette.divider}`,
-        backgroundColor: (theme.vars || theme).palette.background.default,
-        transition: "border 120ms ease-in",
+        borderRadius: "12px",
+        border: `2px solid ${gray[200]}`,
+        backgroundColor: "white",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+        transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
         "&:hover": {
-          borderColor: gray[400],
+          borderColor: brand[300],
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
         },
         [`&.${outlinedInputClasses.focused}`]: {
-          outline: `3px solid ${alpha(brand[500], 0.5)}`,
-          borderColor: brand[400],
+          outline: "none",
+          borderColor: brand[500],
+          boxShadow: `0 0 0 3px ${alpha(brand[500], 0.2)}, 0 4px 16px rgba(0, 0, 0, 0.12)`,
+          transform: "translateY(-1px)",
         },
         ...theme.applyStyles("dark", {
           "&:hover": {
