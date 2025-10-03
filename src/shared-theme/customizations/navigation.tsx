@@ -14,14 +14,27 @@ export const navigationCustomizations: Components<Theme> = {
   MuiMenuItem: {
     styleOverrides: {
       root: ({ theme }) => ({
-        borderRadius: (theme.vars || theme).shape.borderRadius,
-        padding: "6px 8px",
+        borderRadius: "8px",
+        padding: "10px 12px",
+        margin: "2px 4px",
+        transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+        "&:hover": {
+          backgroundColor: alpha(brand[500], 0.08),
+          transform: "translateX(4px)",
+        },
         [`&.${menuItemClasses.focusVisible}`]: {
-          backgroundColor: "transparent",
+          backgroundColor: alpha(brand[500], 0.12),
+          outline: `2px solid ${alpha(brand[500], 0.3)}`,
         },
         [`&.${menuItemClasses.selected}`]: {
+          backgroundColor: alpha(brand[500], 0.12),
+          color: brand[700],
+          fontWeight: 600,
           [`&.${menuItemClasses.focusVisible}`]: {
-            backgroundColor: alpha(theme.palette.action.selected, 0.3),
+            backgroundColor: alpha(brand[500], 0.16),
+          },
+          "&:hover": {
+            backgroundColor: alpha(brand[500], 0.16),
           },
         },
       }),
@@ -36,13 +49,15 @@ export const navigationCustomizations: Components<Theme> = {
         },
       },
       paper: ({ theme }) => ({
-        marginTop: "4px",
-        borderRadius: (theme.vars || theme).shape.borderRadius,
-        border: `1px solid ${(theme.vars || theme).palette.divider}`,
+        marginTop: "8px",
+        borderRadius: "12px",
+        border: "none",
         backgroundImage: "none",
         background: "hsl(0, 0%, 100%)",
         boxShadow:
-          "hsla(220, 30%, 5%, 0.07) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.07) 0px 8px 16px -5px",
+          "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
+        backdropFilter: "blur(8px)",
+        padding: "8px",
         [`& .${buttonBaseClasses.root}`]: {
           "&.Mui-selected": {
             backgroundColor: alpha(theme.palette.action.selected, 0.3),
@@ -127,24 +142,33 @@ export const navigationCustomizations: Components<Theme> = {
         position: "relative",
         textDecoration: "none",
         width: "fit-content",
+        borderRadius: "6px",
+        padding: "4px 8px",
+        transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
         "&::before": {
           content: '""',
           position: "absolute",
-          width: "100%",
-          height: "1px",
-          bottom: 0,
-          left: 0,
-          backgroundColor: (theme.vars || theme).palette.text.secondary,
-          opacity: 0.3,
-          transition: "width 0.3s ease, opacity 0.3s ease",
+          width: "0%",
+          height: "2px",
+          bottom: "2px",
+          left: "50%",
+          backgroundColor: brand[500],
+          borderRadius: "1px",
+          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+          transform: "translateX(-50%)",
+        },
+        "&:hover": {
+          backgroundColor: alpha(brand[500], 0.08),
+          color: brand[600],
+          transform: "translateY(-1px)",
         },
         "&:hover::before": {
-          width: 0,
+          width: "80%",
         },
         "&:focus-visible": {
-          outline: `3px solid ${alpha(brand[500], 0.5)}`,
-          outlineOffset: "4px",
-          borderRadius: "2px",
+          outline: `2px solid ${brand[500]}`,
+          outlineOffset: "2px",
+          borderRadius: "6px",
         },
       }),
     },
