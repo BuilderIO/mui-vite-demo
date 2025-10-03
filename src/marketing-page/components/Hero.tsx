@@ -108,11 +108,25 @@ export default function Hero() {
             <TextField
               id="email-hero"
               hiddenLabel
-              size="small"
+              size="medium"
               variant="outlined"
               aria-label="Enter your email address"
-              placeholder="Your email address"
+              placeholder="Enter your email address"
               fullWidth
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "25px",
+                  fontSize: "1rem",
+                  backgroundColor: "white",
+                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.08)",
+                  "&:hover": {
+                    boxShadow: "0 6px 20px rgba(0, 0, 0, 0.12)",
+                  },
+                  "&.Mui-focused": {
+                    boxShadow: "0 8px 24px rgba(33, 150, 243, 0.2)",
+                  },
+                },
+              }}
               slotProps={{
                 htmlInput: {
                   autoComplete: "off",
@@ -123,8 +137,20 @@ export default function Hero() {
             <Button
               variant="contained"
               color="primary"
-              size="small"
-              sx={{ minWidth: "fit-content" }}
+              size="large"
+              sx={{
+                minWidth: "fit-content",
+                borderRadius: "25px",
+                padding: "12px 32px",
+                fontSize: "1.1rem",
+                fontWeight: 700,
+                textTransform: "none",
+                boxShadow: "0 8px 24px rgba(33, 150, 243, 0.4)",
+                "&:hover": {
+                  boxShadow: "0 12px 32px rgba(33, 150, 243, 0.6)",
+                  transform: "translateY(-2px)",
+                }
+              }}
             >
               Get Started
             </Button>
