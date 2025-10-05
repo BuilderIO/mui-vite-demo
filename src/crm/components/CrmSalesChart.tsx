@@ -91,6 +91,7 @@ export default function CrmSalesChart() {
         height: "100%",
         display: "flex",
         flexDirection: "column",
+        backgroundColor: "#eee",
       }}
     >
       <CardContent

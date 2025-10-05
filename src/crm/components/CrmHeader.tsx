@@ -20,6 +20,20 @@ export default function CrmHeader() {
         justifyContent: "space-between",
         maxWidth: { sm: "100%", md: "1700px" },
         pt: 1.5,
+        backgroundColor: "#000",
+        color: "white",
+        padding: "16px",
+        borderRadius: "8px",
+        "& .MuiTypography-root": {
+          color: "white",
+        },
+        "& .MuiButton-root": {
+          color: "white",
+          borderColor: "white",
+        },
+        "& .MuiSvgIcon-root": {
+          color: "white",
+        },
       }}
       spacing={2}
     >
