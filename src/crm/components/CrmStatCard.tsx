@@ -66,8 +66,9 @@ export default function CrmStatCard({
   const chartColor = trendColors[trend];
   const trendIcon = trendIcons[trend];
 
-  // Special styling for "Deals Won" card
+  // Special styling for specific cards
   const isDealsWon = title === "Deals Won";
+  const isConversionRate = title === "Conversion Rate";
 
   return (
     <Card
@@ -87,6 +88,9 @@ export default function CrmStatCard({
               color: "white",
             },
           },
+        }),
+        ...(isConversionRate && {
+          backgroundColor: "#e0ffe0",
         })
       }}
     >
