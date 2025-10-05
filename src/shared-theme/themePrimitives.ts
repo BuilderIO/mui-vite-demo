@@ -163,10 +163,10 @@ export const getDesignTokens = (mode: PaletteMode) => {
       },
       divider: mode === "dark" ? alpha(gray[700], 0.6) : alpha(gray[300], 0.4),
       background: {
-        default: "#f0f0f0",
+        default: "#fff",
         paper: "hsl(220, 35%, 97%)",
         ...(mode === "dark" && {
-          default: "#f0f0f0",
+          default: "#fff",
           paper: "hsl(220, 30%, 7%)",
         }),
       },
@@ -279,7 +279,7 @@ export const colorSchemes = {
       },
       divider: alpha(gray[300], 0.4),
       background: {
-        default: "#f0f0f0",
+        default: "#fff",
         paper: "hsl(220, 35%, 97%)",
       },
       text: {
