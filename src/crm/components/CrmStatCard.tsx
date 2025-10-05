@@ -66,8 +66,30 @@ export default function CrmStatCard({
   const chartColor = trendColors[trend];
   const trendIcon = trendIcons[trend];
 
+  // Special styling for "Deals Won" card
+  const isDealsWon = title === "Deals Won";
+
   return (
-    <Card variant="outlined" sx={{ height: "100%" }}>
+    <Card
+      variant="outlined"
+      sx={{
+        height: "100%",
+        ...(isDealsWon && {
+          background: "linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)",
+          color: "white",
+          "& .MuiTypography-root": {
+            color: "white",
+          },
+          "& .MuiChip-root": {
+            backgroundColor: "rgba(255, 255, 255, 0.2)",
+            color: "white",
+            "& .MuiChip-icon": {
+              color: "white",
+            },
+          },
+        })
+      }}
+    >
       <CardContent>
         <Typography
           component="h3"
