@@ -34,7 +34,7 @@ const upcomingTasks = [
   {
     id: 3,
     task: "Call HealthCare Pro about contract details",
-    completed: false,
+    completed: true,
     priority: "high",
     dueDate: "Today, 4:30 PM",
   },
