@@ -339,7 +339,7 @@ export const rows: GridRowsProp = [
   },
   {
     id: 15,
-    pageTitle: "Homepage - Authentication",
+    pageTitle: "Login - Authentication",
     status: "Offline",
     eventCount: 9563,
     users: 24240,
