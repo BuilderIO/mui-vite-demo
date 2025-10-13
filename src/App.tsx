@@ -4,6 +4,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CrmDashboard from "./crm/CrmDashboard";
+import MarketingPage from "./marketing-page/MarketingPage";
+import PricingPage from "./pricing/PricingPage";
 
 function NotFound() {
   return (
@@ -31,7 +33,9 @@ export default function App() {
     <BrowserRouter>
       <CssBaseline enableColorScheme />
       <Routes>
-        <Route path="/*" element={<CrmDashboard />} />
+        <Route path="/" element={<MarketingPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/dashboard/*" element={<CrmDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
