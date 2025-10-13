@@ -73,7 +73,7 @@ export default function CrmMainContent() {
         sx={{ mb: 3, display: { xs: "none", sm: "flex" } }}
       >
         <Typography variant="h5" component="h2">
-          Login Overview
+          Overview
         </Typography>
         <Box>
           <Button
