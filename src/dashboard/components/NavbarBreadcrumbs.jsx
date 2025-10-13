@@ -21,7 +21,7 @@ export default function NavbarBreadcrumbs() {
       aria-label="breadcrumb"
       separator={<NavigateNextRoundedIcon fontSize="small" />}
     >
-      <Typography variant="body1">Login</Typography>
+      <Typography variant="body1">Homepage</Typography>
       <Typography
         variant="body1"
         sx={{ color: "text.primary", fontWeight: 600 }}
