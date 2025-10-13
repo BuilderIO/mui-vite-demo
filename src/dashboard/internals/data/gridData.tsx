@@ -545,7 +545,7 @@ export const rows: GridRowsProp = [
   },
   {
     id: 29,
-    pageTitle: "new login - Metrics",
+    pageTitle: "crm dashboard - Metrics",
     status: "Offline",
     eventCount: 5678,
     users: 23456,
