@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -85,12 +86,21 @@ export default function Pricing() {
         >
           Pricing
         </Typography>
-        <Typography variant="body1" sx={{ color: "text.secondary" }}>
+        <Typography variant="body1" sx={{ color: "text.secondary", mb: 2 }}>
           Quickly build an effective pricing table for your potential customers
           with this layout. <br />
           It&apos;s built with default Material UI components with little
           customization.
         </Typography>
+        <Button
+          component={Link}
+          to="/pricing"
+          variant="outlined"
+          color="primary"
+          size="small"
+        >
+          View All Plans & Features
+        </Button>
       </Box>
       <Grid
         container
