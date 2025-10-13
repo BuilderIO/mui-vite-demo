@@ -16,7 +16,6 @@ import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
 import SpeedRoundedIcon from "@mui/icons-material/SpeedRounded";
 import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
 
-import AppTheme from "../shared-theme/AppTheme";
 
 const StyledBox = styled("div")(({ theme }) => ({
   alignSelf: "center",
