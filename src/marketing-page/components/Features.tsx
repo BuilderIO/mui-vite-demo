@@ -14,7 +14,7 @@ import ViewQuiltRoundedIcon from "@mui/icons-material/ViewQuiltRounded";
 const items = [
   {
     icon: <ViewQuiltRoundedIcon />,
-    title: "Homepage",
+    title: "Login",
     description:
       "This item could provide a snapshot of the most important metrics or data points related to the product.",
     imageLight: `url("${process.env.TEMPLATE_IMAGE_URL || "https://mui.com"}/static/images/templates/templates-images/dash-light.png")`,
