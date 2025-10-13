@@ -39,10 +39,10 @@ export default function App() {
   };
 
   const navigationItems = [
-    { label: "Dashboard", href: "#dashboard" },
-    { label: "CRM", href: "#crm" },
-    { label: "Analytics", href: "#analytics" },
-    { label: "Settings", href: "#settings" },
+    { label: "Home", onClick: () => window.location.href = "/" },
+    { label: "CRM", onClick: () => window.location.href = "/crm" },
+    { label: "Features", href: "#features" },
+    { label: "About", href: "#about" },
   ];
 
   return (

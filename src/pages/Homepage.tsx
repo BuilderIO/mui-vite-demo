@@ -283,11 +283,10 @@ function SimpleFooter() {
 
 export default function Homepage() {
   return (
-    <AppTheme>
-      <CssBaseline enableColorScheme />
+    <>
       <Hero />
       <Features />
       <SimpleFooter />
-    </AppTheme>
+    </>
   );
 }
