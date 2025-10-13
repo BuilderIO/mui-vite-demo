@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
@@ -189,7 +189,7 @@ function Features() {
       </Box>
       <Grid container spacing={3}>
         {features.map((feature, index) => (
-          <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
+          <Grid key={index} xs={12} sm={6} md={4}>
             <Card
               variant="outlined"
               sx={{
