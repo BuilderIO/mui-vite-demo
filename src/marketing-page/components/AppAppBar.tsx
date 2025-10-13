@@ -1,5 +1,6 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -64,7 +65,13 @@ export default function AppAppBar() {
               <Button variant="text" color="info" size="small">
                 Highlights
               </Button>
-              <Button variant="text" color="info" size="small">
+              <Button
+                component={Link}
+                to="/pricing"
+                variant="text"
+                color="info"
+                size="small"
+              >
                 Pricing
               </Button>
               <Button
@@ -130,7 +137,7 @@ export default function AppAppBar() {
                 <MenuItem>Features</MenuItem>
                 <MenuItem>Testimonials</MenuItem>
                 <MenuItem>Highlights</MenuItem>
-                <MenuItem>Pricing</MenuItem>
+                <MenuItem component={Link} to="/pricing">Pricing</MenuItem>
                 <MenuItem>FAQ</MenuItem>
                 <MenuItem>Blog</MenuItem>
                 <Divider sx={{ my: 3 }} />
