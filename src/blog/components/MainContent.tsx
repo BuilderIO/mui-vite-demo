@@ -68,7 +68,7 @@ const cardData = [
     tag: "Product",
     title: "Maximizing efficiency with our latest product updates",
     description:
-      "Our recent product updates are designed to help you maximize efficiency and achieve more. Get a detailed overview of the new features and improvements that can elevate your workflow.",
+      "Our recent product updates are designed to help you maximize efficiency and achieve more. Get a detailed home page of the new features and improvements that can elevate your workflow.",
     authors: [{ name: "Travis Howard", avatar: "/static/images/avatar/2.jpg" }],
   },
 ];
