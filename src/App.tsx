@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CrmDashboard from "./crm/CrmDashboard";
+import Homepage from "./pages/Homepage";
 import { Header } from "./shared/components";
 import AppTheme from "./shared-theme/AppTheme";
 
@@ -57,7 +58,8 @@ export default function App() {
         />
         <Box sx={{ pt: "calc(var(--template-frame-height, 0px) + 120px)" }}>
           <Routes>
-            <Route path="/*" element={<CrmDashboard />} />
+            <Route path="/" element={<Homepage />} />
+            <Route path="/crm/*" element={<CrmDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Box>
