@@ -26,6 +26,7 @@ import {
   treeViewCustomizations,
 } from "../dashboard/theme/customizations";
 
+// Merge all MUI X component customizations (charts, data grids, date pickers, tree views) into a single theme configuration object
 const xThemeComponents = {
   ...chartsCustomizations,
   ...dataGridCustomizations,
