@@ -15,12 +15,31 @@ function NotFound() {
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
+        padding: 2,
+        gap: 2,
       }}
     >
-      <Typography variant="h3" component="h1" gutterBottom>
-        404: Page Not Found
+      <Typography
+        sx={{
+          fontWeight: 700,
+          fontSize: { xs: "3rem", sm: "4rem" },
+        }}
+      >
+        404
       </Typography>
-      <Typography variant="body1">
+      <Typography
+        sx={{ fontWeight: 600 }}
+      >
+        Page Not Found
+      </Typography>
+      <Typography
+        variant="body1"
+        sx={{
+          color: "text.secondary",
+          maxWidth: "400px",
+          textAlign: "center",
+        }}
+      >
         The page you're looking for doesn't exist or has been moved.
       </Typography>
     </Box>
