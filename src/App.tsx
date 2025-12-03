@@ -19,7 +19,6 @@ function NotFound() {
       }}
     >
       <Typography
-        variant="h2"
         sx={{
           fontWeight: 700,
           fontSize: { xs: "3rem", sm: "4rem" },
@@ -28,7 +27,6 @@ function NotFound() {
         404
       </Typography>
       <Typography
-        variant="h5"
         sx={{ fontWeight: 600 }}
       >
         Page Not Found
