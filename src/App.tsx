@@ -20,7 +20,6 @@ function NotFound() {
     >
       <Typography
         variant="h2"
-        component="h1"
         sx={{
           fontWeight: 700,
           fontSize: { xs: "3rem", sm: "4rem" },
@@ -30,7 +29,6 @@ function NotFound() {
       </Typography>
       <Typography
         variant="h5"
-        component="h2"
         sx={{ fontWeight: 600 }}
       >
         Page Not Found
