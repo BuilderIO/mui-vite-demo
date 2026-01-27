@@ -41,6 +41,11 @@ export default function CrmStatCard({
 }: CrmStatCardProps) {
   const theme = useTheme();
 
+  const crmSettings = localStorage.getItem("crmSettings");
+  if (crmSettings!.length === 0) {
+    localStorage.setItem("crmSettings", JSON.stringify({}));
+  }
+
   const trendColors = {
     up:
       theme.palette.mode === "light"
