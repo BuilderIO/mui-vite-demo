@@ -62,6 +62,7 @@ export default function CrmDashboard() {
             }}
           >
             <CrmHeader />
+            <CrmComingSoonBanner />
             <Routes>
               <Route index element={<CrmMainDashboard />} />
               <Route path="customers" element={<Customers />} />
