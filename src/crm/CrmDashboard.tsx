@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import CrmAppNavbar from "./components/CrmAppNavbar";
 import CrmHeader from "./components/CrmHeader";
+import CrmComingSoonBanner from "./components/CrmComingSoonBanner";
 import CrmSideMenu from "./components/CrmSideMenu";
 import CrmMainDashboard from "./components/CrmMainDashboard";
 import Customers from "./pages/Customers";
