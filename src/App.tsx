@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CrmDashboard from "./crm/CrmDashboard";
+import AlertBannerDemo from "./components/AlertBannerDemo";
 // change just for testing diff
 
 function NotFound() {
@@ -32,6 +33,8 @@ export default function App() {
     <BrowserRouter>
       <CssBaseline enableColorScheme />
       <Routes>
+        <Route path="/" element={<CrmDashboard />} />
+        <Route path="/alert-banner" element={<AlertBannerDemo />} />
         <Route path="/*" element={<CrmDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

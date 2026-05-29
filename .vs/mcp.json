@@ -1,0 +1,23 @@
+{
+	"servers": {
+		"builder": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-Y",
+				"@builder.io/dev-tools@latest",
+				"dsi-mcp"
+			]
+		},
+        "builder-liam": {
+            "type": "stdio",
+            "command": "npx",
+            "args": [
+                "-Y",
+                "@Builder.io/dev-tools@latest",
+                "dsi-mcp"
+            ]
+        }
+	},
+	"inputs": []
+}
