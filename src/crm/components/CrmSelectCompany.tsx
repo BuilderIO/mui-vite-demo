@@ -5,7 +5,13 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
 
-export default function CrmSelectCompany() {
+interface CrmSelectCompanyProps {
+  isCollapsed?: boolean;
+}
+
+export default function CrmSelectCompany({
+  isCollapsed = false,
+}: CrmSelectCompanyProps) {
   const [company, setCompany] = React.useState("acme");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -33,21 +39,21 @@ export default function CrmSelectCompany() {
               fontSize="small"
               sx={{ color: "primary.main" }}
             />
-            Acme Corporation
+            {!isCollapsed && "Acme Corporation"}
           </MenuItem>
           <MenuItem value="globex">
             <BusinessRoundedIcon
               fontSize="small"
               sx={{ color: "secondary.main" }}
             />
-            Globex Inc.
+            {!isCollapsed && "Globex Inc."}
           </MenuItem>
           <MenuItem value="initech">
             <BusinessRoundedIcon
               fontSize="small"
               sx={{ color: "success.main" }}
             />
-            Initech Technologies
+            {!isCollapsed && "Initech Technologies"}
           </MenuItem>
         </Select>
       </FormControl>

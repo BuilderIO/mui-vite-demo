@@ -34,11 +34,20 @@ const xThemeComponents = {
 };
 
 export default function CrmDashboard() {
+  const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
+
+  const handleToggleSidebar = () => {
+    setSidebarCollapsed((prev) => !prev);
+  };
+
   return (
     <AppTheme themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex", height: "100vh" }}>
-        <CrmSideMenu />
+        <CrmSideMenu
+          isCollapsed={sidebarCollapsed}
+          onToggleCollapse={handleToggleSidebar}
+        />
         <CrmAppNavbar />
         {/* Main content */}
         <Box
@@ -49,6 +58,10 @@ export default function CrmDashboard() {
               ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
               : alpha(theme.palette.background.default, 1),
             overflow: "auto",
+            transition: theme.transitions.create("margin", {
+              easing: theme.transitions.easing.easeInOut,
+              duration: theme.transitions.duration.standard,
+            }),
           })}
         >
           <Stack
