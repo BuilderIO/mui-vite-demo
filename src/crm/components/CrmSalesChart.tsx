@@ -8,10 +8,12 @@ import Stack from "@mui/material/Stack";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import { BarChart } from "@mui/x-charts/BarChart";
+import { LineChart } from "@mui/x-charts/LineChart";
 
 export default function CrmSalesChart() {
   const theme = useTheme();
   const [timeRange, setTimeRange] = React.useState("year");
+  const [chartType, setChartType] = React.useState<"bar" | "line">("bar");
 
   const handleTimeRangeChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -19,6 +21,15 @@ export default function CrmSalesChart() {
   ) => {
     if (newTimeRange !== null) {
       setTimeRange(newTimeRange);
+    }
+  };
+
+  const handleChartTypeChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newType: "bar" | "line" | null,
+  ) => {
+    if (newType !== null) {
+      setChartType(newType);
     }
   };
 
@@ -63,12 +74,22 @@ export default function CrmSalesChart() {
     500000,
   ];
 
-  const xAxisData = {
+  const xAxisBar = {
     scaleType: "band" as const,
     data: monthNames,
     tickLabelStyle: {
       angle: 0,
-      textAnchor: "middle",
+      textAnchor: "middle" as const,
+      fontSize: 12,
+    },
+  };
+
+  const xAxisLine = {
+    scaleType: "point" as const,
+    data: monthNames,
+    tickLabelStyle: {
+      angle: 0,
+      textAnchor: "middle" as const,
       fontSize: 12,
     },
   };
@@ -106,66 +127,125 @@ export default function CrmSalesChart() {
           <Typography variant="h6" component="h3">
             Sales Performance
           </Typography>
-          <ToggleButtonGroup
-            size="small"
-            value={timeRange}
-            exclusive
-            onChange={handleTimeRangeChange}
-            aria-label="time range"
-          >
-            <ToggleButton value="month" aria-label="month view">
-              Month
-            </ToggleButton>
-            <ToggleButton value="quarter" aria-label="quarter view">
-              Quarter
-            </ToggleButton>
-            <ToggleButton value="year" aria-label="year view">
-              Year
-            </ToggleButton>
-          </ToggleButtonGroup>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <ToggleButtonGroup
+              size="small"
+              value={chartType}
+              exclusive
+              onChange={handleChartTypeChange}
+              aria-label="chart type"
+            >
+              <ToggleButton value="bar" aria-label="bar chart">
+                Bar
+              </ToggleButton>
+              <ToggleButton value="line" aria-label="line chart">
+                Line
+              </ToggleButton>
+            </ToggleButtonGroup>
+            <ToggleButtonGroup
+              size="small"
+              value={timeRange}
+              exclusive
+              onChange={handleTimeRangeChange}
+              aria-label="time range"
+            >
+              <ToggleButton value="month" aria-label="month view">
+                Month
+              </ToggleButton>
+              <ToggleButton value="quarter" aria-label="quarter view">
+                Quarter
+              </ToggleButton>
+              <ToggleButton value="year" aria-label="year view">
+                Year
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Stack>
         </Stack>
 
         <Box sx={{ flexGrow: 1, width: "100%", height: "300px" }}>
-          <BarChart
-            series={[
-              {
-                data: salesData,
-                label: "Actual Sales",
-                color: theme.palette.primary.main,
-                valueFormatter: (value) => (value ? formatYAxis(value) : ""),
-              },
-              {
-                data: targetsData,
-                label: "Targets",
-                color: theme.palette.grey[400],
-                valueFormatter: (value) => (value ? formatYAxis(value) : ""),
-              },
-              {
-                data: projectedData,
-                label: "Projected",
-                color: theme.palette.secondary.main,
-                valueFormatter: (value) => (value ? formatYAxis(value) : ""),
-              },
-            ]}
-            xAxis={[xAxisData]}
-            yAxis={[
-              {
-                label: "Revenue",
-                valueFormatter: formatYAxis,
-              },
-            ]}
-            height={300}
-            margin={{ top: 10, bottom: 30, left: 60, right: 10 }}
-            slotProps={{
-              legend: {
-                position: { vertical: "top", horizontal: "middle" },
-                itemMarkWidth: 10,
-                itemMarkHeight: 10,
-                markGap: 5,
-                itemGap: 10,
-              },
-            }}
-          />
+          {chartType === "bar" ? (
+            <BarChart
+              series={[
+                {
+                  data: salesData,
+                  label: "Actual Sales",
+                  color: theme.palette.primary.main,
+                  valueFormatter: (value) => (value ? formatYAxis(value) : ""),
+                },
+                {
+                  data: targetsData,
+                  label: "Targets",
+                  color: theme.palette.grey[400],
+                  valueFormatter: (value) => (value ? formatYAxis(value) : ""),
+                },
+                {
+                  data: projectedData,
+                  label: "Projected",
+                  color: theme.palette.secondary.main,
+                  valueFormatter: (value) => (value ? formatYAxis(value) : ""),
+                },
+              ]}
+              xAxis={[xAxisBar]}
+              yAxis={[
+                {
+                  label: "Revenue",
+                  valueFormatter: formatYAxis,
+                },
+              ]}
+              height={300}
+              margin={{ top: 10, bottom: 30, left: 60, right: 10 }}
+              slotProps={{
+                legend: {
+                  position: { vertical: "top", horizontal: "middle" },
+                  itemMarkWidth: 10,
+                  itemMarkHeight: 10,
+                  markGap: 5,
+                  itemGap: 10,
+                },
+              }}
+            />
+          ) : (
+            <LineChart
+              series={[
+                {
+                  data: salesData,
+                  label: "Actual Sales",
+                  color: theme.palette.primary.main,
+                  valueFormatter: (value) => (value ? formatYAxis(value) : ""),
+                },
+                {
+                  data: targetsData,
+                  label: "Targets",
+                  color: theme.palette.grey[400],
+                  valueFormatter: (value) => (value ? formatYAxis(value) : ""),
+                },
+                {
+                  data: projectedData,
+                  label: "Projected",
+                  color: theme.palette.secondary.main,
+                  valueFormatter: (value) => (value ? formatYAxis(value) : ""),
+                },
+              ]}
+              xAxis={[xAxisLine]}
+              yAxis={[
+                {
+                  label: "Revenue",
+                  valueFormatter: formatYAxis,
+                },
+              ]}
+              height={300}
+              margin={{ top: 10, bottom: 30, left: 60, right: 10 }}
+              slotProps={{
+                legend: {
+                  position: { vertical: "top", horizontal: "middle" },
+                  itemMarkWidth: 10,
+                  itemMarkHeight: 10,
+                  markGap: 5,
+                  itemGap: 10,
+                },
+              }}
+            />
+          )}
         </Box>
       </CardContent>
     </Card>
