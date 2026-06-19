@@ -125,9 +125,15 @@ export default function Hero() {
             />
             <Button
               variant="contained"
-              color="primary"
               size="small"
-              sx={{ minWidth: "fit-content" }}
+              sx={{
+                minWidth: "fit-content",
+                backgroundColor: "#00FF00",
+                color: "#000000",
+                "&:hover": {
+                  backgroundColor: "#00CC00"
+                }
+              }}
             >
               Start now
             </Button>

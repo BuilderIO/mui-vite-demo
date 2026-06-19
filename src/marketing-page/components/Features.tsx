@@ -14,7 +14,7 @@ import ViewQuiltRoundedIcon from "@mui/icons-material/ViewQuiltRounded";
 const items = [
   {
     icon: <ViewQuiltRoundedIcon />,
-    title: "Dashboard",
+    title: "crm dashboard",
     description:
       "This item could provide a snapshot of the most important metrics or data points related to the product.",
     imageLight: `url("${process.env.TEMPLATE_IMAGE_URL || "https://mui.com"}/static/images/templates/templates-images/dash-light.png")`,
@@ -157,7 +157,7 @@ export default function Features() {
           variant="body1"
           sx={{ color: "text.secondary", mb: { xs: 2, sm: 4 } }}
         >
-          Provide a brief overview of the key features of the product. For
+          Provide a brief home page of the key features of the product. For
           example, you could list the number of features, their types or
           benefits, and add-ons.
         </Typography>

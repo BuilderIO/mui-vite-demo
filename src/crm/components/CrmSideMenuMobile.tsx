@@ -20,7 +20,7 @@ import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import { CrmLogo } from "./CrmAppNavbar";
 
 const mainListItems = [
-  { text: "Dashboard", icon: <DashboardRoundedIcon />, path: "/" },
+  { text: "crm dashboard", icon: <DashboardRoundedIcon />, path: "/" },
   { text: "Customers", icon: <PeopleRoundedIcon />, path: "/customers" },
   { text: "Deals", icon: <BusinessCenterRoundedIcon />, path: "/deals" },
   { text: "Contacts", icon: <ContactsRoundedIcon />, path: "/contacts" },

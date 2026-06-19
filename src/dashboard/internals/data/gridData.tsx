@@ -131,7 +131,7 @@ export const columns: GridColDef[] = [
 export const rows: GridRowsProp = [
   {
     id: 1,
-    pageTitle: "Homepage Overview",
+    pageTitle: "home page",
     status: "Online",
     eventCount: 8345,
     users: 212423,
@@ -339,7 +339,7 @@ export const rows: GridRowsProp = [
   },
   {
     id: 15,
-    pageTitle: "Login Page - Authentication",
+    pageTitle: "crm dashboard - Authentication",
     status: "Offline",
     eventCount: 9563,
     users: 24240,
@@ -545,7 +545,7 @@ export const rows: GridRowsProp = [
   },
   {
     id: 29,
-    pageTitle: "Dashboard - Metrics",
+    pageTitle: "crm dashboard - Metrics",
     status: "Offline",
     eventCount: 5678,
     users: 23456,
