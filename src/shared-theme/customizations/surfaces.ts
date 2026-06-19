@@ -59,15 +59,26 @@ export const surfacesCustomizations: Components<Theme> = {
     styleOverrides: {
       root: ({ theme }) => {
         return {
-          padding: 16,
-          gap: 16,
-          transition: "all 100ms ease",
-          backgroundColor: gray[50],
+          padding: 20,
+          gap: 20,
+          transition: "all 150ms ease",
+          backgroundColor: "hsl(210, 25%, 99%)",
           borderRadius: (theme.vars || theme).shape.borderRadius,
           border: `1px solid ${(theme.vars || theme).palette.divider}`,
-          boxShadow: "none",
+          boxShadow:
+            "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+          "&:hover": {
+            boxShadow:
+              "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+          },
           ...theme.applyStyles("dark", {
             backgroundColor: gray[800],
+            boxShadow:
+              "0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2)",
+            "&:hover": {
+              boxShadow:
+                "0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)",
+            },
           }),
           variants: [
             {

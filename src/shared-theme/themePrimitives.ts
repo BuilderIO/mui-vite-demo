@@ -31,68 +31,68 @@ const defaultTheme = createTheme();
 const customShadows: Shadows = [...defaultTheme.shadows];
 
 export const brand = {
-  50: "hsl(210, 100%, 95%)",
-  100: "hsl(210, 100%, 92%)",
-  200: "hsl(210, 100%, 80%)",
-  300: "hsl(210, 100%, 65%)",
-  400: "hsl(210, 98%, 48%)",
-  500: "hsl(210, 98%, 42%)",
-  600: "hsl(210, 98%, 55%)",
-  700: "hsl(210, 100%, 35%)",
-  800: "hsl(210, 100%, 16%)",
-  900: "hsl(210, 100%, 21%)",
+  50: "hsl(220, 100%, 97%)",
+  100: "hsl(220, 100%, 95%)",
+  200: "hsl(220, 100%, 88%)",
+  300: "hsl(220, 100%, 75%)",
+  400: "hsl(220, 100%, 62%)",
+  500: "hsl(220, 90%, 56%)",
+  600: "hsl(220, 85%, 53%)",
+  700: "hsl(220, 80%, 45%)",
+  800: "hsl(220, 75%, 35%)",
+  900: "hsl(220, 70%, 25%)",
 };
 
 export const gray = {
-  50: "hsl(220, 35%, 97%)",
-  100: "hsl(220, 30%, 94%)",
-  200: "hsl(220, 20%, 88%)",
-  300: "hsl(220, 20%, 80%)",
-  400: "hsl(220, 20%, 65%)",
-  500: "hsl(220, 20%, 42%)",
-  600: "hsl(220, 20%, 35%)",
-  700: "hsl(220, 20%, 25%)",
-  800: "hsl(220, 30%, 6%)",
-  900: "hsl(220, 35%, 3%)",
+  50: "hsl(210, 25%, 98%)",
+  100: "hsl(210, 20%, 96%)",
+  200: "hsl(210, 16%, 93%)",
+  300: "hsl(210, 14%, 83%)",
+  400: "hsl(210, 14%, 71%)",
+  500: "hsl(210, 11%, 54%)",
+  600: "hsl(210, 12%, 45%)",
+  700: "hsl(210, 16%, 32%)",
+  800: "hsl(210, 24%, 16%)",
+  900: "hsl(210, 30%, 8%)",
 };
 
 export const green = {
-  50: "hsl(120, 80%, 98%)",
-  100: "hsl(120, 75%, 94%)",
-  200: "hsl(120, 75%, 87%)",
-  300: "hsl(120, 61%, 77%)",
-  400: "hsl(120, 44%, 53%)",
-  500: "hsl(120, 59%, 30%)",
-  600: "hsl(120, 70%, 25%)",
-  700: "hsl(120, 75%, 16%)",
-  800: "hsl(120, 84%, 10%)",
-  900: "hsl(120, 87%, 6%)",
+  50: "hsl(155, 100%, 97%)",
+  100: "hsl(155, 85%, 92%)",
+  200: "hsl(155, 75%, 84%)",
+  300: "hsl(155, 65%, 72%)",
+  400: "hsl(155, 55%, 58%)",
+  500: "hsl(155, 85%, 44%)",
+  600: "hsl(155, 90%, 35%)",
+  700: "hsl(155, 95%, 28%)",
+  800: "hsl(155, 100%, 20%)",
+  900: "hsl(155, 100%, 12%)",
 };
 
 export const orange = {
-  50: "hsl(45, 100%, 97%)",
-  100: "hsl(45, 92%, 90%)",
-  200: "hsl(45, 94%, 80%)",
-  300: "hsl(45, 90%, 65%)",
-  400: "hsl(45, 90%, 40%)",
-  500: "hsl(45, 90%, 35%)",
-  600: "hsl(45, 91%, 25%)",
-  700: "hsl(45, 94%, 20%)",
-  800: "hsl(45, 95%, 16%)",
-  900: "hsl(45, 93%, 12%)",
+  50: "hsl(25, 100%, 97%)",
+  100: "hsl(25, 100%, 93%)",
+  200: "hsl(25, 100%, 86%)",
+  300: "hsl(25, 100%, 75%)",
+  400: "hsl(25, 100%, 62%)",
+  500: "hsl(25, 95%, 53%)",
+  600: "hsl(25, 90%, 48%)",
+  700: "hsl(25, 85%, 40%)",
+  800: "hsl(25, 80%, 30%)",
+  900: "hsl(25, 75%, 20%)",
 };
 
 export const red = {
   50: "hsl(0, 100%, 97%)",
-  100: "hsl(0, 92%, 90%)",
-  200: "hsl(0, 94%, 80%)",
-  300: "hsl(0, 90%, 65%)",
-  400: "hsl(0, 90%, 40%)",
-  500: "hsl(0, 90%, 30%)",
-  600: "hsl(0, 91%, 25%)",
-  700: "hsl(0, 94%, 18%)",
-  800: "hsl(0, 95%, 12%)",
-  900: "hsl(0, 93%, 6%)",
+  100: "hsl(0, 100%, 94%)",
+  200: "hsl(0, 100%, 87%)",
+  300: "hsl(0, 100%, 76%)",
+  400: "hsl(0, 100%, 63%)",
+  500: "hsl(0, 85%, 54%)",
+  600: "hsl(0, 80%, 47%)",
+  700: "hsl(0, 75%, 42%)",
+  800: "hsl(0, 70%, 35%)",
+  900: "hsl(0, 65%, 25%)",
 };
 
 export const getDesignTokens = (mode: PaletteMode) => {
@@ -163,11 +163,11 @@ export const getDesignTokens = (mode: PaletteMode) => {
       },
       divider: mode === "dark" ? alpha(gray[700], 0.6) : alpha(gray[300], 0.4),
       background: {
-        default: "hsl(0, 0%, 99%)",
-        paper: "hsl(220, 35%, 97%)",
+        default: "hsl(210, 30%, 98%)",
+        paper: "hsl(210, 25%, 99%)",
         ...(mode === "dark" && {
           default: gray[900],
-          paper: "hsl(220, 30%, 7%)",
+          paper: "hsl(210, 25%, 8%)",
         }),
       },
       text: {
@@ -189,56 +189,70 @@ export const getDesignTokens = (mode: PaletteMode) => {
       },
     },
     typography: {
-      fontFamily: "Inter, sans-serif",
+      fontFamily:
+        '"Inter", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
       h1: {
         fontSize: defaultTheme.typography.pxToRem(48),
-        fontWeight: 600,
-        lineHeight: 1.2,
-        letterSpacing: -0.5,
+        fontWeight: 700,
+        lineHeight: 1.1,
+        letterSpacing: -0.8,
       },
       h2: {
         fontSize: defaultTheme.typography.pxToRem(36),
-        fontWeight: 600,
-        lineHeight: 1.2,
+        fontWeight: 700,
+        lineHeight: 1.15,
+        letterSpacing: -0.5,
       },
       h3: {
         fontSize: defaultTheme.typography.pxToRem(30),
+        fontWeight: 600,
         lineHeight: 1.2,
+        letterSpacing: -0.3,
       },
       h4: {
         fontSize: defaultTheme.typography.pxToRem(24),
         fontWeight: 600,
-        lineHeight: 1.5,
+        lineHeight: 1.3,
+        letterSpacing: -0.2,
       },
       h5: {
         fontSize: defaultTheme.typography.pxToRem(20),
         fontWeight: 600,
+        lineHeight: 1.4,
+        letterSpacing: -0.1,
       },
       h6: {
         fontSize: defaultTheme.typography.pxToRem(18),
         fontWeight: 600,
+        lineHeight: 1.4,
       },
       subtitle1: {
-        fontSize: defaultTheme.typography.pxToRem(18),
+        fontSize: defaultTheme.typography.pxToRem(16),
+        fontWeight: 500,
+        lineHeight: 1.5,
       },
       subtitle2: {
         fontSize: defaultTheme.typography.pxToRem(14),
         fontWeight: 500,
+        lineHeight: 1.4,
       },
       body1: {
-        fontSize: defaultTheme.typography.pxToRem(14),
+        fontSize: defaultTheme.typography.pxToRem(16),
+        lineHeight: 1.6,
       },
       body2: {
         fontSize: defaultTheme.typography.pxToRem(14),
         fontWeight: 400,
+        lineHeight: 1.5,
       },
       caption: {
         fontSize: defaultTheme.typography.pxToRem(12),
         fontWeight: 400,
+        lineHeight: 1.4,
       },
     },
     shape: {
-      borderRadius: 8,
+      borderRadius: 12,
     },
     shadows: customShadows,
   };
@@ -279,8 +293,8 @@ export const colorSchemes = {
       },
       divider: alpha(gray[300], 0.4),
       background: {
-        default: "hsl(0, 0%, 99%)",
-        paper: "hsl(220, 35%, 97%)",
+        default: "hsl(210, 30%, 98%)",
+        paper: "hsl(210, 25%, 99%)",
       },
       text: {
         primary: gray[800],
@@ -330,7 +344,7 @@ export const colorSchemes = {
       divider: alpha(gray[700], 0.6),
       background: {
         default: gray[900],
-        paper: "hsl(220, 30%, 7%)",
+        paper: "hsl(210, 25%, 8%)",
       },
       text: {
         primary: "hsl(0, 0%, 100%)",
@@ -347,57 +361,70 @@ export const colorSchemes = {
 };
 
 export const typography = {
-  fontFamily: "Inter, sans-serif",
+  fontFamily: '"Inter", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
   h1: {
     fontSize: defaultTheme.typography.pxToRem(48),
-    fontWeight: 600,
-    lineHeight: 1.2,
-    letterSpacing: -0.5,
+    fontWeight: 700,
+    lineHeight: 1.1,
+    letterSpacing: -0.8,
   },
   h2: {
     fontSize: defaultTheme.typography.pxToRem(36),
-    fontWeight: 600,
-    lineHeight: 1.2,
+    fontWeight: 700,
+    lineHeight: 1.15,
+    letterSpacing: -0.5,
   },
   h3: {
     fontSize: defaultTheme.typography.pxToRem(30),
+    fontWeight: 600,
     lineHeight: 1.2,
+    letterSpacing: -0.3,
   },
   h4: {
     fontSize: defaultTheme.typography.pxToRem(24),
     fontWeight: 600,
-    lineHeight: 1.5,
+    lineHeight: 1.3,
+    letterSpacing: -0.2,
   },
   h5: {
     fontSize: defaultTheme.typography.pxToRem(20),
     fontWeight: 600,
+    lineHeight: 1.4,
+    letterSpacing: -0.1,
   },
   h6: {
     fontSize: defaultTheme.typography.pxToRem(18),
     fontWeight: 600,
+    lineHeight: 1.4,
   },
   subtitle1: {
-    fontSize: defaultTheme.typography.pxToRem(18),
+    fontSize: defaultTheme.typography.pxToRem(16),
+    fontWeight: 500,
+    lineHeight: 1.5,
   },
   subtitle2: {
     fontSize: defaultTheme.typography.pxToRem(14),
     fontWeight: 500,
+    lineHeight: 1.4,
   },
   body1: {
-    fontSize: defaultTheme.typography.pxToRem(14),
+    fontSize: defaultTheme.typography.pxToRem(16),
+    lineHeight: 1.6,
   },
   body2: {
     fontSize: defaultTheme.typography.pxToRem(14),
     fontWeight: 400,
+    lineHeight: 1.5,
   },
   caption: {
     fontSize: defaultTheme.typography.pxToRem(12),
     fontWeight: 400,
+    lineHeight: 1.4,
   },
 };
 
 export const shape = {
-  borderRadius: 8,
+  borderRadius: 12,
 };
 
 // @ts-ignore
