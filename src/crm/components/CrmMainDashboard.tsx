@@ -11,6 +11,7 @@ import CrmRecentDealsTable from "./CrmRecentDealsTable";
 import CrmUpcomingTasks from "./CrmUpcomingTasks";
 import CrmSalesChart from "./CrmSalesChart";
 import CrmLeadsBySourceChart from "./CrmLeadsBySourceChart";
+import NewLeadModal from "./NewLeadModal";
 
 // Sample data for stat cards
 const statCardsData = [
@@ -61,6 +62,23 @@ const statCardsData = [
 ];
 
 export default function CrmMainDashboard() {
+  const [isNewLeadModalOpen, setIsNewLeadModalOpen] = React.useState(false);
+
+  const handleOpenNewLeadModal = () => {
+    setIsNewLeadModalOpen(true);
+  };
+
+  const handleCloseNewLeadModal = () => {
+    setIsNewLeadModalOpen(false);
+  };
+
+  const handleLeadCreated = (formData?: any) => {
+    // In a real application, you might want to refresh the data here
+    console.log("New lead created successfully!");
+    console.log("Form data:", formData);
+    // You could trigger a data refresh, show a success message, etc.
+  };
+
   return (
     <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
       {/* Header with action buttons */}
@@ -78,6 +96,7 @@ export default function CrmMainDashboard() {
             variant="contained"
             startIcon={<AddRoundedIcon />}
             sx={{ mr: 1 }}
+            onClick={handleOpenNewLeadModal}
           >
             New Lead
           </Button>
@@ -126,6 +145,13 @@ export default function CrmMainDashboard() {
       </Grid>
 
       <Copyright sx={{ mt: 3, mb: 4 }} />
+
+      {/* New Lead Modal */}
+      <NewLeadModal
+        open={isNewLeadModalOpen}
+        onClose={handleCloseNewLeadModal}
+        onSuccess={handleLeadCreated}
+      />
     </Box>
   );
 }
