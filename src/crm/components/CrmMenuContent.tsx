@@ -7,6 +7,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
+import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
@@ -21,7 +22,12 @@ const mainListItems = [
   { text: "Dashboard", icon: <DashboardRoundedIcon />, path: "/" },
   { text: "Customers", icon: <PeopleRoundedIcon />, path: "/customers" },
   { text: "Deals", icon: <BusinessCenterRoundedIcon />, path: "/deals" },
-  { text: "Contacts", icon: <ContactsRoundedIcon />, path: "/contacts" },
+  {
+    text: "Contacts",
+    icon: <ContactsRoundedIcon />,
+    path: "/contacts",
+    comingSoon: true,
+  },
   { text: "Tasks", icon: <AssignmentRoundedIcon />, path: "/tasks" },
   { text: "Reports", icon: <AssessmentRoundedIcon />, path: "/reports" },
 ];
@@ -50,6 +56,15 @@ export default function CrmMenuContent() {
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
+              {(item as any).comingSoon && (
+                <Chip
+                  label="Coming Soon"
+                  size="small"
+                  color="primary"
+                  variant="outlined"
+                  sx={{ ml: 1, height: 20, fontSize: "0.65rem" }}
+                />
+              )}
             </ListItemButton>
           </ListItem>
         ))}
@@ -64,8 +79,17 @@ export default function CrmMenuContent() {
                 onClick={() => handleNavigation(item.path)}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
-              </ListItemButton>
+              <ListItemText primary={item.text} />
+              {(item as any).comingSoon && (
+                <Chip
+                  label="Coming Soon"
+                  size="small"
+                  color="primary"
+                  variant="outlined"
+                  sx={{ ml: 1, height: 20, fontSize: "0.65rem" }}
+                />
+              )}
+            </ListItemButton>
             </ListItem>
           ))}
         </List>
